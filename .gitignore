@@ -7,4 +7,4 @@ coverage
 webpack/webpack-assets.json
 
 *.swp
-src/store/config.js
+src/config.js

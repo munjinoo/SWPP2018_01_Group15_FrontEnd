@@ -1,11 +1,10 @@
 import { take, put, call, fork } from 'redux-saga/effects'
 import api from 'services/api'
 import * as types from '../types'
-import { url } from '../config'
 
 export function* login(username, password) {
     try {
-        const data = yield call(api.post, `${url}login/`, {username: username, password: password}, {credentials: 'include'})
+        const data = yield call(api.post, `/login/`, {username: username, password: password}, {credentials: 'include'})
         yield put({
             type: types.SET_LOGIN
         })
@@ -24,7 +23,7 @@ export function* login(username, password) {
 
 export function* logout() {
     try {
-        yield call(api.post, `{url}logout/`, {}, {credentials: 'include'})
+        yield call(api.post, `/logout/`, {}, {credentials: 'include'})
         yield put({
             type: types.RESET_USERINFO
         })
