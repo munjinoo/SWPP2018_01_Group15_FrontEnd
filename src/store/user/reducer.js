@@ -3,6 +3,11 @@ import * as types from '../types'
 
 const user_reducer = (state = initialState, action) => {
     switch (action.type) {
+        case types.SET_LOGIN:
+            return {
+                ...state,
+                isLogin: true
+            }
         case types.SET_USERID:
             return {
                 ...state,

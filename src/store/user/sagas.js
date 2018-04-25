@@ -5,7 +5,10 @@ import { url } from '../config'
 
 export function* login(username, password) {
     try {
-        const data = yield call(api.post, `${url}login/`, {username: username, password: password}, {credetials: 'include'})
+        const data = yield call(api.post, `${url}login/`, {username: username, password: password}, {credentials: 'include'})
+        yield put({
+            type: types.SET_LOGIN
+        })
         yield put({
             type: types.SET_USERNAME,
             username: username
@@ -21,7 +24,7 @@ export function* login(username, password) {
 
 export function* logout() {
     try {
-        yield call(api.post, `{url}logout/`, {}, {credetials: 'include'})
+        yield call(api.post, `{url}logout/`, {}, {credentials: 'include'})
         yield put({
             type: types.RESET_USERINFO
         })

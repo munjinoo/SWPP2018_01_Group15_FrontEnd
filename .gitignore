@@ -1,0 +1,10 @@
+.DS_Store
+.happypack
+dist
+*.log
+node_modules
+coverage
+webpack/webpack-assets.json
+
+*.swp
+src/store/config.js

@@ -1,10 +1,12 @@
 import React from 'react'
 
-import { PageTemplate } from 'components'
+import { UserStatus } from 'containers'
 
 const HomePage = () => {
   return (
-    <PageTemplate>Hello World</PageTemplate>
+    <div>
+      <UserStatus />
+    </div>
   )
 }
 
