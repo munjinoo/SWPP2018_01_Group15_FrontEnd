@@ -5,7 +5,7 @@ import { signup } from 'store/actions'
 
 const SignupContainer = props => <Signup {...props} />
 
-const mapStateToProps = () => {
+const mapStateToProps = (state) => {
     return {
     }
 }

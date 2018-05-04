@@ -23,7 +23,7 @@ export function* login(username, password) {
 
 export function* logout() {
     try {
-        yield call(api.post, `/logout/`, {username: username, password: password}, {credentials: 'include'})
+        yield call(api.post, `/logout/`, {}, {credentials: 'include'})
         yield put({
             type: types.RESET_USERINFO
         })
@@ -32,9 +32,9 @@ export function* logout() {
     }
 }
 
-export function* signup() {
+export function* signup(username, password, email, name, college, major, admission_year) {
     try {
-        yield call(api.post, `/signup/`, {username: username, password: password, email: email, name: name, college: college, major: major, admission_year: admission_year})
+        yield call(api.post, `/signup/`, {username: username, password: password, email: email, name: name, college: college, major: major, admission_year: admission_year}, {credentials: 'include'})
     } catch (e) {
         console.log(e)
         alert('회원가입 에러메시지');
@@ -65,4 +65,5 @@ export function* watchSignupRequest() {
 export default function* () {
     yield fork(watchLoginRequest)
     yield fork(watchLogoutRequest)
+    yield fork(watchSignupRequest)
 }

@@ -16,7 +16,7 @@ export const logout = () => {
 
 export const signup = (username, password, email, name, college, major, admission_year) => {
     return {
-        type: types.LOGIN,
+        type: types.SIGNUP,
         username: username,
         password: password,
         email: email,
