@@ -32,6 +32,15 @@ export function* logout() {
     }
 }
 
+export function* signup(username, password, email, name, college, major, admission_year) {
+    try {
+        yield call(api.post, `/signup/`, {username: username, password: password, email: email, name: name, college: college, major: major, admission_year: admission_year}, {credentials: 'include'})
+    } catch (e) {
+        console.log(e)
+        alert('회원가입 에러메시지');
+    }
+}
+
 export function* watchLoginRequest() {
     while (true) {
         const data = yield take(types.LOGIN)
@@ -46,7 +55,15 @@ export function* watchLogoutRequest() {
     }
 }
 
+export function* watchSignupRequest() {
+    while (true) {
+        const data = yield take(types.SIGNUP)
+        yield call(signup, data.username, data.password, data.email, data.name, data.college, data.major, data.admission_year)
+    }
+}
+
 export default function* () {
     yield fork(watchLoginRequest)
     yield fork(watchLogoutRequest)
+    yield fork(watchSignupRequest)
 }
