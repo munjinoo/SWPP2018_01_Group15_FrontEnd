@@ -11,11 +11,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        onClick: (clubid) => {
-            dispatch(getClubPage(clubid))
-        }
-    }
+    return {}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ClubListContainer)

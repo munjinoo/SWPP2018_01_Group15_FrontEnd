@@ -7,10 +7,12 @@ export const getClubs = (userid) => {
     }
 }
 
-export const getClubPage = (clubid) => {
+export const postClub = (name, scope, category, introduction) => {
     return {
-        type: types.GET_CLUB_PAGE,
-        clubid
+        type: types.POST_CLUB,
+        name,
+        scope,
+        category,
+        introduction
     }
 }
-

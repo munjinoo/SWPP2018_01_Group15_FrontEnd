@@ -1,25 +1,30 @@
 import React, { PropTypes } from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
+import { Link } from 'react-router'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
   color: ${palette('grayscale', 0)};
 `
 
-const ClubList = ({ clubState = { admin: [], members: []}, onClick }) => {
+const ClubList = ({ clubState = {admin: [], members: []} }) => {
   return (
     <Wrapper>
-      <h4>내가 관리하는 동아리</h4>
+      내가 관리하는 동아리 <br />
       <ul>
         {clubState.admin.map(club =>
-          <li key={club} onClick={onClick}>{club}</li>
+          <Link to="/club/${club.id}">
+            <li key={club}>{club}</li>
+          </Link>
         )}
       </ul>
-      <h4>내가 가입한 동아리</h4>
+      내가 가입한 동아리<br />
       <ul>
         {clubState.members.map(club =>
+          <Link to="/club/${club.id}">
           <li key={club} onClick={onClick}>{club}</li>
+        </Link>
         )}
       </ul>
     </Wrapper>
@@ -31,7 +36,6 @@ ClubList.propTypes = {
     admin: PropTypes.arrayOf(PropTypes.number),
     members: PropTypes.arrayOf(PropTypes.number)
   }),
-  onClick: PropTypes.func.isRequired,
   reverse: PropTypes.bool,
 }
 

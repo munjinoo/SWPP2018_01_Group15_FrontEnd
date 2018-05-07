@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
@@ -9,7 +9,7 @@ const Wrapper = styled.div`
 `
 
 // FIXME: Link route incomplete.. ;^;
-const CreateClub = ({ onPostClub }) => {
+const CreateClub = ({ clubState = {admin: [], members: []}, onPostClub }) => {
   let name = '';
   let scope = '';
   let category = '';
@@ -17,7 +17,7 @@ const CreateClub = ({ onPostClub }) => {
 
   const onClick = () => {
     if (name != undefined && scope != undefined && category != undefined && introduction != undefined) {
-      (name.value, scope.value, category.value, introduction.value);
+      onPostClub(name.value, scope.value, category.value, introduction.value);
       name.value = '';
       scope.value = '';
       category.value = '';
@@ -41,7 +41,7 @@ const CreateClub = ({ onPostClub }) => {
             <option value="예술">예술</option>
         </select>
       동아리 소개: <input type="text" ref={node => {introduction = node;}} /> <br/>
-      <Link to="/club/${club.id}">
+      <Link to="/club/${clubState.id}">
         <button onClick={onClick}>동아리방 만들기</button>
       </Link>
     </Wrapper>

@@ -11,13 +11,13 @@ export function* getClubs(userid) {
         for (var i=0; i < admin.length; i++) {
             yield put({
                 type: types.ADD_ADMIN_CLUB,
-                promise: admin[i]
+                club: admin[i]
             })
         }
         for (var i=0; i < members.length; i++) {
             yield put({
                 type: types.ADD_MEMBER_CLUB,
-                promise: members[i]
+                club: members[i]
             })
         }
     } catch (e) {
@@ -25,38 +25,17 @@ export function* getClubs(userid) {
     }
 }
 
-export function* getClubPage(clubid) {
+export function* postClub(name, scope, category, introduction) {
     try {
-        const data = yield call(api.get, `/club/${clubid}/`, {credentials: 'include'});
-        let admin = data.clubs_as_admin;
-        let members = data.clubs_as_admin;
-        for (var i=0; i < admin.length; i++) {
-            yield put({
-                type: types.ADD_ADMIN_CLUB,
-                promise: admin[i]
-            })
-        }
-        for (var i=0; i < members.length; i++) {
-            yield put({
-                type: types.ADD_MEMBER_CLUB,
-                promise: members[i]
-            })
-        }
+        const data = yield call(api.post, `/club/`, {name: name, scope: scope, category: category, introduction: introduction}, {credentials: 'include'});
+        yield put({
+            type: types.ADD_ADMIN_CLUB,
+            club: data.id
+        })
     } catch (e) {
-        console.log(e);
+        console.log(e)
     }
 }
-// export function* postClub(sinceWhen, tilWhen, user2) {
-//     try {
-//         const data = yield call(api.post, `${url}promises/`, {sinceWhen:sinceWhen, tilWhen:tilWhen, user2:user2}, {credentials: 'include'});
-//         yield put({
-//             type: types.ADD_INVITER_PROMISE,
-//             promise: data.id
-//         })
-//     } catch (e) {
-//         console.log(e)
-//     }
-// }
 
 export function* watchGetClubsRequest() {
     while (true) {
@@ -65,20 +44,14 @@ export function* watchGetClubsRequest() {
     }
 }
 
-export function* watchGetClubPageRequest() {
+export function* watchPostClubRequest() {
     while (true) {
-        const clubid = yield take(types.GET_CLUB_PAGE);
-        yield call(getClubPage, clubid.clubid);
+        const {name, scope, category, introduction} = yield take(types.POST_CLUB);
+        yield call(postClub, name, scope, category, introduction);
     }
 }
-// export function* watchPostPromiseRequest() {
-//     while (true) {
-//         const {sinceWhen, tilWhen, user2} = yield take(types.POST_PROMISE);
-//         yield call(postPromise, sinceWhen, tilWhen, user2);
-//     }
-// }
 
 export default function* () {
     yield fork(watchGetClubsRequest);
-    yield fork(watchGetClubPageRequest);
+    yield fork(watchPostClubRequest);
 }
