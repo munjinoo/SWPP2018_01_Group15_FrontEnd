@@ -20,7 +20,7 @@ const CreateClub = ({ clubState = {admin: [], members: []}, onPostClub, router }
       router.push(path);
     }
     if (name != undefined && scope != undefined && category != undefined && introduction != undefined) {
-      onPostClub(name.value, scope.value, category.value, introduction.value);
+      onPostClub(name.value, scope.value, category.value, introduction.value, callback);
       name.value = '';
       scope.value = '';
       category.value = '';
