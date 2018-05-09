@@ -6,7 +6,7 @@ const ClubListContainer = props => <ClubList {...props} />
 
 const mapStateToProps = (state) => {
     return {
-        clubState: state.club
+        userState: state.user
     }
 }
 

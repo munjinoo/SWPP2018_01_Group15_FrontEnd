@@ -8,22 +8,23 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const ClubList = ({ clubState = {admin: [], members: []} }) => {
+const ClubList = ({ userState = { clubs_as_admin: [], clubs_as_member: []} }) => {
+  console.log(userState);
   return (
     <Wrapper>
       내가 관리하는 동아리 <br />
       <ul>
-        {clubState.admin.map(club =>
+        {userState.club_as_admin.map(club =>
           <Link to="/club/${club.id}">
-            <li key={club}>{club}</li>
+            <li key={club.id}>{club.name}</li>
           </Link>
         )}
       </ul>
       내가 가입한 동아리<br />
       <ul>
-        {clubState.members.map(club =>
+        {userState.club_as_member.map(club =>
           <Link to="/club/${club.id}">
-          <li key={club} onClick={onClick}>{club}</li>
+          <li key={club.id} onClick={onClick}>{club.name}</li>
         </Link>
         )}
       </ul>
