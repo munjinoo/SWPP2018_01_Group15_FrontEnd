@@ -357,7 +357,7 @@ const Signup = ({ onSignup }) => {
         </select>
 
         <div id="select02Container">
-            전공: <select name="select02" id="select02">
+            전공: <select ref={node => {major = node;}} name="select02" id="select02">
                 <option value="">--선택--</option>
             </select>
         </div>
