@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { CreateClub } from 'components'
+import { CreateClub } from 'containers'
 
 const CreateClubPage = () => {
   return (

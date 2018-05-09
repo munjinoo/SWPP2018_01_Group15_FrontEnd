@@ -24,7 +24,9 @@ const CreateClub = ({ clubState = {admin: [], members: []}, onPostClub }) => {
       introduction.value = '';
     }
   }
+  console.log("HDHDHDH");
   return (
+    
     <Wrapper>
       동아리 이름: <input type="text" ref={node => {name = node;}} /> <br/>
       동아리 소속: <input type="text" ref={node => {scope = node;}} /> <br/>

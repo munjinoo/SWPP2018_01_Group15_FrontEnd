@@ -8,8 +8,8 @@ const routes = (
   <Route path="/" component={App}>
     <IndexRoute component={HomePage} />
     <Route path = 'mypage' component={MyPage} />
-    <Route path = 'club/:clubid' component={ClubMain} />
     <Route path = 'club/create' component={ClubCreatePage} />
+    <Route path = 'club/:clubid' component={ClubMain} />
   </Route>
 )
 
