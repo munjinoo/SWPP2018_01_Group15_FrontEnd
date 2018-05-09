@@ -9,13 +9,16 @@ const Wrapper = styled.div`
 `
 
 // FIXME: Link route incomplete.. ;^;
-const CreateClub = ({ clubState = {admin: [], members: []}, onPostClub }) => {
+const CreateClub = ({ clubState = {admin: [], members: []}, onPostClub, router }) => {
   let name = '';
   let scope = '';
   let category = '';
   let introduction = '';
 
   const onClick = () => {
+    const callback = (path) => {
+      router.push(path);
+    }
     if (name != undefined && scope != undefined && category != undefined && introduction != undefined) {
       onPostClub(name.value, scope.value, category.value, introduction.value);
       name.value = '';
@@ -24,9 +27,7 @@ const CreateClub = ({ clubState = {admin: [], members: []}, onPostClub }) => {
       introduction.value = '';
     }
   }
-  console.log("HDHDHDH");
-  return (
-    
+  return (    
     <Wrapper>
       동아리 이름: <input type="text" ref={node => {name = node;}} /> <br/>
       동아리 소속: <input type="text" ref={node => {scope = node;}} /> <br/>
@@ -41,15 +42,12 @@ const CreateClub = ({ clubState = {admin: [], members: []}, onPostClub }) => {
             <option value="봉사">봉사</option>
             <option value="교류">교류</option>
             <option value="예술">예술</option>
-        </select>
+        </select> <br />
       동아리 소개: <input type="text" ref={node => {introduction = node;}} /> <br/>
-      <Link to="/club/${clubState.id}">
-        <button onClick={onClick}>동아리방 만들기</button>
-      </Link>
+      <button onClick={onClick}>동아리방 만들기</button>
     </Wrapper>
   )
 }
-
 
 CreateClub.propTypes = {
   onPostClub: PropTypes.func.isRequired,

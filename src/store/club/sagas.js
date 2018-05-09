@@ -5,9 +5,9 @@ import * as types from '../types'
 export function* getClubs(userid) {
     try {
         const data = yield call(api.get, `/users/${userid}/`, {credentials: 'include'});
-        // need to add below fields to UserSerializer in BackEnd ?
+        
         let admin = data.clubs_as_admin;
-        let members = data.clubs_as_admin;
+        let members = data.clubs_as_member;
         for (var i=0; i < admin.length; i++) {
             yield put({
                 type: types.ADD_ADMIN_CLUB,
@@ -32,6 +32,7 @@ export function* postClub(name, scope, category, introduction) {
             type: types.ADD_ADMIN_CLUB,
             club: data.id
         })
+        callback(`club/${data.id}`);
     } catch (e) {
         console.log(e)
     }
