@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { UserStatus } from 'components'
+import { initUserState } from 'store/actions'
 
 const UserStatusContainer = props => <UserStatus {...props} />
 
@@ -12,6 +13,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        onLoad: () => {
+            dispatch(initUserState())
+        }
     }
 }
 
