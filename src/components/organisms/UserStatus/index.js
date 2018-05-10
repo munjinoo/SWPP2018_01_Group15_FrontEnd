@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import { Link } from 'react-router'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import { Login, Logout } from 'containers'
@@ -26,6 +27,7 @@ const UserStatus = ({ userState={isLogin: false, needLoading: {user: true}}, onL
     return (
       <Wrapper>
         <Login />
+        <Link to='/signup'>회원가입</Link>
       </Wrapper>
     )
   }
