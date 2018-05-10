@@ -7,6 +7,8 @@ export const UNSET_USER_NEED_LOAD = 'UNSET_USER_NEED_LOAD'
 export const LOGIN = 'LOGIN'
 export const LOGOUT = 'LOGOUT'
 
+export const SIGNUP = 'SIGNUP'
+
 export const SET_LOGIN = 'SET_LOGIN'
 export const SET_USERNAME = 'SET_USERNAME'
 export const SET_USERID = 'SET_USERID'
