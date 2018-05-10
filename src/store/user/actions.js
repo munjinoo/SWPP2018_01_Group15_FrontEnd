@@ -14,6 +14,12 @@ export const logout = () => {
     }
 }
 
+export const initUserState = () => {
+    return {
+        type: types.INIT_USER_STATE
+    }
+}
+
 export const signup = (username, password, email, name, college, major, admission_year) => {
     return {
         type: types.SIGNUP,

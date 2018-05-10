@@ -5,9 +5,8 @@ import * as types from '../types'
 export function* login(username, password) {
     try {
         const data = yield call(api.post, `/login/`, {username: username, password: password}, {credentials: 'include'})
-        yield put({
-            type: types.SET_LOGIN
-        })
+        yield put({type: types.UNSET_USER_NEED_LOAD})
+        yield put({type: types.SET_LOGIN})
         yield put({
             type: types.SET_USERNAME,
             username: username
@@ -24,11 +23,44 @@ export function* login(username, password) {
 export function* logout() {
     try {
         yield call(api.post, `/logout/`, {}, {credentials: 'include'})
-        yield put({
-            type: types.RESET_USERINFO
-        })
+        yield put({type: types.RESET_USERINFO})
     } catch (e) {
         console.log(e)
+    }
+}
+
+export function* init_user_state() {
+    try {
+        const data = yield call(api.get, `/me/`, {credentials: 'include'})
+        const as_admin = data.clubs_as_admin
+        const as_member = data.clubs_as_members
+
+        yield put({type: types.UNSET_USER_NEED_LOAD})
+        yield put({type: types.SET_LOGIN})
+        // set user info
+        yield put({
+            type: types.SET_USERNAME,
+            username: data.username
+        })
+        yield put({
+            type: types.SET_USERID,
+            id: data.id
+        })
+        // add clubs
+        for (var i=0; i<as_admin.length; i++) {
+            yield put({
+                type: types.ADD_ADMIN_CLUB,
+                club: {id: as_admin[i].id, name: as_admin[i].name}
+            })
+        }
+        for (var i=0; i<as_member.length; i++) {
+            yield put({
+                type: types.ADD_MEMBER_CLUB,
+                club: {id: as_member[i].id, name: as_member[i].name}
+            })
+        }
+    } catch (e) {
+        yield put({type: types.RESET_USERINFO})
     }
 }
 
@@ -55,6 +87,14 @@ export function* watchLogoutRequest() {
     }
 }
 
+export function* watchInitUserStateRequest() {
+    while (true) {
+        yield take(types.INIT_USER_STATE)
+        yield call(init_user_state)
+      
+    }
+}
+
 export function* watchSignupRequest() {
     while (true) {
         const data = yield take(types.SIGNUP)
@@ -65,5 +105,6 @@ export function* watchSignupRequest() {
 export default function* () {
     yield fork(watchLoginRequest)
     yield fork(watchLogoutRequest)
+    yield fork(watchInitUserStateRequest)
     yield fork(watchSignupRequest)
 }

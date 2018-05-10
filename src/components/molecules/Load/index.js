@@ -1,25 +1,25 @@
 import React, { PropTypes } from 'react'
-import { Link } from 'react-router'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
+import { Loading } from 'components'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
   color: ${palette('grayscale', 0)};
 `
 
-const Logout = ({ userState, onLogout }) => {
+const Load = ({ onLoad }) => {
+  onLoad()
   return (
     <Wrapper>
-      Hello, <Link to="/mypage">{userState.username}</Link><br/>
-      <button onClick={onLogout}>Logout</button>
+      <Loading />
     </Wrapper>
   )
 }
 
-Logout.propTypes = {
+Load.propTypes = {
   reverse: PropTypes.bool,
   children: PropTypes.node,
 }
 
-export default Logout
+export default Load
