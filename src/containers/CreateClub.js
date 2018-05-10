@@ -13,8 +13,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onPostClub: (name, scope, category, introduction, callback) => {
-            dispatch(postClub(name, scope, category, introduction, callback))
+        onPostClub: (name, scope, category, introduction) => {
+            dispatch(postClub(name, scope, category, introduction))
         }
     }
 }

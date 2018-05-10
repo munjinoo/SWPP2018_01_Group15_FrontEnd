@@ -14,6 +14,13 @@ export const logout = () => {
     }
 }
 
+export const verifyToken = (token) => {
+    return {
+        type: types.VERIFY_TOKEN,
+        token: token
+    }
+}
+
 export const initUserState = () => {
     return {
         type: types.INIT_USER_STATE

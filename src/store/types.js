@@ -19,5 +19,7 @@ export const SET_CLUBS = 'SET_CLUBS'
 export const ADD_ADMIN_CLUB = 'ADD_ADMIN_CLUB'
 export const ADD_MEMBER_CLUB = 'ADD_MEMBER_CLUB'
 
+export const VERIFY_TOKEN = 'VERIFY_TOKEN'
+
 /* Club */
 export const POST_CLUB = 'POST_CLUB'

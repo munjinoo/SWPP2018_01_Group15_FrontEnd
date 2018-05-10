@@ -49,7 +49,6 @@ const user_reducer = (state = initialState, action) => {
                 needLoading: false
             }
         case types.ADD_ADMIN_CLUB:
-            console.log(action)
             return {
                 ...state,
                 clubs_as_admin: add_club(state.clubs_as_admin, action.club)

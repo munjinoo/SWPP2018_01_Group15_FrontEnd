@@ -20,18 +20,10 @@ const Signup = ({ onSignup }) => {
     const onClick = () => {
         if (username != undefined && password != undefined && email != undefined && name != undefined && college != undefined && major != undefined && admission_year != undefined) {
             onSignup(username.value, password.value, email.value, name.value, college.value, major.value, admission_year.value);
-            username.value = '';
-            password.value = '';
-            email.value = '';
-            name.value = '';
-            college.value = '';
-            major.value = '';
-            admission_year.value = '';
         }
     }
 
     const loadSelectElement =(options)=>{
-		console.log(options)
             var selObj = document.getElementById('select02');
 
             // clear the target select element apart from the "select your..." option
@@ -58,7 +50,6 @@ const Signup = ({ onSignup }) => {
     }
 
     const madeSelection =() =>{
-		console.log(college.value)
                 switch(college.value) {
                     case '인문대학':
                         loadSelectElement([

@@ -2,10 +2,10 @@ import React from 'react'
 
 import { CreateClub } from 'containers'
 
-const CreateClubPage = ({ router }) => {
+const CreateClubPage = () => {
   return (
     <div>
-      <CreateClub router={router} />
+      <CreateClub />
     </div>
   )
 }
