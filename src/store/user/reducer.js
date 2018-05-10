@@ -36,17 +36,12 @@ const user_reducer = (state = initialState, action) => {
         case types.RESET_USERINFO:
             return {
                 ...initialState,
-                needLoading: false
+                needLoading: {user: false, club: true}
             }
         case types.SET_USER_NEED_LOAD:
             return {
                 ...state,
-                needLoading: true
-            }
-        case types.UNSET_USER_NEED_LOAD:
-            return {
-                ...state,
-                needLoading: false
+                needLoading: {...state.needLoading, ...action.flags}
             }
         case types.ADD_ADMIN_CLUB:
             return {

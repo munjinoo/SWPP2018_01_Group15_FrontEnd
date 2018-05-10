@@ -9,8 +9,8 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const UserStatus = ({ userState={isLogin: false, needLoading: true}, onLoad }) => {
-  if (userState.needLoading) {
+const UserStatus = ({ userState={isLogin: false, needLoading: {user: true}}, onLoad }) => {
+  if (userState.needLoading.user) {
     return (
       <Wrapper>
         <Load onLoad={onLoad} />
