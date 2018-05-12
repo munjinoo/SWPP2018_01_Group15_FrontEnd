@@ -1,5 +1,4 @@
 import React, { PropTypes } from 'react'
-import { Link } from 'react-router'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 
@@ -8,18 +7,17 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const Logout = ({ userState, onLogout }) => {
+const VerifyToken = ({ token, onVerify }) => {
+  onVerify(token)
   return (
     <Wrapper>
-      Hello, <Link to="/mypage">{userState.username}</Link><br/>
-      <button onClick={onLogout}>Logout</button>
     </Wrapper>
   )
 }
 
-Logout.propTypes = {
+VerifyToken.propTypes = {
   reverse: PropTypes.bool,
   children: PropTypes.node,
 }
 
-export default Logout
+export default VerifyToken

@@ -1,6 +1,21 @@
 import { initialState } from './selectors'
 import * as types from '../types'
 
+const add_club = (club_list, club) => {
+    let new_list = [...club_list]
+    for (var i=0; i<new_list.length; i++) {
+        if (new_list[i].id > club.id) {
+            new_list.splice(i, 0, club)
+            return new_list
+        }
+        if (new_list[i].id === club.id) {
+            return new_list
+        }
+    }
+    new_list.push(club)
+    return new_list
+}
+
 const user_reducer = (state = initialState, action) => {
     switch (action.type) {
         case types.SET_LOGIN:
@@ -19,7 +34,25 @@ const user_reducer = (state = initialState, action) => {
                 username: action.username
             }
         case types.RESET_USERINFO:
-            return initialState
+            return {
+                ...initialState,
+                needLoading: {user: false, club: true}
+            }
+        case types.SET_USER_NEED_LOAD:
+            return {
+                ...state,
+                needLoading: {...state.needLoading, ...action.flags}
+            }
+        case types.ADD_ADMIN_CLUB:
+            return {
+                ...state,
+                clubs_as_admin: add_club(state.clubs_as_admin, action.club)
+            }
+        case types.ADD_MEMBER_CLUB:
+            return {
+                ...state,
+                clubs_as_member: add_club(state.clubs_as_member, action.club)
+            }
         default:
             return state
     }
