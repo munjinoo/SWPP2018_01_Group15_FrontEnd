@@ -1,4 +1,5 @@
 import { take, put, call, fork } from 'redux-saga/effects'
+import { push } from 'react-router-redux'
 import api from 'services/api'
 import * as types from '../types'
 
@@ -25,14 +26,14 @@ export function* getClubs(userid) {
     }
 }
 
-export function* postClub(name, scope, category, introduction, callback) {
+export function* postClub(name, scope, category, introduction) {
     try {
         const data = yield call(api.post, `/club/`, {name: name, scope: scope, category: category, introduction: introduction}, {credentials: 'include'});
         yield put({
             type: types.ADD_ADMIN_CLUB,
             club: data.id
         })
-        callback(`club/${data.id}`);
+        yield put(push(`/club/${data.id}`))
     } catch (e) {
         console.log(e)
     }
@@ -47,8 +48,8 @@ export function* watchGetClubsRequest() {
 
 export function* watchPostClubRequest() {
     while (true) {
-        const {name, scope, category, introduction, callback} = yield take(types.POST_CLUB);
-        yield call(postClub, name, scope, category, introduction, callback);
+        const {name, scope, category, introduction} = yield take(types.POST_CLUB);
+        yield call(postClub, name, scope, category, introduction);
     }
 }
 

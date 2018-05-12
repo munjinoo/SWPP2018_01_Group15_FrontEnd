@@ -7,13 +7,12 @@ export const getClubs = (userid) => {
     }
 }
 
-export const postClub = (name, scope, category, introduction, callback) => {
+export const postClub = (name, scope, category, introduction) => {
     return {
         type: types.POST_CLUB,
         name,
         scope,
         category,
-        introduction,
-        callback
+        introduction
     }
 }

@@ -8,19 +8,15 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-// FIXME: Link route incomplete.. ;^;
-const CreateClub = ({ clubState = {admin: [], members: []}, onPostClub, router }) => {
+const CreateClub = ({ clubState = {admin: [], members: []}, onPostClub }) => {
   let name = '';
   let scope = '';
   let category = '';
   let introduction = '';
 
   const onClick = () => {
-    const callback = (path) => {
-      router.push(path);
-    }
     if (name != undefined && scope != undefined && category != undefined && introduction != undefined) {
-      onPostClub(name.value, scope.value, category.value, introduction.value, callback);
+      onPostClub(name.value, scope.value, category.value, introduction.value);
       name.value = '';
       scope.value = '';
       category.value = '';

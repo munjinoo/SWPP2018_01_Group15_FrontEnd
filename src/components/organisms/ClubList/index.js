@@ -9,8 +9,8 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const ClubList = ({ userState = { clubs_as_admin: [], clubs_as_member: [], needLoading: true}, onLoad }) => {
-  if (userState.needLoading)
+const ClubList = ({ userState = { clubs_as_admin: [], clubs_as_member: [], needLoading: {club: true}}, onLoad }) => {
+  if (userState.needLoading.club)
     return (
       <Wrapper>
         <Load onLoad={onLoad} />
