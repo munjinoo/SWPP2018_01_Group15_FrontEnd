@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, IndexRoute } from 'react-router'
 
 import App from 'components/App'
-import { HomePage, MyPage, ClubMain, CreateClubPage, SignupPage, ClubEventPage, ClubAccountingPage, ClubManagePage, ClubEventPage } from 'components'
+import { HomePage, MyPage, ClubMain, CreateClubPage, SignupPage, ClubEventPage, ClubAccountingPage, ClubManagePage } from 'components'
 
 const routes = (
   <Route path="/" component={App}>
