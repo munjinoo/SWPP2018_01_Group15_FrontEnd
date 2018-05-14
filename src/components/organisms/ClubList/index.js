@@ -20,7 +20,7 @@ const ClubList = ({ userState = { clubs_as_admin: [], clubs_as_member: [], needL
   return (
     <Wrapper>
       내가 관리하는 동아리 <br />
-      <ul>
+      <ul id="clubs-as-admin">
         {userState.clubs_as_admin.map(club =>
           <li key={club.id}>
             <Link to={`/club/${club.id}`}>{club.name}</Link>
@@ -28,7 +28,7 @@ const ClubList = ({ userState = { clubs_as_admin: [], clubs_as_member: [], needL
         )}
       </ul>
       내가 가입한 동아리<br />
-      <ul>
+      <ul id="clubs-as-member">
         {userState.clubs_as_member.map(club =>
           <li key={club.id}>
             <Link to={`/club/${club.id}`}>{club.name}</Link>
