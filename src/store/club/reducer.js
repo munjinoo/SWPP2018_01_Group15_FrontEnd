@@ -20,6 +20,7 @@ const add_club = (clubs, num) => {
     return new_clubs;
 }
 
+// TODO: changed state struct
 const club_reducer = (state=clubState, action) => {
     switch (action.type) {
         case types.ADD_ADMIN_CLUB:

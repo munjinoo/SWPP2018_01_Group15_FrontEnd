@@ -4,12 +4,12 @@ import CreateClub from '.'
 
 const wrap = (props = {}) => shallow(<CreateClub {...props} />)
 
-it('renders children when passed in', () => {
-  const wrapper = wrap({ children: 'test' })
-  expect(wrapper.contains('test')).toBe(true)
-})
-
-it('renders props when passed in', () => {
-  const wrapper = wrap({ id: 'foo' })
-  expect(wrapper.find({ id: 'foo' })).toHaveLength(1)
+it('handle onPostClub when click sumbit button', () => {
+  const props = {
+      clubState: {},
+      onPostClub: jest.fn()
+  }
+  const wrapper = wrap(props)
+  wrapper.find('#create-club-submit').simulate('click')
+  expect(props.onPostClub).toHaveBeenCalled()
 })
