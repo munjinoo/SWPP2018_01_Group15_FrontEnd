@@ -4,12 +4,11 @@ import VerifyToken from '.'
 
 const wrap = (props = {}) => shallow(<VerifyToken {...props} />)
 
-it('renders children when passed in', () => {
-  const wrapper = wrap({ children: 'test' })
-  expect(wrapper.contains('test')).toBe(true)
-})
-
-it('renders props when passed in', () => {
-  const wrapper = wrap({ id: 'foo' })
-  expect(wrapper.find({ id: 'foo' })).toHaveLength(1)
+it('call onVerify when rendered', () => {
+  const props = {
+    token: 'random123test321token',
+    onVerify: jest.fn()
+  }
+  const wrapper = wrap(props)
+  expect(props.onVerify).toHaveBeenCalled()
 })

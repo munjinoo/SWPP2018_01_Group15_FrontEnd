@@ -4,12 +4,11 @@ import Signup from '.'
 
 const wrap = (props = {}) => shallow(<Signup {...props} />)
 
-it('renders children when passed in', () => {
-  const wrapper = wrap({ children: 'test' })
-  expect(wrapper.contains('test')).toBe(true)
-})
-
-it('renders props when passed in', () => {
-  const wrapper = wrap({ id: 'foo' })
-  expect(wrapper.find({ id: 'foo' })).toHaveLength(1)
+it('handle onSignup when click button', () => {
+  const props = {
+    onSignup: jest.fn()
+  }
+  const wrapper = wrap(props)
+  wrapper.find('button').simulate('click')
+  expect(props.onSignup).toHaveBeenCalled()
 })
