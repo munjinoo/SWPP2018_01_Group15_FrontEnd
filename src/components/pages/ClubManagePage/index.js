@@ -1,9 +1,14 @@
 import React from 'react'
+import { BoardList, CreateBoard } from 'containers'
+
 
 const ClubManagePage = () => {
+  
+
   return (
     <div>
-      This is Club Manage Page
+      <BoardList/>
+      <CreateBoard/>
     </div>
   )
 }
