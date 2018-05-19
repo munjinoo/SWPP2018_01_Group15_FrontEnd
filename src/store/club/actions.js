@@ -16,3 +16,9 @@ export const postClub = (name, scope, category, introduction) => {
         introduction
     }
 }
+
+export const initClubState = () => {
+    return {
+        type: types.INIT_CLUB_STATE
+    }
+}
