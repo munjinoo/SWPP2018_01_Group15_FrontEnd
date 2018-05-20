@@ -8,13 +8,13 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const BoardList = ({ clubState={id, boards: [], needLoading: {board: true}}, onLoad}) => {
-  if (clubState.needLoading.board)
-    return{
+const BoardList = ({ clubState={id, boards: [], needLoading: true}, onLoad}) => {
+  if (clubState.needLoading)
+    return(
       <Wrapper>
         <Load onLoad={onLoad} />
       </Wrapper>
-    }
+    )
   return (    
     <Wrapper>
       전체 게시판  <br />
