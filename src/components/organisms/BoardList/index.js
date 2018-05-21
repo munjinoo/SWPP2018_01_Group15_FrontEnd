@@ -8,11 +8,15 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const BoardList = ({ clubState={id, boards: [], needLoading: true}, onLoad}) => {
+const BoardList = ({ clubState={id, boards: [], needLoading: true}, onLoad, clubid}) => {
+  const loadingFunc = () => {
+    onLoad(clubid)
+  }
+
   if (clubState.needLoading)
     return(
       <Wrapper>
-        <Load onLoad={onLoad} />
+        <Load onLoad={loadingFunc} />
       </Wrapper>
     )
   return (    

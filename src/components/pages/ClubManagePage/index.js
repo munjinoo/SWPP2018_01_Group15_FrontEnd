@@ -2,12 +2,11 @@ import React from 'react'
 import { BoardList, CreateBoard } from 'containers'
 
 
-const ClubManagePage = () => {
-  
+const ClubManagePage = (props) => {
 
   return (
     <div>
-      <BoardList/>
+      <BoardList clubid={props.routeParams.clubid} />
       <CreateBoard/>
     </div>
   )

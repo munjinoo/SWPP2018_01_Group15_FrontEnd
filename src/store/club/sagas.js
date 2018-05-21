@@ -118,8 +118,8 @@ export function* watchPostClubRequest() {
 
 export function* watchInitClubStateRequest() {
     while (true) {
-        yield take(types.INIT_CLUB_STATE)
-        yield call(init_club_state)
+        const { clubid } = yield take(types.INIT_CLUB_STATE)
+        yield call(init_club_state, clubid)
     }
 }
 

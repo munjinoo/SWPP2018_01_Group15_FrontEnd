@@ -13,8 +13,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLoad: () => {
-            dispatch(initClubState())
+        onLoad: (clubid) => {
+            dispatch(initClubState(clubid))
         }
     }
 }
