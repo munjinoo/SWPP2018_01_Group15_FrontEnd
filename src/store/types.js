@@ -21,3 +21,13 @@ export const VERIFY_TOKEN = 'VERIFY_TOKEN'
 export const POST_CLUB = 'POST_CLUB'
 export const GET_CLUBS = 'GET_CLUBS'
 export const SET_CLUBS = 'SET_CLUBS'
+export const ADD_EVENT = 'ADD_EVENT'
+
+/* Event */
+export const GET_EVENTS = 'GET_EVENTS'
+export const POST_EVENT = 'POST_EVENT'
+export const INIT_EVENT_STATE = 'INIT_EVENT_STATE'
+export const SET_EVENT = 'SET_EVENT'
+export const ADD_FUTURE_ATTENDEE = 'ADD_FUTURE_ATTENDEE'
+export const ADD_FUTURE_ABSENTEE = 'ADD_FUTURE_ABSENTEE'
+export const ADD_PAST_ATTENDEE = 'ADD_PAST_ATTENDEE'
