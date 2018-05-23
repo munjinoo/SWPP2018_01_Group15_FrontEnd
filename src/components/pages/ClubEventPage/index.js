@@ -1,9 +1,12 @@
+import { CreateEvent, FutureEvents, PastEvents } from 'containers'
 import React from 'react'
 
 const ClubEventPage = () => {
   return (
     <div>
-      This is Club Event Page 
+      <CreateEvent/>
+      <FutureEvents/>
+      <PastEvents/>
     </div>
   )
 }
