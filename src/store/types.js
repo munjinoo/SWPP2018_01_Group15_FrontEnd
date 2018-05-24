@@ -21,7 +21,8 @@ export const VERIFY_TOKEN = 'VERIFY_TOKEN'
 export const POST_CLUB = 'POST_CLUB'
 export const GET_CLUBS = 'GET_CLUBS'
 export const SET_CLUBS = 'SET_CLUBS'
-export const ADD_EVENT = 'ADD_EVENT'
+export const ADD_FUTURE_EVENT = 'ADD_FUTURE_EVENT'
+export const ADD_PAST_EVENT = 'ADD_PAST_EVENT'
 
 /* Event */
 export const GET_EVENTS = 'GET_EVENTS'
