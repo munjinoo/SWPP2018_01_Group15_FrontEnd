@@ -5,22 +5,36 @@ import * as types from '../types'
 
 export function* getEvents(clubid, time) {
     try {
-        if (time == None) {
-            const data = yield call(api.get, `/event/?clubid=${clubid}`)
-        }
-        else if (time == 'future') {
+        // if (time == None) {
+        //     const data = yield call(api.get, `/event/?clubid=${clubid}`)
+        // }
+        // else 
+        if (time == 'future') {
             const data = yield call(api.get, `/event/?need=future&clubid=${clubid}`)
+            let events = data
+            for (var i=0; i < events.length; i++) {
+                yield put({
+                    type: types.ADD_FUTURE_EVENT,
+                    event: events[i]
+                })
+            }
         }
         else if (time == 'past') {
             const data = yield call(api.get, `/event/?need=past&clubid=${clubid}`)
+            let events = data
+            for (var i=0; i < events.length; i++) {
+                yield put({
+                    type: types.ADD_PAST_EVENT,
+                    event: events[i]
+                })
+            }
         }
-        let events = data
-        for (var i=0; i < events.length; i++) {
-            yield put({
-                type: types.ADD_EVENT,
-                event: events[i]
-            })
-        }
+        // for (var i=0; i < events.length; i++) {
+        //     yield put({
+        //         type: types.ADD_EVENT,
+        //         event: events[i]
+        //     })
+        // }
     }
     catch (e) {
         console.log(e);
@@ -30,11 +44,19 @@ export function* getEvents(clubid, time) {
 export function* postEvent(name, content, date, club) {
     try {
         const data = yield call(api.post, `/event/`, {name: name, content: content, date: date, club: club}, {credentials: 'include'});
-        yield put({
-            type: types.ADD_EVENT,
-            event: data
-        })
-        yield put(push(`/event/${data.id}`))   //이 url로 이동하자
+        if (data.time == 'future') {
+            yield put({
+                type: types.ADD_FUTURE_EVENT,
+                event: data.event
+            })
+        }
+        else {
+            yield put({
+                type: types.ADD_PAST_EVENT,
+                event: data.event
+            })
+        }
+        yield put(push(`/event/${data.event.id}`))   //이 url로 이동하자
     }
     catch (e) {
         console.log(e)
