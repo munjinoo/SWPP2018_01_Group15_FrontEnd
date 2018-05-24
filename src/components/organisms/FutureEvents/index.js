@@ -8,11 +8,11 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const FutureEvents = ({ clubState = { events: [] }}) => {
+const FutureEvents = ({ clubState = { future_events: [] }}) => {
   return (
     <Wrapper>
       <ul>
-        {clubState.events.map(event =>
+        {clubState.future_events.map(event =>
           <li key={event.id}>
             <strong>{event.name}</strong><br/>
             날짜: {event.date}<br/>
@@ -28,7 +28,7 @@ const FutureEvents = ({ clubState = { events: [] }}) => {
 
 FutureEvents.propTypes = {
   clubState: PropTypes.shape({
-    events: PropTypes.arrayOf(PropTypes.object)   //??
+    future_events: PropTypes.arrayOf(PropTypes.object)   //??
   }),
   reverse: PropTypes.bool,
 }

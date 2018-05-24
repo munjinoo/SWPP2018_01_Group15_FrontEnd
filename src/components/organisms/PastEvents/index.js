@@ -8,11 +8,11 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const PastEvents = ({ clubState = { events: [] }}) => {
+const PastEvents = ({ clubState = { past_events: [] }}) => {
   return (
     <Wrapper>
       <ul>
-        {clubState.events.map(event =>
+        {clubState.past_events.map(event =>   //how to get only past events?
           <li key={event.id}>
             <strong>{event.name}</strong><br/>
             날짜: {event.date}<br/>
@@ -27,9 +27,9 @@ const PastEvents = ({ clubState = { events: [] }}) => {
   )
 }
 
-FutureEvents.propTypes = {
+PastEvents.propTypes = {
   clubState: PropTypes.shape({
-    events: PropTypes.arrayOf(PropTypes.object)   //??
+    past_events: PropTypes.arrayOf(PropTypes.object)   //??
   }),
   reverse: PropTypes.bool,
 }
