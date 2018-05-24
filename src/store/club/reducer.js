@@ -137,11 +137,22 @@ const club_reducer = (state=clubState, action) => {
                 ...state,
                 waitings: add_waiting(state.waitings, action.waiting)
             }
-        case types.ADD_EVENT:
+
+        case types.ADD_FUTURE_EVENT:
             return {
                 ...state,
-                events: add_event(state.events, action.event)
+                future_events: add_event(state.future_events, action.event)
             }
+        case types.ADD_PAST_EVENT:
+            return {
+                ...state,
+                past_events: add_event(state.past_events, action.event)
+            }
+        // case types.ADD_EVENT:
+        //     return {
+        //         ...state,
+        //         events: add_event(state.events, action.event)
+        //     }
         default:
             return state
     }
