@@ -1,7 +1,7 @@
 import { clubState } from './selectors'
 import * as types from '../types'
 
-const add_event = (old_list, addme) => {
+const add = (old_list, addme) => {
     let new_list = [...old_list]
     for (var i=0; i < old_list.length; i++) {
         if (new_list[i].id > addme.id) {
@@ -35,51 +35,6 @@ const add_club = (clubs, num) => {
     return new_clubs;
 }
 
-const add_board = (board_list, board) => {
-    let new_list = [...board_list]
-    for (var i=0; i < new_list.length; i++) {
-        if (new_list[i].id > board.id) {
-            new_list.splice(i, 0, board)
-            return new_list
-        }
-        if (new_list[i].id === board.id) {
-            return new_list
-        }
-    }
-    new_list.push(board)
-    return new_list
-}
-
-const add_member = (member_list, member) => {
-    let new_list = [...member_list]
-    for (var i=0; i < new_list.length; i++) {
-        if (new_list[i].id > member.id) {
-            new_list.splice(i, 0, member)
-            return new_list
-        }
-        if (new_list[i].id === member.id) {
-            return new_list
-        }
-    }
-    new_list.push(member)
-    return new_list
-}
-
-const add_waiting = (waiting_list, waiting) => {
-    let new_list = [...waiting_list]
-    for (var i=0; i < new_list.length; i++) {
-        if (new_list[i].id > waiting.id) {
-            new_list.splice(i, 0, waiting)
-            return new_list
-        }
-        if (new_list[i].id === waiting.id) {
-            return new_list
-        }
-    }
-    new_list.push(waiting)
-    return new_list
-}
-
 const club_reducer = (state=clubState, action) => {
     switch (action.type) {
         case types.RESET_CLUBINFO:
@@ -102,11 +57,6 @@ const club_reducer = (state=clubState, action) => {
                 ...state,
                 id: action.id
             }
-        case types.SET_CLUBADMIN:
-            return {
-                ...state,
-                admin: action.admin
-            }
         case types.SET_CLUBSCOPE:
             return {
                 ...state,
@@ -125,28 +75,37 @@ const club_reducer = (state=clubState, action) => {
         case types.ADD_CLUBBOARD:
             return {
                 ...state,
-                boards: add_board(state.boards, action.board)
+                boards: add(state.boards, action.board)
+            }
+        case types.ADD_CLUBADMIN:
+            return {
+                ...state,
+                admin: add(state.admin, action.admin)
             }
         case types.ADD_CLUBMEMBER:
             return {
                 ...state,
-                members: add_member(state.members, action.member)
+                members: add(state.members, action.member)
             }
         case types.ADD_CLUBWAITING:
             return {
                 ...state,
-                waitings: add_waiting(state.waitings, action.waiting)
+                waitings: add(state.waitings, action.waiting)
             }
-
+        case types.ADD_CLUBBOARD:
+            return {
+                ...state,
+                boards: add_board(state.boards, action.board)
+            }
         case types.ADD_FUTURE_EVENT:
             return {
                 ...state,
-                future_events: add_event(state.future_events, action.event)
+                future_events: add(state.future_events, action.event)
             }
         case types.ADD_PAST_EVENT:
             return {
                 ...state,
-                past_events: add_event(state.past_events, action.event)
+                past_events: add(state.past_events, action.event)
             }
         // case types.ADD_EVENT:
         //     return {
