@@ -1,12 +1,16 @@
 import React from 'react'
+import { Link } from 'react-router'
 
-import { PageTemplate, Header, Hero, Footer, FeatureList } from 'components'
-
-const EventDetailPage = () => {
+const EventDetailPage = ({ routeParams }) => {
+  const event_id = routeParams.eventid
   return (
-    <PageTemplate header={<Header />} hero={<Hero />} footer={<Footer />}>
-      <FeatureList />
-    </PageTemplate>
+    <div>
+      행사명: 
+      날짜:
+      내용:
+      
+      참가자.... 기타 등등
+    </div>
   )
 }
 
