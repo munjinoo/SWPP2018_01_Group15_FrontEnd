@@ -17,10 +17,6 @@ const CreateClub = ({ clubState = {admin: [], members: []}, onPostClub }) => {
   const onClick = () => {
     if (name != undefined && scope != undefined && category != undefined && introduction != undefined) {
       onPostClub(name.value, scope.value, category.value, introduction.value);
-      name.value = '';
-      scope.value = '';
-      category.value = '';
-      introduction.value = '';
     }
   }
   return (    
@@ -47,7 +43,7 @@ const CreateClub = ({ clubState = {admin: [], members: []}, onPostClub }) => {
             <option value="인권봉사분과">인권봉사봉사</option>
         </select> <br />
       동아리 소개: <input type="text" ref={node => {introduction = node;}} /> <br/>
-      <button onClick={onClick}>동아리방 만들기</button>
+      <button id="create-club-submit" onClick={onClick}>동아리방 만들기</button>
     </Wrapper>
   )
 }
