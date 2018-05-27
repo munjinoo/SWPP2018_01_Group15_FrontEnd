@@ -1,19 +1,20 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { FutureEvents } from 'components'
+import { initClubState } from 'store/actions'
 
 const FutureEventsContainer = props => <FutureEvents {...props} />
 
 const mapStateToProps = (state) => {
     return {
-        state: state
+        clubState: state.club
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLoad: () => {
-            dispatch(initEventState())    //??
+        onLoad: (clubid) => {
+            dispatch(initClubState(clubid))    //??
         }
     }
 }

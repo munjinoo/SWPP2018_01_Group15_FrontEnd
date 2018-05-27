@@ -13,8 +13,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onPostEvent: (name, content, date) => {
-            dispatch(postEvent(name, content, date))
+        onPostEvent: (name, content, date, club) => {
+            dispatch(postEvent(name, content, date, club))
         }
     }
 }
