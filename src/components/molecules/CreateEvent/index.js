@@ -8,14 +8,15 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const CreateEvent = ({ eventState = { future_attendees: [], future_absentees: [], past_attendees: [] }, onPostEvent }) => {
+const CreateEvent = ({ eventState = { future_attendees: [], future_absentees: [], past_attendees: [] }, onPostEvent, clubid }) => {
+
   let name = '';
   let content = '';
   let date = '';     //???
   
   const onClick = () => {
     if (name != undefined && content != undefined && date != undefined) {
-      onPostEvent(name.value, content.value, date.value);
+      onPostEvent(name.value, content.value, date.value, clubid);
       name.value = '';
       content.value = '';
       date.value = '';     //?????
