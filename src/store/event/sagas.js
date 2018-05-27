@@ -109,8 +109,8 @@ export function* watchGetEventsRequest() {
 
 export function* watchPostEventRequest() {
     while (true) {
-        const {name, content, date} = yield take(types.POST_EVENT);
-        yield call(postEvent, name, content, date);
+        const {name, content, date, club} = yield take(types.POST_EVENT);
+        yield call(postEvent, name, content, date, club);
     }
 }
 
