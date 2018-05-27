@@ -2,15 +2,27 @@ import React, { PropTypes } from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import { Link } from 'react-router'
+import { Load } from 'components'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
   color: ${palette('grayscale', 0)};
 `
 
-const FutureEvents = ({ clubState = { future_events: [] }}) => {
+const FutureEvents = ({ clubState = { future_events: [], needLoading: true }, onLoad, clubid }) => {
+  if (clubState.needLoading) {
+    const onLoading = () => {
+      onLoad(clubid)
+    }
+    return (
+      <Wrapper>
+        <Load onLoad={onLoading} />
+      </Wrapper>
+    )
+  }
   return (
     <Wrapper>
+      다가오는 행사
       <ul>
         {clubState.future_events.map(event =>
           <li key={event.id}>
