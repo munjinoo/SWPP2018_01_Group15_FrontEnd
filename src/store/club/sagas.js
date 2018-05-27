@@ -96,7 +96,7 @@ export function* init_club_state(clubid) {
             })
         }
     } catch (e) {
-        yield put({type: types.RESET_CLUBINFO})
+        console.log(e)
     }
 }
 

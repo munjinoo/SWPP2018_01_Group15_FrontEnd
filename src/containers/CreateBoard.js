@@ -7,7 +7,7 @@ const CreateBoardContainer = props => <CreateBoard {...props} />
 
 const mapStateToProps = (state) => {
     return {
-        clubstate: state.club
+        clubState: state.club
     }
 }
 

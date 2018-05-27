@@ -3,12 +3,14 @@ import { push } from 'react-router-redux'
 import api from 'services/api'
 import * as types from '../types'
 
-export function* postBoard(name, club) {
+export function* postBoard(club, name) {
     try {
+        console.log(club)
+        console.log(name)
         const data = yield call(api.post, `/board/`, {name: name, club: club}, {credentials: 'include'});
         yield put({
             type: types.ADD_CLUBBOARD,
-            board: data.board
+            board: data.id
         })
     } catch (e) {
         console.log(e)
@@ -17,8 +19,8 @@ export function* postBoard(name, club) {
 
 export function* watchPostBoardRequest() {
     while (true) {
-        const {name, club} = yield take(types.POST_BOARD);
-        yield call(postBoard, name, club);
+        const {club, name} = yield take(types.POST_BOARD);
+        yield call(postBoard, club, name);
     }
 }
 

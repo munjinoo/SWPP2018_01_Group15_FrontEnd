@@ -24,8 +24,8 @@ const BoardList = ({ clubState={id, boards: [], needLoading: true}, onLoad, club
       전체 게시판  <br />
       <ul>
         {clubState.boards.map(board =>
-          <li>
-            {board.name}
+          <li key={board.id}>
+            아아 {board.name}
           </li>
         )}
       </ul>
