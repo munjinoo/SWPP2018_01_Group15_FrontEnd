@@ -29,7 +29,7 @@ const FutureEvents = ({ clubState = { future_events: [], needLoading: true }, on
             <strong>{event.name}</strong><br/>
             날짜: {event.date}<br/>
             내용: {event.content}<br/>
-            <Link to={`/club/${clubState.id}/event/${event.id}`}>
+            <Link to={`/event/${event.id}/`}>
               자세히 보기</Link>
           </li>
         )}
