@@ -5,10 +5,6 @@ import * as types from '../types'
 
 export function* getEvents(clubid, time) {
     try {
-        // if (time == None) {
-        //     const data = yield call(api.get, `/event/?clubid=${clubid}`)
-        // }
-        // else 
         if (time == 'future') {
             const data = yield call(api.get, `/event/?need=future&clubid=${clubid}`)
             let events = data
@@ -29,12 +25,6 @@ export function* getEvents(clubid, time) {
                 })
             }
         }
-        // for (var i=0; i < events.length; i++) {
-        //     yield put({
-        //         type: types.ADD_EVENT,
-        //         event: events[i]
-        //     })
-        // }
     }
     catch (e) {
         console.log(e);
@@ -56,7 +46,23 @@ export function* postEvent(name, content, date, club) {
                 event: data.event
             })
         }
-        yield put(push(`/event/${data.event.id}`))   //이 url로 이동하자
+        yield put(push(`/event/${data.event.id}/`))   //이 url로 이동하자
+    }
+    catch (e) {
+        console.log(e)
+    }
+}
+
+export function* putFutureAttendee(eventid) {
+    try {
+        const data = call(api.put, `/event/${eventid}/future_attendee/`, {})
+        
+        yield put({
+            type: types.ADD_FUTURE_ATTENDEE,
+            future_attendee: {name: data.username, id: data.id}
+        })
+        console.log("put", data)
+        yield put(push(`/event/${eventid}/`))  // page update... 페이지 전체가 아니라 숫자만 바뀌게 할 수 있나?
     }
     catch (e) {
         console.log(e)
@@ -70,7 +76,11 @@ export function* init_event_state(eventid) {
         const future_absentees = data.future_absentees
         const past_attendees = data.past_attendees
         yield put({
+            type: types.SET_EVENT_NEED_LOAD
+        })
+        yield put({
             type: types.SET_EVENT,
+            id: data.id,
             name: data.name,
             content: data.content,
             date: data.date,
@@ -114,13 +124,21 @@ export function* watchPostEventRequest() {
     }
 }
 
+export function* watchPutFutureAttendeeRequest() {
+    while (true) {
+        const { eventid } = yield take(types.PUT_FUTURE_ATTENDEE);
+        yield call(putFutureAttendee, eventid);
+    }
+}
+
 export function* watchInitEventStateRequest() {
     while (true) {
-        const { clubid } = yield take(types.INIT_EVENT_STATE)
-        yield call(init_event_state, clubid)
+        const { eventid } = yield take(types.INIT_EVENT_STATE)
+        yield call(init_event_state, eventid)
     }
 }
 export default function* () {
+    yield fork(watchPutFutureAttendeeRequest);
     yield fork(watchPostEventRequest);
     yield fork(watchInitEventStateRequest);
     yield fork(watchGetEventsRequest);

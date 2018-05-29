@@ -18,8 +18,16 @@ export const postEvent = (name, content, date, club) => {
     }
 }
 
-export const initEventState = () => {
+export const putFutureAttendee = (eventid) => {
     return {
-        type: types.INIT_EVENT_STATE
+        type: types.PUT_FUTURE_ATTENDEE,
+        eventid: eventid
+    }
+}
+
+export const initEventState = (eventid) => {
+    return {
+        type: types.INIT_EVENT_STATE,
+        eventid: eventid
     }
 }

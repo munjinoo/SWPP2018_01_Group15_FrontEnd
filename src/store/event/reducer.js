@@ -18,9 +18,15 @@ const add_person = (old_list, addme) => {
 
 const event_reducer = (state=eventState, action) => {
     switch (action.type) {
+        case types.SET_EVENT_NEED_LOAD:
+          return {
+              ...state,
+              needLoading: false
+          }
         case types.SET_EVENT:
           return {
               ...state,
+              id: action.id,
               name: action.name,
               content: action.content,
               date: action.date,
