@@ -8,7 +8,7 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const CreateClub = ({ clubState = {admin: [], members: []}, onPostClub }) => {
+const CreateClub = ({ onPostClub }) => {
   let name = '';
   let scope = '';
   let category = '';

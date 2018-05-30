@@ -1,32 +1,34 @@
 import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 import styled from 'styled-components'
+import lifecycle from 'react-pure-lifecycle'
 import { font, palette } from 'styled-theme'
-import { Login, Logout } from 'containers'
-import { Load } from 'components'
+import { Login, Logout } from 'components'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
   color: ${palette('grayscale', 0)};
 `
 
-const UserStatus = ({ userState={isLogin: false, needLoading: {user: true}}, onLoad }) => {
-  if (userState.needLoading.user) {
+const componentDidMount = (props) => {
+  props.onLoad()
+}
+
+const methods = {
+  componentDidMount
+}
+
+const UserStatus = ({ userState={isLogin: false}, onLoad, onLogout, onLogin }) => {
+  if (userState.isLogin) {
     return (
       <Wrapper>
-        <Load onLoad={onLoad} />
-       </Wrapper>
-    )
-  } else if (userState.isLogin) {
-    return (
-      <Wrapper>
-        <Logout />
+        <Logout username={userState.username} onLogout={onLogout} />
       </Wrapper>
     )
   } else {
     return (
       <Wrapper>
-        <Login />
+        <Login onLogin={onLogin} />
         <Link to='/signup'>회원가입</Link>
       </Wrapper>
     )
@@ -37,4 +39,4 @@ UserStatus.propTypes = {
   reverse: PropTypes.bool,
 }
 
-export default UserStatus
+export default lifecycle(methods)(UserStatus)

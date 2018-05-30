@@ -7,7 +7,7 @@ const Wrapper = styled.div`
     color: ${palette('grayscale', 0)};
 `
 
-const Login = ({ userState={isLogin: false}, onLogin }) => {
+const Login = ({ onLogin }) => {
     let username = '';
     let password = '';
     const onClick = () => {

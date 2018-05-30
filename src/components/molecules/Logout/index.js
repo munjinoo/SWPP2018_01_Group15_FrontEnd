@@ -8,10 +8,10 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const Logout = ({ userState, onLogout }) => {
+const Logout = ({ username, onLogout }) => {
   return (
     <Wrapper>
-      Hello, <Link to="/mypage">{userState.username}</Link><br/>
+      Hello, <Link to="/mypage">{username}</Link><br/>
       <button onClick={onLogout}>Logout</button>
     </Wrapper>
   )
