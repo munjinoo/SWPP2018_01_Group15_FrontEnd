@@ -80,7 +80,8 @@ export function* signup(username, password, email, name, college, major, admissi
         yield put(push('/'))
     } catch (e) {
         console.log(e)
-        alert('회원가입 에러메시지');
+        const response = yield e.response.json()
+        alert(response)
     }
 }
 
