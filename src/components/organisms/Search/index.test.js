@@ -1,10 +1,17 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 import Search from '.'
 
-const wrap = (props = {}) => shallow(<Search {...props} />)
+const wrap = (props = {}) => mount(<Search {...props} />)
 
-it('renders props when passed in', () => {
-  const wrapper = wrap({ id: 'foo' })
-  expect(wrapper.find({ id: 'foo' })).toHaveLength(1)
+it('renders', () => {
+  const props = {
+    onLoad: jest.fn(),
+    query: {},
+    search_result: []
+  }
+  const wrapper = wrap(props)
+  expect(props.onLoad).toHaveBeenCalled()
+  expect(wrapper.find('SearchBar').exists()).toBe(true)
+  expect(wrapper.find('SearchResult').exists()).toBe(true)
 })

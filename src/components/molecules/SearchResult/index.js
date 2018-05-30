@@ -10,10 +10,10 @@ const Wrapper = styled.div`
 
 const SearchResult = ({ search_result }) => {
   if (search_result.length === 0)
-    return (<Wrapper>검색 결과가 없습니다.</Wrapper>)
+    return (<Wrapper><p id="info-nothing">검색 결과가 없습니다.</p></Wrapper>)
   return (
     <Wrapper>
-      <ul>
+      <ul id="search-result">
         {search_result.map(club =>
           <li key={club.id}>
             <Link to={`/club/${club.id}`}>{club.name}</Link>
