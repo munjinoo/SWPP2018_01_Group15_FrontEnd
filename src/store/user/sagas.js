@@ -6,7 +6,6 @@ import * as types from '../types'
 export function* login(username, password) {
     try {
         const data = yield call(api.post, `/login/`, {username: username, password: password}, {credentials: 'include'})
-        yield put({type: types.SET_USER_NEED_LOAD, flags: {user: false, club: true}})
         yield put({type: types.SET_LOGIN})
         yield put({
             type: types.SET_USERNAME,
@@ -36,7 +35,6 @@ export function* init_user_state() {
         const as_admin = data.clubs_as_admin
         const as_member = data.clubs_as_members
 
-        yield put({type: types.SET_USER_NEED_LOAD, flags: {user: false, club: false}})
         yield put({type: types.SET_LOGIN})
         // set user info
         yield put({
@@ -82,7 +80,8 @@ export function* signup(username, password, email, name, college, major, admissi
         yield put(push('/'))
     } catch (e) {
         console.log(e)
-        alert('회원가입 에러메시지');
+        const response = yield e.response.json()
+        alert(response)
     }
 }
 

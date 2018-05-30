@@ -46,10 +46,6 @@ describe('user reducer', () => {
             type: types.RESET_USERINFO
         }
         const expectedState = {
-            needLoading: {
-                user: false,
-                club: true
-            },
             isLogin: false,
             username: '',
             id: null,
@@ -59,41 +55,6 @@ describe('user reducer', () => {
             ]
         }
         expect(user_reducer(initialState, action)).toEqual(expectedState)
-    })
-
-    it('should set need flags correct', () => {
-        const action = {
-            type: types.SET_USER_NEED_LOAD,
-            flags: {user: true}
-        }
-        const initState = {
-            needLoading: {
-                user: false,
-                club: true
-            },
-            isLogin: false,
-            username: '',
-            id: null,
-            clubs_as_admin: [
-            ],
-            clubs_as_member: [
-            ]
-        }
-        const expectedState = {
-            needLoading: {
-                user: true,
-                club: true
-            },
-            isLogin: false,
-            username: '',
-            id: null,
-            clubs_as_admin: [
-            ],
-            clubs_as_member: [
-            ]
-        }
-        expect(user_reducer(initState, action)).not.toContainEqual({user: false, club: true})
-        expect(user_reducer(initState, action)).toEqual(expectedState)
     })
 
     it('should add admin club', () => {
@@ -110,10 +71,6 @@ describe('user reducer', () => {
 
     it('should not add exist admin club', () => {
         const initState = {
-            needLoading: {
-                user: false,
-                club: true
-            },
             isLogin: false,
             username: '',
             id: null,
@@ -144,10 +101,6 @@ describe('user reducer', () => {
 
     it('should not add exist member club', () => {
         const initState = {
-            needLoading: {
-                user: false,
-                club: true
-            },
             isLogin: false,
             username: '',
             id: null,

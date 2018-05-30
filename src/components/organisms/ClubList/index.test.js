@@ -1,9 +1,9 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 import ClubList from '.'
 import Load from 'components'
 
-const wrap = (props = {}) => shallow(<ClubList {...props} />)
+const wrap = (props = {}) => mount(<ClubList {...props} />)
 
 it('all clubs should be rendered', () => {
   const props = {
