@@ -11,25 +11,32 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const AccountList = ({ clubState = { accounts: []}}) => {
-  const loadingFunc = () => {
-    onLoad(clubid)
-  }
+const AccountList = ({ clubState={ accounts: [], needLoading: true }, onLoad, clubid}) => {
+  if(clubState.needLoading){
+    const onLoading= () => {
+      onLoad(clubid)
+    }
   
-  if(clubState.needLoading) 
     return (
       <Wrapper>
-        <Load onLoad = {loadingFunc} />
+        <Load onLoad = {onLoading} /> 
       </Wrapper>
     )
+  }
 
   return (
     <Wrapper> 
       전체 회계 정보 <br /> 
-      <ul> 
-        {clubState.accounts.map(account => 
-          <li>
-            {account.content}
+      <ul>
+        {clubState.accounts.map((account, i) => 
+          <li key={i}>
+            {account.is_income} <br/> 
+            금액: {account.money} <br/>
+            작성자: {account.writer} <br/>
+            날짜: {account.date} <br/>
+            내용: <strong> {account.content} </strong> <br/>
+            작성일: {account.created_at} <br/>
+            수정일: {account.updated_at} <br/>
           </li>
         )}
       </ul>

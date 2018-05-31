@@ -1,4 +1,3 @@
-/* User */
 export const INIT_USER_STATE = 'INIT_USER_STATE'
 export const RESET_USERINFO = 'RESET_USERINFO'
 export const SET_USER_NEED_LOAD = 'SET_USER_NEED_LOAD'
@@ -21,3 +20,45 @@ export const VERIFY_TOKEN = 'VERIFY_TOKEN'
 export const POST_CLUB = 'POST_CLUB'
 export const GET_CLUBS = 'GET_CLUBS'
 export const SET_CLUBS = 'SET_CLUBS'
+
+export const INIT_CLUB_STATE = 'INIT_CLUB_STATE'
+export const RESET_CLUBINFO = 'RESET_CLUBINFO'
+export const SET_CLUB_NEED_LOAD = 'SET_CLUB_NEED_LOAD'
+
+export const SET_CLUBNAME = 'SET_CLUBNAME'
+export const SET_CLUBID = 'SET_CLUBID'
+export const SET_CLUBSCOPE = 'SET_CLUBSCOPE'
+export const SET_CLUBCATEGORY = 'SET_CLUBCATEGORY'
+export const SET_CLUBINTRODUCTION = 'SET_CLUBINTRODUCTION'
+
+export const ADD_CLUBBORAD = 'ADD_CLUBBOARD'
+export const ADD_FUTURE_EVENT = 'ADD_FUTURE_EVENT'
+export const ADD_PAST_EVENT = 'ADD_PAST_EVENT'
+export const ADD_CLUBACCOUNTING = 'ADD_CLUBACCOUNTING'
+
+export const ADD_CLUBADMIN = 'ADD_CLUBADMIN'
+export const ADD_CLUBMEMBER = 'ADD_CLUBMEMBER'
+export const ADD_CLUBWAITING = 'ADD_CLUBWAITING'
+
+
+/* Board */
+export const GET_BOARD = 'GET_BOARD'
+export const POST_BOARD = 'POST_BOARD'
+export const INIT_BOARD_STATE = 'INIT_BOARD_STATE'
+ 
+/* Event */
+export const GET_EVENTS = 'GET_EVENTS'
+export const POST_EVENT = 'POST_EVENT'
+export const INIT_EVENT_STATE = 'INIT_EVENT_STATE'
+export const SET_EVENT = 'SET_EVENT'
+export const ADD_FUTURE_ATTENDEE = 'ADD_FUTURE_ATTENDEE'
+export const ADD_FUTURE_ABSENTEE = 'ADD_FUTURE_ABSENTEE'
+export const ADD_PAST_ATTENDEE = 'ADD_PAST_ATTENDEE'
+
+/* Account */
+export const GET_ACCOUNTS = 'GET_ACCOUNTS'
+export const POST_ACCOUNT = 'POST_ACCOUNT'
+export const INIT_ACCOUNT_STATE = 'INIT_ACCOUNT_STATE'
+export const SET_ACCOUNT = 'SET_ACCOUNT'
+export const ADD_ACCOUNT = 'ADD_ACCOUNT'
+

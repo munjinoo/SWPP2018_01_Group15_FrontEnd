@@ -1,28 +1,29 @@
 import * as types from '../types'
 
-export const postAccount = (created_at, updated_at, is_income, club, money, date, writer, content) => {
+export const postAccount = (is_income, money, date, content, club) => {
     return {
         type: types.POST_ACCOUNT,
-        created_at,
-        updated_at, 
         is_income,
-        club,
         money,
         date,
-        writer,
-        content
+        content,
+        club
     }
 }
 
-export const getAccounts = (clubid) => {
+export const getAccounts = (club, created_at, updated_at, writer) => {
     return {
         type: types.GET_ACCOUNTS,
-        clubid
+        club,
+        created_at, 
+        updated_at, 
+        writer
     }
 }
 
-export const initAccountState = () => {
+export const initAccountState = (accountid) => {
     return {
-        type: types.INIT_ACCOUNT_STATE
+        type: types.INIT_ACCOUNT_STATE,
+        accountid: accountid
     }
 }

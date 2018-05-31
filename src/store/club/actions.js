@@ -16,3 +16,10 @@ export const postClub = (name, scope, category, introduction) => {
         introduction
     }
 }
+
+export const initClubState = (clubid) => {
+    return {
+        type: types.INIT_CLUB_STATE,
+        clubid: clubid
+    }
+}

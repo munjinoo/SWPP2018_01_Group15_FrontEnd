@@ -1,1 +1,1 @@
-export const accountState = { id: null, created_at: null, updated_at: null, is_income: null,  money: null, date: null, writer: null, content: null }
+export const accountState = { id: null, created_at: null, updated_at: null, is_income: null,  money: null, date: null, writer: null, content: null, needLoading: true }
