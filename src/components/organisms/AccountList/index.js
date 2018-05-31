@@ -30,11 +30,11 @@ const AccountList = ({ clubState={ accounts: [], needLoading: true }, onLoad, cl
       <ul>
         {clubState.accounts.map((account, i) => 
           <li key={i}>
-            {account.is_income} <br/> 
+            {account.is_income === "income" ? `수입` : `지출` } <br/> 
             금액: {account.money} <br/>
             작성자: {account.writer} <br/>
-            날짜: {account.date} <br/>
             내용: <strong> {account.content} </strong> <br/>
+            날짜: {account.date} <br/>
             작성일: {account.created_at} <br/>
             수정일: {account.updated_at} <br/>
           </li>
