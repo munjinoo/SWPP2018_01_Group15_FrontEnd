@@ -1,2 +1,2 @@
-export const boardState = { id: null, club: null, name: null, needLoading: true}
+export const boardState = { id: null, club: null, name: null, articles: [], needLoading: true}
 

@@ -48,7 +48,6 @@ export function* init_club_state(clubid) {
         yield put({
             type: types.SET_CLUB_NEED_LOAD
         })
-
         // set user info
         yield put({
             type: types.SET_CLUBNAME,
@@ -80,6 +79,7 @@ export function* init_club_state(clubid) {
                 type: types.ADD_CLUBBOARD,
                 board: {id: board_list[i].id, name: board_list[i].name}
             })
+            console.log(board_list[i].name)
         }
         // add members
         for (var i=0; i<member_list.length; i++) {

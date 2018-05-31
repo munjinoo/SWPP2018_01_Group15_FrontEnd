@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { BoardList } from 'components'
-import { initClubState } from 'store/actions'
+import { initClubState, deleteBoard } from 'store/actions'
 
 const BoardListContainer = props => <BoardList {...props} />
 
@@ -15,6 +15,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onLoad: (clubid) => {
             dispatch(initClubState(clubid))
+        },
+        onDeleteBoard: (boardid) =>{
+            dispatch(deleteBoard(boardid))
         }
     }
 }

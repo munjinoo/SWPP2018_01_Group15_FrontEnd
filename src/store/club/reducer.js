@@ -65,6 +65,17 @@ const add_waiting = (waiting_list, waiting) => {
     return new_list
 }
 
+const delete_board = (board_list, board_id) => {
+   let new_list = [...board_list]
+   for (var i=0; i < new_list.length; i++) {
+       if (new_list[i].id=board_id){
+           new_list.splice(i,1)
+           return new_list
+       }
+   }
+   return new_list
+}
+
 const club_reducer = (state=clubState, action) => {
     switch (action.type) {
         case types.RESET_CLUBINFO:
@@ -121,6 +132,11 @@ const club_reducer = (state=clubState, action) => {
             return {
                 ...state,
                 waitings: add_waiting(state.waitings, action.waiting)
+            }
+        case types.DELETE_CLUBBOARD:
+            return {
+                ...state,
+                boards: delete_board(state.boards, action.board_id)
             }
         default:
             return state

@@ -1,9 +1,9 @@
 import * as types from '../types'
 
-export const getBoards = (clubid) => {
+export const getBoards = (boardid) => {
     return {
         type: types.GET_BOARDS,
-        clubid
+        boardid
     }
 }
 
@@ -15,9 +15,16 @@ export const postBoard = (club, name) => {
     }
 }
 
-export const initBoardState = () => {
+export const deleteBoard = (boardid) => {
     return {
-        type: types.INIT_BOARD_STATE
+        type: types.DELETE_BOARD,
+        boardid
     }
 }
 
+export const initBoardState = (boardid) => {
+    return {
+        type: types.INIT_BOARD_STATE,
+        boardid
+    }
+}
