@@ -17,12 +17,12 @@ const routes = (
     <Route path=':token' component={VerifyPage} />
     <Route path = 'mypage' component={MyPage} />
     <Route path = 'club/create' component={CreateClubPage} />
-    <Route path = 'club/:clubid' component={ClubMain} />
+    <Route path = 'club/:clubid' component={props => <ClubMainPage key={props.routeParams.clubid}{...props}/>} />
     <Route path = 'club/:clubid/event' component = {ClubEventPage}/>
     <Route path = 'club/:clubid/manage' component = {ClubManagePage} /> 
     <Route path = 'club/:clubid/account' component = {ClubAccountingPage} />
     <Route path = "signup" component={SignupPage} />
-    <Route path = 'board/:boardid' component={BoardPage} />
+    <Route path = 'board/:boardid' component={props => <BoardPage key={props.routeParams.boardid}{...props} />} />
     <Route path = 'article/:articleid' component={ArticlePage} />
   </Route>
 

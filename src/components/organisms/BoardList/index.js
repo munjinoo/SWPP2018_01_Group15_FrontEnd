@@ -1,26 +1,23 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import styled from 'styled-components'
+import lifecycle from 'react-pure-lifecycle'
 import { font, palette } from 'styled-theme'
-import { Load } from 'components'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
   color: ${palette('grayscale', 0)};
 `
 
-const BoardList = ({ clubState={id, boards: [], needLoading: true}, onLoad, clubid, onDeleteBoard}) => {
-  const loadingFunc = () => {
-    onLoad(clubid)
-  }
-  
-  if (clubState.needLoading)
-    return(
-      <Wrapper>
-        <Load onLoad={loadingFunc} />
-      </Wrapper>
-    )
-    
+const componentDidMount = (props) => {
+  props.onLoad(props.clubid)
+}
 
+const methods = {
+  componentDidMount
+}
+
+
+const BoardList = ({ clubState={id, boards: [] }, clubid, onDeleteBoard}) => {
   const onClick = (e) => {
     onDeleteBoard(e.target.id)
     window.location.reload() // 새로고침
@@ -40,8 +37,4 @@ const BoardList = ({ clubState={id, boards: [], needLoading: true}, onLoad, club
   )
 }
 
-BoardList.propTypes = {
-  reverse: PropTypes.bool,
-}
-
-export default BoardList
+export default lifecycle(methods)(BoardList)
