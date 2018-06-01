@@ -18,7 +18,7 @@ const AccountForm = ({ accountState = { id: null, created_at: null, updated_at: 
   const onClick = () => {
     console.log("happening....??")
     if(is_income != undefined && money != undefined && date != undefined && content != undefined){
-      onPostAccount(is_income.value, money.value, date.value, content.value, clubid);
+      onPostAccount(is_income, money.value, date.value, content.value, clubid);
       is_income =  '' ;
       money.value = '';
       date.value = '';
@@ -27,18 +27,14 @@ const AccountForm = ({ accountState = { id: null, created_at: null, updated_at: 
   }
 
   const onButtonClick = (e) => {
-    accountState.is_income = e.target.value;
+    is_income = e.target.value;
     checked = accountState.is_income === "income";
-    console.log(e.target.value)
-    console.log(accountState.is_income === "income")
-    console.log(accountState.is_income === "expenditure")
   }
 
   return (
     <Wrapper>
-      <input type = "radio"  value = "expenditure" name = "is_income" checked = { checked } onChange = { onButtonClick } ref = {node => {is_income = node;}}/> 지출 <br/>
-      <input type = "radio" value = "income" name = "is_income" checked = { !checked } onChange = { onButtonClick }  ref = {node => {is_income = node;}}/> 수입 <br/> 
-     
+      <input type = "radio"  value = "expenditure" name = "is_income" onClick = { onButtonClick } ref = {node => {is_income =  node;}}/> 지출 <br/> 
+      <input type = "radio" value = "income" name = "is_income"  onClick = { onButtonClick }  ref = {node => {is_income = node;}}/> 수입 <br/> 
       금액 : <input type = "text" ref = {node => {money = node;}} /> <br/> 
       날짜 : <input type="datetime-local" ref={node => {date = node;}} /> <br/>
       내용 : <input type = "text" ref = {node => {content = node;}} /> <br/> 
