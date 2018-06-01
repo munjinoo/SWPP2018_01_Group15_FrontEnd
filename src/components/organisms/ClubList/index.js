@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import { Link } from 'react-router'
@@ -39,12 +39,5 @@ const ClubList = ({ userState = { clubs_as_admin: [], clubs_as_member: [], needL
   )
 }
 
-ClubList.propTypes = {
-  clubstate: PropTypes.shape({
-    admin: PropTypes.arrayOf(PropTypes.number),
-    members: PropTypes.arrayOf(PropTypes.number)
-  }),
-  reverse: PropTypes.bool,
-}
 
 export default ClubList

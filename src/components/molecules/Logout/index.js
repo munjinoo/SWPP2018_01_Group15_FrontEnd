@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { Link } from 'react-router'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
@@ -17,9 +17,5 @@ const Logout = ({ userState, onLogout }) => {
   )
 }
 
-Logout.propTypes = {
-  reverse: PropTypes.bool,
-  children: PropTypes.node,
-}
 
 export default Logout

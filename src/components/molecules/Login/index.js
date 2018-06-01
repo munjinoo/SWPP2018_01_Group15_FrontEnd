@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 
@@ -24,11 +24,6 @@ const Login = ({ userState={isLogin: false}, onLogin }) => {
             <button onClick={onClick}>Login</button>
         </Wrapper>
     )
-}
-
-Login.propTypes = {
-    reverse: PropTypes.bool,
-    children: PropTypes.node,
 }
 
 export default Login

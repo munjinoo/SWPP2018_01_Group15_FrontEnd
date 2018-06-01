@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import { Link } from 'react-router'
@@ -52,10 +52,5 @@ const CreateClub = ({ clubState = {admin: [], members: []}, onPostClub }) => {
   )
 }
 
-CreateClub.propTypes = {
-  onPostClub: PropTypes.func.isRequired,
-  reverse: PropTypes.bool,
-  children: PropTypes.node,
-}
 
 export default CreateClub

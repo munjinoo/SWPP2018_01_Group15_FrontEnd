@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import { Link } from 'react-router'
@@ -32,16 +32,5 @@ const CreateEvent = ({ eventState = { future_attendees: [], future_absentees: []
   )
 }
 
-CreateEvent.propTypes = {
-  eventState: PropTypes.shape({
-    future_attendees:PropTypes.arrayOf(PropTypes.number),
-    future_absentees:PropTypes.arrayOf(PropTypes.number),
-    past_attendees:PropTypes.arrayOf(PropTypes.number),
-    
-  }),
-  onPostEvent: PropTypes.func.isRequired,
-  reverse: PropTypes.bool,
-  children: PropTypes.node, //??
-}
 
 export default CreateEvent
