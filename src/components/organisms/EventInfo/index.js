@@ -1,24 +1,22 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
-import { Load } from 'components'
+import lifecycle from 'react-pure-lifecycle'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
   color: ${palette('grayscale', 0)};
 `
 
-const EventInfo = ({ eventState = { name: null, date: null, content: null, needLoading: true }, onLoad, eventid }) => {
-  if (eventState.needLoading) {
-    const onLoading = () => {
-      onLoad(eventid)
-    }
-    return (
-      <Wrapper>
-        <Load onLoad={onLoading} />
-      </Wrapper>
-    )
-  }
+const componentDidMount = (props) => {
+  props.onLoad(props.eventid)
+}
+
+const methods = {
+  componentDidMount
+}
+
+const EventInfo = ({ eventState = { name: null, date: null, content: null }, eventid }) => {
   return (
     <Wrapper>
       행사명: {eventState.name} <br/>
@@ -30,8 +28,5 @@ const EventInfo = ({ eventState = { name: null, date: null, content: null, needL
   )
 }
 
-EventInfo.propTypes = {
-  reverse: PropTypes.bool,
-}
 
-export default EventInfo
+export default lifecycle(methods)(EventInfo)
