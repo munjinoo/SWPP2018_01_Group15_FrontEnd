@@ -1,25 +1,23 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import { Link } from 'react-router'
-import { Load } from 'components'
+import lifecycle from 'react-pure-lifecycle'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
   color: ${palette('grayscale', 0)};
 `
+const componentDidMount = (props) => {
+  props.onLoad(props.clubid)
+}
 
-const PastEvents = ({ clubState = { past_events: [], needLoading: true }, onLoad, clubid }) => {
-  if (clubState.needLoading) {
-    const onLoading = () => {
-      onLoad(clubid)
-    }
-    return (
-      <Wrapper>
-        <Load onLoad={onLoading} />
-      </Wrapper>
-    )
-  }
+const methods = {
+  componentDidMount
+}
+
+const PastEvents = ({ clubState = { past_events: [] }, clubid }) => {
+  
   return (
     <Wrapper>
       지난 행사
@@ -39,11 +37,5 @@ const PastEvents = ({ clubState = { past_events: [], needLoading: true }, onLoad
   )
 }
 
-PastEvents.propTypes = {
-  clubState: PropTypes.shape({
-    past_events: PropTypes.arrayOf(PropTypes.object)   //??
-  }),
-  reverse: PropTypes.bool,
-}
 
-export default PastEvents
+export default lifecycle(methods)(PastEvents)

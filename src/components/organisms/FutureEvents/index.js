@@ -1,25 +1,22 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import { Link } from 'react-router'
-import { Load } from 'components'
+import lifecycle from 'react-pure-lifecycle'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
   color: ${palette('grayscale', 0)};
 `
+const componentDidMount = (props) => {
+  props.onLoad(props.clubid)
+}
 
-const FutureEvents = ({ clubState = { future_events: [], needLoading: true }, onLoad, clubid }) => {
-  if (clubState.needLoading) {
-    const onLoading = () => {
-      onLoad(clubid)
-    }
-    return (
-      <Wrapper>
-        <Load onLoad={onLoading} />
-      </Wrapper>
-    )
-  }
+const methods = {
+  componentDidMount
+}
+
+const FutureEvents = ({ clubState = { future_events: [] }, clubid }) => {
   return (
     <Wrapper>
       다가오는 행사
@@ -38,11 +35,5 @@ const FutureEvents = ({ clubState = { future_events: [], needLoading: true }, on
   )
 }
 
-FutureEvents.propTypes = {
-  clubState: PropTypes.shape({
-    future_events: PropTypes.arrayOf(PropTypes.object)   //??
-  }),
-  reverse: PropTypes.bool,
-}
 
-export default FutureEvents
+export default lifecycle(methods)(FutureEvents)
