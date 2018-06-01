@@ -16,6 +16,15 @@ export const postArticle = (board, title, content) => {
     }
 }
 
+export const putArticle = (articleid, title, content) => {
+    return {
+        type: types.PUT_ARTICLE,
+        articleid,
+        title,
+        content
+    }
+}
+
 export const deleteArticle = (articleid) => {
     return {
         type: types.DELETE_ARTICLE,
@@ -30,3 +39,8 @@ export const initArticleState = (articleid) => {
     }
 }
 
+export const setArticleIsEdit = () =>{
+    return {
+        type: types.SET_ARTICLE_ISEDIT
+    }
+}

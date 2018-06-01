@@ -16,13 +16,24 @@ export function* postArticle(board, title, content) {
     }
 }
 
+export function* putArticle(articleid, title, content) {
+    try {
+        yield call(api.put, `/article/${articleid}/`, {title: title, content: content}, {credentials: 'include'});        
+        yield call(init_article_state, articleid)
+    } catch (e) {
+        console.log(e)
+}
+}
+
 export function* deleteArticle(articleid) {
     try {
+        const article = yield call(api.get, `/article/${articleid}/`, {credentials: 'include'});
         yield call(api.delete, `/article/${articleid}/`, {credentials: 'include'});
         yield put({
             type: types.DELETE_BOARDARTICLE,
             article_id: articleid
         })
+        yield put(push(`/board/${article.board}`))
     } catch (e) {
         console.log(e)
     }
@@ -32,7 +43,7 @@ export function* init_article_state(articleid) {
     try {
         const data = yield call(api.get, `/article/${articleid}/`, {credentials: 'include'})
         yield put({
-            type: types.SET_ARTICLE_NEED_LOAD
+            type: types.RESET_ARTICLE_ISEDIT
         })
 
         // set ARTICLE info
@@ -77,6 +88,13 @@ export function* watchPostArticleRequest() {
     }
 }
 
+export function* watchPutArticleRequest() {
+    while (true) {
+        const {articleid, title, content} = yield take(types.PUT_ARTICLE);
+        yield call(putArticle, articleid, title, content);
+    }
+}
+
 export function* watchDeleteArticleRequest() {
     while (true) {
         const {articleid} = yield take(types.DELETE_ARTICLE);
@@ -95,5 +113,6 @@ export default function* () {
     yield fork(watchPostArticleRequest);
     yield fork(watchDeleteArticleRequest);
     yield fork(watchInitArticleStateRequest);
+    yield fork(watchPutArticleRequest);
 }
 

@@ -4,15 +4,15 @@ import * as types from '../types'
 
 const article_reducer = (state=articleState, action) => { 
     switch (action.type) {
-        case types.RESET_ARTICLEINFO:
+        case types.RESET_ARTICLE_ISEDIT:
             return {
-                ...ariticleState,
-                needLoading: true
+                ...articleState,
+                isEdit: false
             }
-        case types.SET_ARTICLE_NEED_LOAD:
+        case types.SET_ARTICLE_ISEDIT:
             return {
                 ...state,
-                needLoading: false
+                isEdit: true
             }
         case types.SET_ARTICLETITLE:
             return {
