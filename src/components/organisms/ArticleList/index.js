@@ -11,25 +11,14 @@ const Wrapper = styled.div`
 `
 
 const componentDidMount = (props) => {
-  props.onLoad()
+  props.onLoad(props.boardid)
 }
 
 const methods = {
   componentDidMount
 }
 
-const ArticleList = ({ boardState={name: "", articles: [], needLoading: true}, boardid, onLoad }) => {
-  const loadingFunc = () => {
-    onLoad(boardid)
-  }
-  console.log(boardState.needLoading)
-  if (boardState.needLoading)
-    return(
-      <Wrapper>
-        <Load onLoad={loadingFunc} />
-      </Wrapper>
-    )
-  console.log(boardState)  
+const ArticleList = ({ boardState={name: "", articles: [], needLoading: true}, boardid }) => {
   return (    
     <Wrapper>
       {boardState.name}  <br />
