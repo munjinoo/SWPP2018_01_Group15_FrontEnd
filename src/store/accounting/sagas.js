@@ -37,7 +37,7 @@ export function* postAccount(is_income, money, date, content, club) {
 
 export function* init_account_state(accountid) { 
     try{
-        const data = yield call (api.get, '/account/`${accountid}/', {credentials: 'include'})
+        const data = yield call (api.get, `/account/${accountid}/`, {credentials: 'include'})
         yield put({
             type : types.SET_ACCOUNT,
             id: data.id,
