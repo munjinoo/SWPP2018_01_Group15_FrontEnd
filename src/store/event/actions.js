@@ -25,6 +25,13 @@ export const putFutureAttendee = (eventid) => {
     }
 }
 
+export const putFutureAbsentee = (eventid) => {
+    return {
+        type: types.PUT_FUTURE_ABSENTEE,
+        eventid: eventid
+    }
+}
+
 export const initEventState = (eventid) => {
     return {
         type: types.INIT_EVENT_STATE,

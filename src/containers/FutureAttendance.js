@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { FutureAttendance } from 'components'
-import { initEventState, putFutureAttendee } from 'store/actions'
+import { initEventState, putFutureAttendee, putFutureAbsentee } from 'store/actions'
 
 const FutureAttendanceContainer = props => <FutureAttendance {...props} />
 
@@ -18,8 +18,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         onPutFutureAttendee: (eventid) => {
             dispatch(putFutureAttendee(eventid))
+        },
+        onPutFutureAbsentee: (eventid) => {
+            dispatch(putFutureAbsentee(eventid))
         }
-        
     }
 }
 

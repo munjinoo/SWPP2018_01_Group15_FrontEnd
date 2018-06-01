@@ -6,23 +6,23 @@ const add_person = (old_list, addme) => {
     for (var i=0; i < old_list.length; i++) {
         if (new_list[i].id > addme.id) {
             new_list.splice(i, 0, addme)
+            console.log("new_list", new_list)
             return new_list
         }
         if (new_list[i].id === addme.id) {
+            console.log("new_list", new_list)
             return new_list
         }
     }
     new_list.push(addme)
+    console.log("new_list", new_list)
     return new_list
 }
 
+
 const event_reducer = (state=eventState, action) => {
     switch (action.type) {
-        case types.SET_EVENT_NEED_LOAD:
-          return {
-              ...state,
-              needLoading: false
-          }
+        
         case types.SET_EVENT:
           return {
               ...state,
@@ -30,7 +30,10 @@ const event_reducer = (state=eventState, action) => {
               name: action.name,
               content: action.content,
               date: action.date,
-              club: action.club
+              club: action.club,
+              future_attendees: action.future_attendees,
+              future_absentees: action.future_absentees,
+              past_attendees: action.past_attendees
           }
         case types.ADD_FUTURE_ATTENDEE:
           return {

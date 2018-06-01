@@ -46,6 +46,7 @@ export function* postEvent(name, content, date, club) {
                 event: data.event
             })
         }
+
         yield put(push(`/event/${data.event.id}/`))   //이 url로 이동하자
     }
     catch (e) {
@@ -55,14 +56,28 @@ export function* postEvent(name, content, date, club) {
 
 export function* putFutureAttendee(eventid) {
     try {
-        const data = call(api.put, `/event/${eventid}/future_attendee/`, {})
+        const data = yield call(api.post, `/event/${eventid}/future_attendee/`, {}, {credentials: 'include'})
         
         yield put({
             type: types.ADD_FUTURE_ATTENDEE,
-            future_attendee: {name: data.username, id: data.id}
+            future_attendee: {username: data.username, id: data.id}
         })
-        console.log("put", data)
-        yield put(push(`/event/${eventid}/`))  // page update... 페이지 전체가 아니라 숫자만 바뀌게 할 수 있나?
+        yield put(push(`/event/${eventid}/`))
+    }
+    catch (e) {
+        console.log(e)
+    }
+}
+
+export function* putFutureAbsentee(eventid) {
+    try {
+        const data = yield call(api.post, `/event/${eventid}/future_absentee/`, {}, {credentials: 'include'})
+        
+        yield put({
+            type: types.ADD_FUTURE_ABSENTEE,
+            future_absentee: {username: data.username, id: data.id}
+        })
+        yield put(push(`/event/${eventid}/`))
     }
     catch (e) {
         console.log(e)
@@ -72,38 +87,19 @@ export function* putFutureAttendee(eventid) {
 export function* init_event_state(eventid) {
     try {
         const data = yield call(api.get, `/event/${eventid}/`, {credentials: 'include'})
-        const future_attendees = data.future_attendees
-        const future_absentees = data.future_absentees
-        const past_attendees = data.past_attendees
-        yield put({
-            type: types.SET_EVENT_NEED_LOAD
-        })
+        
         yield put({
             type: types.SET_EVENT,
             id: data.id,
             name: data.name,
             content: data.content,
             date: data.date,
-            club: data.club
+            club: data.club,
+            future_attendees: data.future_attendees,
+            future_absentees: data.future_absentees,
+            past_attendees: data.past_attendees
         })
-        for (var i=0; i<future_attendees.length; i++) {
-            yield put({
-                type: types.ADD_FUTURE_ATTENDEE,
-                future_attendee: {id: future_attendees[i].id, name: future_attendees[i].name},
-            })
-        }
-        for (var i=0; i<future_absentees.length; i++) {
-            yield put({
-                type: types.ADD_FUTURE_ABSENTEE,
-                future_absentee: {id: future_absentees[i].id, name: future_absentees[i].name},
-            })
-        }
-        for (var i=0; i<past_attendees.length; i++) {
-            yield put({
-                type: types.ADD_PAST_ATTENDEE,
-                past_attendee: {id: past_attendees[i].id, name: past_attendees[i].name},
-            })
-        }
+        console.log("initEventState 해씀")
     }
     catch (e) {
         console.log(e)
@@ -131,6 +127,13 @@ export function* watchPutFutureAttendeeRequest() {
     }
 }
 
+export function* watchPutFutureAbsenteeRequest() {
+    while (true) {
+        const { eventid } = yield take(types.PUT_FUTURE_ABSENTEE);
+        yield call(putFutureAbsentee, eventid);
+    }
+}
+
 export function* watchInitEventStateRequest() {
     while (true) {
         const { eventid } = yield take(types.INIT_EVENT_STATE)
@@ -139,6 +142,7 @@ export function* watchInitEventStateRequest() {
 }
 export default function* () {
     yield fork(watchPutFutureAttendeeRequest);
+    yield fork(watchPutFutureAbsenteeRequest);
     yield fork(watchPostEventRequest);
     yield fork(watchInitEventStateRequest);
     yield fork(watchGetEventsRequest);
