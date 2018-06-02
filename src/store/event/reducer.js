@@ -45,10 +45,10 @@ const event_reducer = (state=eventState, action) => {
             ...state,
             future_absentees: add_person(state.future_absentees, action.future_absentee)
           }
-        case types.ADD_PAST_ATTENDEE:
+        case types.SET_PAST_ATTENDEES:
           return {
             ...state,
-            past_attendees: add_person(state.past_attendees, action.past_attendee)
+            past_attendees: action.past_attendees
         }
         default:
           return state
