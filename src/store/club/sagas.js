@@ -41,8 +41,9 @@ export function* postClub(name, scope, category, introduction) {
 
 export function* init_club_state(clubid) {
     try {
+        console.log("clubid in sagas", clubid)
         const data = yield call(api.get, `/club/${clubid}/`, {credentials: 'include'})
-        console.log("called data")
+        
         const admin_list = data.admin
         const board_list = data.boards
         const member_list = data.members
@@ -53,32 +54,16 @@ export function* init_club_state(clubid) {
         const past_event_data = yield call(api.get, `/event/?need=past&clubid=${clubid}`)
         let past_event_list = past_event_data
         
-
         console.log("init club state")
-
-        yield put({
-            type: types.SET_CLUB_NEED_LOAD
-        })
+        console.log(admin_list, board_list, member_list, waiting_list)
         // set club info
         yield put({
-            type: types.SET_CLUBNAME,
-            name: data.name
-        })
-        yield put({
-            type: types.SET_CLUBID,
-            id: data.id
-        })
-        yield put({
-            type: types.SET_CLUBSCOPE,
-            id: data.scope
-        })
-        yield put({
-            type: types.SET_CLUBCATEGORY,
-            id: data.category
-        })
-        yield put({
-            type: types.SET_CLUBINTRODUCTION,
-            id: data.introduction
+            type: types.SET_CLUBINFO, 
+            name: data.name,
+            id: data.id,
+            scope: data.scope,
+            category: data.category,
+            introduction: data.introduction
         })
         // add boards
         for (var i=0; i<board_list.length; i++) {
@@ -104,24 +89,24 @@ export function* init_club_state(clubid) {
         for (var i=0; i<admin_list.length; i++) {
             yield put({
                 type: types.ADD_CLUBADMIN,
-                admin: {id: admin_list[i].id, name: admin_list[i].name}
+                admin: {id: admin_list[i].id, username: admin_list[i].username}
             })
         }
         // add members
         for (var i=0; i<member_list.length; i++) {
             yield put({
                 type: types.ADD_CLUBMEMBER,
-                member: {id: member_list[i].id, name: member_list[i].name}
+                member: {id: member_list[i].id, username: member_list[i].username}
             })
         }
         // add waitings
         for (var i=0; i<waiting_list.length; i++) {
             yield put({
                 type: types.ADD_CLUBWAITING,
-                waiting: {id: waiting_list[i].id, name: waiting_list[i].name}
+                waiting: {id: waiting_list[i].id, username: waiting_list[i].username}
             })
         }
-
+        console.log("init club state 했음!!! (msg from sagas)")
         
     } catch (e) {
         console.log(e)

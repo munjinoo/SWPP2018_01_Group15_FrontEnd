@@ -37,41 +37,16 @@ const add_club = (clubs, num) => {
 
 const club_reducer = (state=clubState, action) => {
     switch (action.type) {
-        case types.RESET_CLUBINFO:
-            return {
-                ...clubState,
-                needLoading: true
-            }
-        case types.SET_CLUB_NEED_LOAD:
+        case types.SET_CLUBINFO:
             return {
                 ...state,
-                needLoading: false
+                name: action.name,
+                id: action.id, 
+                scope: action.scope,
+                category: action.category,
+                introduction: action.introduction,
             }
-        case types.SET_CLUBNAME:
-            return {
-                ...state,
-                name: action.name
-            }
-        case types.SET_CLUBID:
-            return {
-                ...state,
-                id: action.id
-            }
-        case types.SET_CLUBSCOPE:
-            return {
-                ...state,
-                scope: action.scope
-            }
-        case types.SET_CLUBCATEGORY:
-            return {
-                ...state,
-                category: action.category
-            }
-        case types.SET_CLUBINTRODUCTION:
-            return {
-                ...state,
-                introduction: action.introduction
-            }
+        
         case types.ADD_CLUBBOARD:
             return {
                 ...state,

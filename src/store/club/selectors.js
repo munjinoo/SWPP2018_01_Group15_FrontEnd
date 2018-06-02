@@ -5,6 +5,6 @@ export const clubState = { admin: [], members: [], waitings: [],
 
     // admin, members, waitings: {id: ~, name: ~}
     // boards: {id: ~, name: ~}
-    // future_events, past_events: id
+    // future_events, past_events: event with all attributes
 
     // members includes admin
