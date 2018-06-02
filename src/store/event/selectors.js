@@ -3,4 +3,5 @@ export const eventState = { id: null, name: null,
     future_attendees: [], future_absentees: [], 
     past_attendees: [] }
 
-    // future_attendees has form of {id: ~~ , username: ~~}
+    // future_attendees, future_absentees, 
+    // past_attendees have form of {id: ~~ , username: ~~}
