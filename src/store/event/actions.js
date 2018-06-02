@@ -32,6 +32,14 @@ export const putFutureAbsentee = (eventid) => {
     }
 }
 
+export const postPastAttendees = (eventid, past_attendees) => {
+    return {
+        type: types.POST_PAST_ATTENDEES,
+        eventid: eventid,
+        past_attendees: past_attendees
+    }
+}
+
 export const initEventState = (eventid) => {
     return {
         type: types.INIT_EVENT_STATE,
