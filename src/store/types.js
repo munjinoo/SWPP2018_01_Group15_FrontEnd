@@ -21,3 +21,7 @@ export const VERIFY_TOKEN = 'VERIFY_TOKEN'
 export const POST_CLUB = 'POST_CLUB'
 export const GET_CLUBS = 'GET_CLUBS'
 export const SET_CLUBS = 'SET_CLUBS'
+
+/* Search */
+export const GET_SEARCH_RESULT = 'GET_SEARCH_RESULT'
+export const SET_SEARCH_RESULT = 'SET_SEARCH_RESULT'

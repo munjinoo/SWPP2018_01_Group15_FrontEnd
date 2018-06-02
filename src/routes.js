@@ -2,12 +2,13 @@ import React from 'react'
 import { Route, IndexRoute } from 'react-router'
 
 import App from 'components/App'
-import { HomePage, MyPage, ClubMain, CreateClubPage, SignupPage, VerifyPage, ClubEventPage, ClubAccountingPage, ClubManagePage } from 'components'
+import { HomePage, MyPage, ClubMain, CreateClubPage, SignupPage, VerifyPage, ClubEventPage, ClubAccountingPage, ClubManagePage, SearchPage } from 'components'
 
 
 const routes = (
   <Route path="/" component={App}>
     <IndexRoute component={HomePage} />
+    <Route path='search' component={props => <SearchPage key={`${props.location.search}`} {...props}/>} />
     <Route path='mypage' component={MyPage} />
     <Route path="signup" component={SignupPage} />
     <Route path='club'>
