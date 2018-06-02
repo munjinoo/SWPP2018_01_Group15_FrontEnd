@@ -17,7 +17,7 @@ const methods = {
   componentDidMount
 }
 
-const PastAttendance = ({ eventState = { past_attendees: [], club: null }, eventid }) => {
+const PastAttendance = ({ eventState = { past_attendees: [], club: null }, eventid, clubid }) => {
   console.log("eventState in pastAttendance",eventState)
   
   //admin만 출첵할수 있게!?
@@ -32,7 +32,7 @@ const PastAttendance = ({ eventState = { past_attendees: [], club: null }, event
           </li>
         )}
       </ul>
-      <CheckAttendance eventid = {eventid}/>
+      <CheckAttendance eventid = {eventid} clubid = {clubid}/>
     </Wrapper>
   )
 }

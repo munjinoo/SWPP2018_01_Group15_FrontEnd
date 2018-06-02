@@ -47,7 +47,7 @@ export function* postEvent(name, content, date, club) {
             })
         }
 
-        yield put(push(`/event/${data.event.id}/`))   //이 url로 이동하자
+        yield put(push(`/club/${data.event.club}/event/${data.event.id}/`))   //이 url로 이동하자
     }
     catch (e) {
         console.log(e)
@@ -86,13 +86,14 @@ export function* putFutureAbsentee(eventid) {
 
 export function* postPastAttendees(eventid, past_attendees) {
     try {
+        console.log("past_attendees in sagas", past_attendees)
         const data = yield call(api.post, `/event/${eventid}/past_attendee/`, {past_attendees: past_attendees}, {credentials: 'include'})
         
         yield put({
             type: types.SET_PAST_ATTENDEES,
             past_attendees: past_attendees
         })
-        yield put(push(`/event/${eventid}/`))
+        yield put(push(`/club/${data.clubid}/event/${eventid}/`))
     }
     catch (e) {
         console.log(e)

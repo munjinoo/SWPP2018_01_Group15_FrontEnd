@@ -10,54 +10,57 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 const componentDidMount = (props) => {
-  if (props.eventid != null) {
-    props.onLoadEvent(props.eventid)
-  }
-  if (props.eventState.club != null) {
-    props.onLoadClub(props.eventState.club)
-  }
-  
-  //props.onLoad(props.eventState.club, props.eventid)
+  props.onLoad(props.clubid, props.eventid)
 }
 
 const methods = {
   componentDidMount
 }
 
-const CheckAttendance = ({ clubState = { members: [] }, eventState = {club: null}, onPostPastAttendees, eventid }) => {
-  //const clubid = eventState.club
+const CheckAttendance = ({ clubState = { members: [] }, onPostPastAttendees, eventid, clubid }) => {
   console.log("clubState in component", clubState)
-  console.log("eventState in component", eventState)
-  //console.log("clubid in component", clubid)
+  console.log("clubid in component", clubid)
   let selected = [];
 
-  const onClickSubmit = () => {
-    // if (eventid != undefined && selected != undefined) {
-      
-      // onPostPastAttendees(eventid, selected);
-      // selected = []
-      // //window.location.reload()
-    // }
-  }
   const onClickMember = (e) => {
-    id = e.target.id;
-    name = e.target.name;
-    member = {id: id, username: name}
-    // if (selected.has(member)) {
-    //   selected.delete(member);
-    // }
-    // else {
-    //   selected.add(member)
-    // }
+    const id = e.target.id;
+    const username = e.target.name;
+    const member = {id: id, username: username}
+    var exists = false
+    for (var i=0; i<selected.length; i++) {
+      if (selected[i].id == id) {
+        exists = true
+      }
+    }
+    if (exists) {
+      selected.splice(
+        selected.findIndex(function(obj) {
+          return obj.id === id
+      }))
+      console.log("deleted selected", selected)
+    }
+    else {
+      selected.push(member)
+      console.log("added selected", selected)
+    }
   }
+
+  const onClickSubmit = () => {
+    if (eventid != undefined && selected != undefined) {
+      onPostPastAttendees(eventid, selected);
+      selected = []
+    }
+    window.location.reload()
+  }
+
   return (
     <Wrapper>
       <strong>출석 체크하기</strong><br/>
         <ul>
         {clubState.members.map(member => 
           <li key={member.id}>
-          <input type="checkbox" id={member.id} name={member.name} onChange={ onClickMember }/>
-            {member.name}
+          <input type="checkbox" id={member.id} name={member.username} onChange={ onClickMember }/>
+            {member.username}
           </li>
         )}
         </ul>

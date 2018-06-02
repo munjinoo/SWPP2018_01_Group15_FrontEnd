@@ -6,7 +6,7 @@ const EventDetailPage = ({ routeParams }) => {
     <div>
       <EventInfo eventid = {routeParams.eventid}/>
       <FutureAttendance eventid = {routeParams.eventid}/>
-      <PastAttendance eventid = {routeParams.eventid} />
+      <PastAttendance eventid = {routeParams.eventid} clubid = {routeParams.clubid} />
     </div>
   )
 }
