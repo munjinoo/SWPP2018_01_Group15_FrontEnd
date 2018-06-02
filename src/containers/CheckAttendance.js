@@ -14,11 +14,18 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLoad: (clubid, eventid) => {
-            console.log("clubid in container",clubid)
-            dispatch(initClubState(clubid)),
+        onLoadClub: (clubid) => {
+            dispatch(initClubState(clubid))
+        },
+        onLoadEvent: (eventid) => {
             dispatch(initEventState(eventid))
         },
+        // onLoad: (clubid, eventid) => {
+        //     console.log("clubid in container",clubid)
+        //     console.log("eventid in container", eventid)
+        //     dispatch(initClubState(clubid))
+        //     dispatch(initEventState(eventid))
+        // },
         onPostPastAttendees: (eventid, past_attendees) => {
             dispatch(postPastAttendees(eventid, past_attendees))
         }
