@@ -56,14 +56,12 @@ const CheckAttendance = ({ clubState = { members: [] }, onPostPastAttendees, eve
   return (
     <Wrapper>
       <strong>출석 체크하기</strong><br/>
-        <ul>
-        {clubState.members.map(member => 
-          <li key={member.id}>
+        {clubState.members.map(member =>
+          <div key={member.id}>
           <input type="checkbox" id={member.id} name={member.username} onChange={ onClickMember }/>
-            {member.username}
-          </li>
+            {member.username} 
+          </div>
         )}
-        </ul>
     <button onClick={onClickSubmit}>출석체크 완료</button>
     
     </Wrapper>
