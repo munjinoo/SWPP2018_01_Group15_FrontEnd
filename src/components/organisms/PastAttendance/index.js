@@ -32,7 +32,7 @@ const PastAttendance = ({ eventState = { past_attendees: [], club: null }, event
           </li>
         )}
       </ul>
-      <CheckAttendance eventid = {eventid} clubid = {eventState.club}/>
+      <CheckAttendance eventid = {eventid}/>
     </Wrapper>
   )
 }

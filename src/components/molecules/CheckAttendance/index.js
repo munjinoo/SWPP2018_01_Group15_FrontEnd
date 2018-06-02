@@ -10,16 +10,25 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 const componentDidMount = (props) => {
-  props.onLoad(props.clubid, props.eventid)
+  if (props.eventid != null) {
+    props.onLoadEvent(props.eventid)
+  }
+  if (props.eventState.club != null) {
+    props.onLoadClub(props.eventState.club)
+  }
+  
+  //props.onLoad(props.eventState.club, props.eventid)
 }
 
 const methods = {
   componentDidMount
 }
 
-const CheckAttendance = ({ clubState = { members: [] }, onPostPastAttendees, eventid, clubid }) => {
+const CheckAttendance = ({ clubState = { members: [] }, eventState = {club: null}, onPostPastAttendees, eventid }) => {
+  //const clubid = eventState.club
   console.log("clubState in component", clubState)
-  console.log("clubid in component", clubid)
+  console.log("eventState in component", eventState)
+  //console.log("clubid in component", clubid)
   let selected = [];
 
   const onClickSubmit = () => {
