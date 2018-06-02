@@ -17,13 +17,13 @@ const methods = {
   componentDidMount
 }
 
-const PastAttendance = ({ eventState = { past_attendees: [] }, eventid }) => {
-  console.log("eventState in component",eventState)
+const PastAttendance = ({ eventState = { past_attendees: [], club: null }, eventid }) => {
+  console.log("eventState in pastAttendance",eventState)
   
   //admin만 출첵할수 있게!?
   return (
     <Wrapper>
-      <CheckAttendance eventid = {eventid}/>
+      
       <strong>참가한 사람들</strong>({eventState.past_attendees.length}명) <br/>
       <ul>
         {eventState.past_attendees.map(attendee =>
@@ -32,6 +32,7 @@ const PastAttendance = ({ eventState = { past_attendees: [] }, eventid }) => {
           </li>
         )}
       </ul>
+      <CheckAttendance eventid = {eventid} clubid = {eventState.club}/>
     </Wrapper>
   )
 }
