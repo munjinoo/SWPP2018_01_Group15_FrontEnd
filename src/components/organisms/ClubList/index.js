@@ -18,21 +18,25 @@ const methods = {
   componentDidMount
 }
 
-const ClubList = ({ userState = { clubs_as_admin: [], clubs_as_member: [], needLoading: {club: true}}, onLoad }) => {
-  
-  
-  
+const ClubList = ({ userState = { clubs_as_admin: [], clubs_as_member: []} }) => {
   console.log(userState);
   const as_member = userState.clubs_as_member
   const as_admin = userState.clubs_as_admin
   let only_as_member = []
   console.log("as_member", as_member)
   console.log("as_admin", as_admin)
-  for (var club in as_member) {
-    if (!as_admin.hasOwnProperty(club)) {
-      only_as_member.add(club)
+  for (var i=0; i<as_member.length; i++) {
+    var exists = false
+    for (var j=0; j<as_admin.length; j++) {
+      if (as_admin[j].id == as_member[i].id) {
+        exists = true
+      }
+    }
+    if (!exists) {
+      only_as_member.push(as_member[i])
     }
   }
+  
   console.log("only_as_member", only_as_member)
 
   return (
