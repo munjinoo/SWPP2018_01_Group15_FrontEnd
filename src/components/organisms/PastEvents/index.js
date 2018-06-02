@@ -27,7 +27,7 @@ const PastEvents = ({ clubState = { past_events: [] }, clubid }) => {
             <strong>{event.name}</strong><br/>
             날짜: {event.date}<br/>
             내용: {event.content}<br/>
-            <Link to={`/event/${event.id}/`}>
+            <Link to={`/club/${clubid}/event/${event.id}/`}>
               자세히 보기
             </Link>
           </li>
