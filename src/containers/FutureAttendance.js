@@ -7,7 +7,7 @@ const FutureAttendanceContainer = props => <FutureAttendance {...props} />
 
 const mapStateToProps = (state) => {
     return {
-        eventState: state.event   //??
+        eventState: state.event
     }
 }
 

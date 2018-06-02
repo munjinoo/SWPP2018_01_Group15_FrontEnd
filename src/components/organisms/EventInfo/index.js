@@ -17,6 +17,7 @@ const methods = {
 }
 
 const EventInfo = ({ eventState = { name: null, date: null, content: null }, eventid }) => {
+  console.log("eventinfo eventState", eventState)
   return (
     <Wrapper>
       행사명: {eventState.name} <br/>
