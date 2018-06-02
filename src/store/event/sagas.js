@@ -84,6 +84,21 @@ export function* putFutureAbsentee(eventid) {
     }
 }
 
+export function* postPastAttendees(eventid, past_attendees) {
+    try {
+        const data = yield call(api.post, `/event/${eventid}/past_attendee/`, {past_attendees: past_attendees}, {credentials: 'include'})
+        
+        yield put({
+            type: types.SET_PAST_ATTENDEES,
+            past_attendees: past_attendees
+        })
+        yield put(push(`/event/${eventid}/`))
+    }
+    catch (e) {
+        console.log(e)
+    }
+}
+
 export function* init_event_state(eventid) {
     try {
         const data = yield call(api.get, `/event/${eventid}/`, {credentials: 'include'})
@@ -134,6 +149,13 @@ export function* watchPutFutureAbsenteeRequest() {
     }
 }
 
+export function* watchPostPastAttendeesRequest() {
+    while (true) {
+        const { eventid, past_attendees } = yield take(types.POST_PAST_ATTENDEES);
+        yield call(postPastAttendees, eventid, past_attendees)
+    }
+}
+
 export function* watchInitEventStateRequest() {
     while (true) {
         const { eventid } = yield take(types.INIT_EVENT_STATE)
@@ -141,6 +163,7 @@ export function* watchInitEventStateRequest() {
     }
 }
 export default function* () {
+    yield fork(watchPostPastAttendeesRequest);
     yield fork(watchPutFutureAttendeeRequest);
     yield fork(watchPutFutureAbsenteeRequest);
     yield fork(watchPostEventRequest);
