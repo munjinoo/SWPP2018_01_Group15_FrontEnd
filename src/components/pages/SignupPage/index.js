@@ -1,10 +1,11 @@
 import React from 'react'
-import { Signup } from 'containers'
+import { Signup, MenuBar } from 'containers'
 
 
 const SignupPage = () => {
   return (
     <div>
+      <MenuBar />
       <Signup />
     </div>
   )

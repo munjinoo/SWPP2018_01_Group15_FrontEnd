@@ -1,10 +1,11 @@
 import * as types from '../types'
 
-export const login = (username, password) => {
+export const login = (username, password, onErr = () => {}) => {
     return {
         type: types.LOGIN,
-        username: username,
-        password: password
+        username,
+        password,
+        onErr
     }
 }
 
@@ -27,15 +28,16 @@ export const initUserState = () => {
     }
 }
 
-export const signup = (username, password, email, name, college, major, admission_year) => {
+export const signup = (username, password, email, name, college, major, admission_year, onErr = () => {}) => {
     return {
         type: types.SIGNUP,
-        username: username,
-        password: password,
-        email: email,
-        name: name,
-        college: college,
-        major: major,
-        admission_year: admission_year
+        username,
+        password,
+        email,
+        name,
+        college,
+        major,
+        admission_year,
+        onErr
     }
 }
