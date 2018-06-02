@@ -44,7 +44,7 @@ const CreateClub = ({ clubState = {admin: [], members: []}, onPostClub }) => {
             <option value="연행예술분과">연행예술분과</option>
             <option value="무예운동분과">무예운동분과</option>
             <option value="종교분과">종교분과</option>
-            <option value="인권봉사분과">인권봉사봉사</option>
+            <option value="인권봉사분과">인권봉사분과</option>
         </select> <br />
       동아리 소개: <input type="text" ref={node => {introduction = node;}} /> <br/>
       <button onClick={onClick}>동아리방 만들기</button>
