@@ -17,10 +17,19 @@ const methods = {
   componentDidMount
 }
 
-const PastAttendance = ({ eventState = { past_attendees: [], club: null }, eventid, clubid }) => {
+const PastAttendance = ({ eventState = { past_attendees: [], club: null }, clubState = { admin: [] }, userState = { id: null }, eventid, clubid }) => {
   console.log("eventState in pastAttendance",eventState)
   
-  //admin만 출첵할수 있게!?
+  //admin만 출첵할수 있게
+  var isAdmin = false
+  for (var i=0; i<clubState.admin.length; i++) {
+    if (clubState.admin[i].id == userState.id) {
+      isAdmin = true
+    }
+  }
+  console.log("clubState", clubState)
+  console.log("userState", userState)
+  console.log("isAdmin", isAdmin)
   return (
     <Wrapper>
       
@@ -32,7 +41,10 @@ const PastAttendance = ({ eventState = { past_attendees: [], club: null }, event
           </li>
         )}
       </ul>
-      <CheckAttendance eventid = {eventid} clubid = {clubid}/>
+      {isAdmin && 
+        <CheckAttendance eventid = {eventid} clubid = {clubid}/>
+      }
+      
     </Wrapper>
   )
 }

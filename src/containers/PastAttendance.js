@@ -7,7 +7,9 @@ const PastAttendanceContainer = props => <PastAttendance {...props} />
 
 const mapStateToProps = (state) => {
     return {
-        eventState: state.event
+        eventState: state.event,
+        clubState: state.club,
+        userState: state.user
     }
 }
 
