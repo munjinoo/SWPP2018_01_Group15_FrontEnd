@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { AccountList } from 'components'
-import { initClubState } from 'store/actions'
-import { Load } from 'components'
+import { initClubState, deleteAccount } from 'store/actions'
+
 
 
 const AccountListContainer = props => <AccountList {...props} />
@@ -17,6 +17,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onLoad: (clubid) => {
             dispatch(initClubState(clubid))
+        },
+
+        onDeleteAccount: (accountid) => {
+            dispatch(deleteAccount(accountid))
         }
     }
 }

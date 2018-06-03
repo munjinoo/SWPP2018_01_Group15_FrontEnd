@@ -4,7 +4,7 @@ import * as types from '../types'
 const account_reducer = (state=accountState, action) => {
     switch (action.type) {
         case types.SET_ACCOUNT:
-          return {
+            return {
               ...state,
               id: action.id,
               created_at: action.created_at,

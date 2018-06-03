@@ -1,11 +1,12 @@
 import { AccountDetail } from 'containers'
 import React from 'react'
-import { Link } from 'react-router'
 
 const AccountDetailPage = ({ routeParams }) => {
+  const account_id = routeParams.accountid;
+
   return (
     <div>
-      <AccountDetail accountid = {routeParams.accountid} />
+      <AccountDetail accountid = {account_id} />
     </div>
   )
 }

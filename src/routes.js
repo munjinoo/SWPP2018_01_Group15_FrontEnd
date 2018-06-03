@@ -21,7 +21,7 @@ const routes = (
     <Route path = 'club/:clubid/event' component = {ClubEventPage}/>
     <Route path = 'club/:clubid/manage' component = {ClubManagePage} /> 
     <Route path = 'club/:clubid/account' component = {ClubAccountingPage} />
-    <Route path = 'account/:accountid' component = {AccountDetailPage} />
+    <Route path = 'account/:accountid' component = { AccountDetailPage } />
     <Route path = "signup" component={SignupPage} />
   </Route>
 

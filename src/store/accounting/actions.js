@@ -11,13 +11,12 @@ export const postAccount = (is_income, money, date, content, club) => {
     }
 }
 
-export const getAccounts = (club, created_at, updated_at, writer) => {
+
+export const deleteAccount = (accountid) => {
+
     return {
-        type: types.GET_ACCOUNTS,
-        club,
-        created_at, 
-        updated_at, 
-        writer
+        type: types.DELETE_ACCOUNT,
+        accountid
     }
 }
 

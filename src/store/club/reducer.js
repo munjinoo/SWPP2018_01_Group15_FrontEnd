@@ -20,35 +20,31 @@ const add_club = (clubs, num) => {
     return new_clubs;
 }
 
-const add_board = (board_list, board) => {
-    let new_list = [...board_list]
-    for (var i=0; i < new_list.length; i++) {
-        if (new_list[i].id > board.id) {
-            new_list.splice(i, 0, board)
+const add = (old_list, addme) => {
+    let new_list = [...old_list]
+    for (var i=0; i < old_list.length; i++) {
+        if (new_list[i].id > addme.id) {
+            new_list.splice(i, 0, addme)
             return new_list
         }
-        if (new_list[i].id === board.id) {
+        if (new_list[i].id === addme.id) {
             return new_list
         }
     }
-    new_list.push(board)
+    new_list.push(addme)
     return new_list
 }
 
-const add_account = (account_list, account) => {
-
+const delete_account = (account_list, account_id) =>{
     let new_list = [...account_list]
-    for(var i = 0; i < new_list.length ; i++){
-        if (new_list[i].id > account.id){
-            new_list.splice(i,0,account)
-            return new_list
-        }
-        if(new_list[i].id === account.id){
+    console.log("clubreducer delete_account")
+    for (var i = 0; i < new_list.length; i++){
+        if(new_list[i].id==account_id){
+            new_list.splice(i,1)
             return new_list
         }
     }
-    new_list.push(account)
-    return new_list
+    return new_list 
 }
 
 const club_reducer = (state=clubState, action) => {
@@ -96,22 +92,27 @@ const club_reducer = (state=clubState, action) => {
         case types.ADD_CLUBBOARD:
             return {
                 ...state,
-                boards: add_board(state.boards, action.board)
+                boards: add(state.boards, action.board)
             }
         case types.ADD_CLUBMEMBER:
             return {
                 ...state,
-                members: add_board(state.members, action.member)
+                members: add(state.members, action.member)
             }
         case types.ADD_CLUBWAITING:
             return {
                 ...state,
-                waitings: add_board(state.waitings, action.waiting)
+                waitings: add(state.waitings, action.waiting)
             }
         case types.ADD_ACCOUNT:
             return {
                 ...state,
-                accounts: add_board(state.accounts, action.account)
+                accounts: add(state.accounts, action.account)
+            }
+        case types.DELETE_ACCOUNT: 
+            return {
+                ...state,
+                accounts: delete_account(state.accounts, action.account_id)
             }
         default:
             return state

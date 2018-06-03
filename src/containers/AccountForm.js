@@ -7,16 +7,14 @@ const AccountFormContainer = props => <AccountForm {...props} />
 
 const mapStateToProps = (state) => {
     return {
-       state: state
+       accountState: state.accounting
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return { 
         onPostAccount: (is_income,  money, date, content, club) => {
-            console.log("happening.........???")
             dispatch(postAccount(is_income,  money, date, content, club))
-           
        }
     }
 }

@@ -7,7 +7,7 @@ const AccountDetailContainer = props => <AccountDetail {...props} />
 
 const mapStateToProps = (state) => {
     return {
-        accountState: state.account   //??
+        accountState: state.accounting   //??
     }
 }
 
