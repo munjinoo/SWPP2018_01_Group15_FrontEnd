@@ -3,7 +3,7 @@ import { push } from 'react-router-redux'
 import api from 'services/api'
 import * as types from '../types'
 
-export function* login(username, password) {
+export function* login(username, password, onErr) {
     try {
         const data = yield call(api.post, `/login/`, {username: username, password: password}, {credentials: 'include'})
         yield put({type: types.SET_LOGIN})
@@ -15,8 +15,12 @@ export function* login(username, password) {
             type: types.SET_USERID,
             id: data.id
         })
+        yield put({
+            type: types.INIT_USER_STATE
+        })
     } catch (e) {
         console.log(e)
+        yield call(onErr)
     }
 }
 
@@ -74,21 +78,21 @@ export function* verify_token(token) {
     }
 }
 
-export function* signup(username, password, email, name, college, major, admission_year) {
+export function* signup(username, password, email, name, college, major, admission_year, onErr) {
     try {
         yield call(api.post, `/signup/`, {username: username, password: password, email: email, name: name, college: college, major: major, admission_year: admission_year}, {credentials: 'include'})
         yield put(push('/'))
     } catch (e) {
         console.log(e)
         const response = yield e.response.json()
-        alert(response)
+        yield call(onErr, response)
     }
 }
 
 export function* watchLoginRequest() {
     while (true) {
         const data = yield take(types.LOGIN)
-        yield call(login, data.username, data.password)
+        yield call(login, data.username, data.password, data.onErr)
     }
 }
 
@@ -110,7 +114,7 @@ export function* watchInitUserStateRequest() {
 export function* watchSignupRequest() {
     while (true) {
         const data = yield take(types.SIGNUP)
-        yield call(signup, data.username, data.password, data.email, data.name, data.college, data.major, data.admission_year)
+        yield call(signup, data.username, data.password, data.email, data.name, data.college, data.major, data.admission_year, data.onErr)
     }
 }
 

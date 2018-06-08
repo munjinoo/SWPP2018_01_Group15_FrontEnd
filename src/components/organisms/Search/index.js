@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import lifecycle from 'react-pure-lifecycle'
 import { font, palette } from 'styled-theme'
@@ -24,10 +24,6 @@ const Search = ({ search_result }) => {
       <SearchResult search_result={search_result} />
     </Wrapper>
   )
-}
-
-Search.propTypes = {
-  reverse: PropTypes.bool,
 }
 
 export default lifecycle(methods)(Search)
