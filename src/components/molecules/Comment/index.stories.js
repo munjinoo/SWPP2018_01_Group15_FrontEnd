@@ -1,11 +1,11 @@
 import React from 'react'
 import { storiesOf } from '@kadira/storybook'
-import { BoardList_main } from 'components'
+import { Comment } from 'components'
 
-storiesOf('BoardList_main', module)
+storiesOf('Comment', module)
   .add('default', () => (
-    <BoardList_main />
+    <Comment>Hello</Comment>
   ))
   .add('reverse', () => (
-    <BoardList_main reverse />
+    <Comment reverse>Hello</Comment>
   ))

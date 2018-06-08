@@ -12,18 +12,20 @@ const routes = (
     <Route path="signup" component={SignupPage} />
     <Route path='club'>
       <Route path='create' component={CreateClubPage} />
-      <Route path=':clubid' component={ClubMain} />
+      <Route path=':clubid'>
+        <IndexRoute component={ClubMain} />
+        <Route path='event' component={ClubEventPage}/>
+        <Route path='manage' component={ClubManagePage} /> 
+        <Route path='account' component={ClubAccountingPage} />
+        <Route path='board/:boardid'>
+          <IndexRoute component={props => <BoardPage key={props.routeParams.boardid} {...props} />} />
+          <Route path=':articleid' component={ArticlePage} />
+        </Route>
+      </Route>
     </Route>
     <Route path=':token' component={VerifyPage} />
-    <Route path = 'mypage' component={MyPage} />
-    <Route path = 'club/create' component={CreateClubPage} />
-    <Route path = 'club/:clubid' component={props => <ClubMainPage key={props.routeParams.clubid}{...props}/>} />
-    <Route path = 'club/:clubid/event' component = {ClubEventPage}/>
-    <Route path = 'club/:clubid/manage' component = {ClubManagePage} /> 
-    <Route path = 'club/:clubid/account' component = {ClubAccountingPage} />
+    <Route path='mypage' component={MyPage} />
     <Route path = "signup" component={SignupPage} />
-    <Route path = 'board/:boardid' component={props => <BoardPage key={props.routeParams.boardid}{...props} />} />
-    <Route path = 'article/:articleid' component={ArticlePage} />
   </Route>
 
 )

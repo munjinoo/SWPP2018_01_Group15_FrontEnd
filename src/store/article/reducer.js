@@ -49,6 +49,11 @@ const article_reducer = (state=articleState, action) => {
                 ...state,
                 board: action.board
             }
+        case types.SET_ARTICLE_COMMENT:
+            return {
+                ...state,
+                comments: action.comments
+            }
         default:
             return state
     }

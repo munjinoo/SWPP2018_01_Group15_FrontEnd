@@ -1,5 +1,4 @@
-import { take, put, call, fork } from 'redux-saga/effects'
-import { push } from 'react-router-redux'
+import { take, put, call, fork, select } from 'redux-saga/effects'
 import api from 'services/api'
 import * as types from '../types'
 
@@ -22,7 +21,7 @@ export function* putArticle(articleid, title, content) {
         yield call(initArticleState, articleid)
     } catch (e) {
         console.log(e)
-}
+    }
 }
 
 export function* deleteArticle(articleid) {
@@ -33,7 +32,46 @@ export function* deleteArticle(articleid) {
             type: types.DELETE_BOARD_ARTICLE,
             article_id: articleid
         })
-        yield put(push(`/board/${article.board}`))
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+export function* postComment(articleid, title, content) {
+    try {
+        const data = {
+            article_id: articleid,
+            title: title,
+            content: content
+        }
+        yield call(api.post, `/comment/`, data, {credentials: 'include'})
+        yield call(initArticleState, articleid)
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+export function* putComment(commentid, title, content) {
+    try {
+        const data = {
+            title: title,
+            content: content
+        }
+        yield call(api.put, `/comment/${commentid}/`, data, {credentials: 'include'})
+        const getArticle = state => state.article
+        const articleState = yield select(getArticle)
+        yield call(initArticleState, articleState.id)
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+export function* deleteComment(commentid) {
+    try {
+        yield call(api.delete, `/comment/${commentid}/`, {credentials: 'include'})
+        const getArticle = state => state.article
+        const articleState = yield select(getArticle)
+        yield call(initArticleState, articleState.id)
     } catch (e) {
         console.log(e)
     }
@@ -75,6 +113,10 @@ export function* initArticleState(articleid) {
             type: types.SET_ARTICLE_BOARD,
             board: data.board
         })
+        yield put({
+            type: types.SET_ARTICLE_COMMENT,
+            comments: data.comment
+        })
     } catch (e) {
         console.log(e)
     }
@@ -82,21 +124,21 @@ export function* initArticleState(articleid) {
 
 export function* watchPostArticleRequest() {
     while (true) {
-        const {board, title, content} = yield take(types.POST_ARTICLE);
+        const { board, title, content } = yield take(types.POST_ARTICLE);
         yield call(postArticle, board, title, content);
     }
 }
 
 export function* watchPutArticleRequest() {
     while (true) {
-        const {articleid, title, content} = yield take(types.PUT_ARTICLE);
+        const { articleid, title, content } = yield take(types.PUT_ARTICLE);
         yield call(putArticle, articleid, title, content);
     }
 }
 
 export function* watchDeleteArticleRequest() {
     while (true) {
-        const {articleid} = yield take(types.DELETE_ARTICLE);
+        const { articleid } = yield take(types.DELETE_ARTICLE);
         yield call(deleteArticle, articleid);
     }
 }
@@ -108,10 +150,34 @@ export function* watchInitArticleStateRequest() {
     }
 }
 
+export function* watchPostCommentRequest() {
+    while (true) {
+        const { articleid, title, content } = yield take(types.POST_COMMENT);
+        yield call(postComment, articleid, title, content);
+    }
+}
+
+export function* watchPutCommentRequest() {
+    while (true) {
+        const { commentid, title, content } = yield take(types.PUT_COMMENT);
+        yield call(putComment, commentid, title, content);
+    }
+}
+
+export function* watchDeleteCommentRequest() {
+    while (true) {
+        const { commentid } = yield take(types.DELETE_COMMENT);
+        yield call(deleteComment, commentid);
+    }
+}
+
 export default function* () {
     yield fork(watchPostArticleRequest);
     yield fork(watchDeleteArticleRequest);
     yield fork(watchInitArticleStateRequest);
     yield fork(watchPutArticleRequest);
+    yield fork(watchPostCommentRequest);
+    yield fork(watchPutCommentRequest);
+    yield fork(watchDeleteCommentRequest);
 }
 

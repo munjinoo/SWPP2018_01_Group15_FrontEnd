@@ -20,7 +20,6 @@ const methods = {
 const BoardList = ({ clubState={id, boards: [] }, clubid, onDeleteBoard}) => {
   const onClick = (e) => {
     onDeleteBoard(e.target.id)
-    window.location.reload() // 새로고침
   }
   return (    
     <Wrapper>

@@ -3,12 +3,11 @@ import { BoardList, CreateBoard, ChangeUserStatus } from 'containers'
 
 
 const ClubManagePage = (props) => {
-
   return (
     <div>
-      <BoardList clubid={props.routeParams.clubid} />
+      <BoardList clubid={props.params.clubid} />
       <CreateBoard />
-      <ChangeUserStatus clubid={props.routeParams.clubid} />
+      <ChangeUserStatus clubid={props.params.clubid} />
     </div>
   )
 }

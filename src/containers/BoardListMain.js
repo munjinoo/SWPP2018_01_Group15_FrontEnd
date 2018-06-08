@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { BoardList_main } from 'components'
+import { BoardListMain } from 'components'
 import { initClubState } from 'store/actions'
 
-const BoardList_mainContainer = props => <BoardList_main {...props} />
+const BoardListMainContainer = props => <BoardListMain {...props} />
 
 const mapStateToProps = (state) => {
     return {
@@ -19,4 +19,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BoardList_mainContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(BoardListMainContainer)
