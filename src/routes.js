@@ -18,7 +18,7 @@ const routes = (
     <Route path = 'mypage' component={MyPage} />
     <Route path = 'club/create' component={CreateClubPage} />
     <Route path = 'club/:clubid' component={ClubMain} />
-    <Route path = 'club/:clubid/event' component = {ClubEventPage}/>
+    <Route path = 'club/:clubid/event' component = {props => <ClubEventPage key={props.routeParams.clubid}{...props}/>} />
     <Route path = 'club/:clubid/event/:eventid' component = {EventDetailPage} />
     <Route path = 'club/:clubid/manage' component = {ClubManagePage} /> 
     <Route path = 'club/:clubid/account' component = {ClubAccountingPage} />
