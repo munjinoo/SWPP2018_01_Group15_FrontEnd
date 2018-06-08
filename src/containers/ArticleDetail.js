@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { ArticleDetail } from 'components'
-import { initArticleState } from 'store/actions'
+import { initArticleState, setArticleIsEdit } from 'store/actions'
 
 const ArticleDetailContainer = props => <ArticleDetail {...props} />
 
@@ -16,6 +16,9 @@ const mapDispatchToProps = (dispatch) => {
         onLoad: (articleid) => {
             dispatch(initArticleState(articleid))
         },
+        onSetArticleIsEdit: () => {
+            dispatch(setArticleIsEdit())
+        }
     }
 }
 

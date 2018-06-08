@@ -5,7 +5,7 @@ const ArticlePage = ({routeParams}) => {
   const article_id=routeParams.articleid;
   return (
     <div>
-      <ArticleDetail articleid={article_id} />
+      <ArticleDetail articleid={article_id}/>
     </div>
   )
 }
