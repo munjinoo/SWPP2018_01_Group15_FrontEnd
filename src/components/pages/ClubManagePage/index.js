@@ -1,5 +1,5 @@
 import React from 'react'
-import { BoardList, CreateBoard } from 'containers'
+import { BoardList, CreateBoard, ChangeUserStatus } from 'containers'
 
 
 const ClubManagePage = (props) => {
@@ -7,7 +7,8 @@ const ClubManagePage = (props) => {
   return (
     <div>
       <BoardList clubid={props.routeParams.clubid} />
-      <CreateBoard/>
+      <CreateBoard />
+      <ChangeUserStatus clubid={props.routeParams.clubid} />
     </div>
   )
 }

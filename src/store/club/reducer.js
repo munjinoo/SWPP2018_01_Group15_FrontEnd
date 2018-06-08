@@ -138,6 +138,13 @@ const club_reducer = (state=clubState, action) => {
                 ...state,
                 boards: delete_board(state.boards, action.board_id)
             }
+        case types.SET_CLUB_USER_LIST:
+            return {
+                ...state,
+                admin: action.admin,
+                members: action.members,
+                waitings: action.waitings
+            }
         default:
             return state
     }
