@@ -8,7 +8,7 @@ export function* postBoard(club, name) {
         const board = yield call(api.post, `/board/`, {name: name, club_id: club}, {credentials: 'include'});
         const data = yield call(api.get, `/board/${board.id}/`, {credentials: 'include'});
         yield put({
-            type: types.ADD_CLUBBOARD,
+            type: types.ADD_CLUB_BOARD,
             board: data
         })
     } catch (e) {
@@ -20,7 +20,7 @@ export function* deleteBoard(boardid) {
     try {
         yield call(api.delete, `/board/${boardid}/`, {credentials: 'include'});
         yield put({
-            type: types.DELETE_CLUBBOARD,
+            type: types.DELETE_CLUB_BOARD,
             board_id: boardid
         })
     } catch (e) {
@@ -28,7 +28,7 @@ export function* deleteBoard(boardid) {
     }
 }
 
-export function* init_board_state(boardid) {
+export function* initBoardState(boardid) {
     try {
         const data = yield call(api.get, `/board/${boardid}/`, {credentials: 'include'})
         const article_list = data.articles
@@ -39,17 +39,17 @@ export function* init_board_state(boardid) {
 
         // set user info
         yield put({
-            type: types.SET_BOARDNAME,
+            type: types.SET_BOARD_NAME,
             name: data.name
         })
         yield put({
-            type: types.SET_BOARDID,
+            type: types.SET_BOARD_ID,
             id: data.id
         })
         // add boards
         for (var i=0; i<article_list.length; i++) {
             yield put({
-                type: types.ADD_BOARDARTICLE,
+                type: types.ADD_BOARD_ARTICLE,
                 article: {id: article_list[i].id, title: article_list[i].title, created_at: article_list[i].created_at}
             })
         }
@@ -57,7 +57,6 @@ export function* init_board_state(boardid) {
         console.log(e)
     }
 }
-
 
 export function* watchPostBoardRequest() {
     while (true) {
@@ -76,7 +75,7 @@ export function* watchDeleteBoardRequest() {
 export function* watchInitBoardStateRequest() {
     while (true) {
         const { boardid } = yield take(types.INIT_BOARD_STATE)
-        yield call(init_board_state, boardid)
+        yield call(initBoardState, boardid)
     }
 }
 

@@ -39,7 +39,7 @@ export function* postClub(name, scope, category, introduction) {
     }
 }
 
-export function* init_club_state(clubid) {
+export function* initClubState(clubid) {
     try {
         const data = yield call(api.get, `/club/${clubid}/`, {credentials: 'include'})
         const board_list = data.boards
@@ -48,11 +48,11 @@ export function* init_club_state(clubid) {
         })
         // set user info
         yield put({
-            type: types.SET_CLUBNAME,
+            type: types.SET_CLUB_NAME,
             name: data.name
         })
         yield put({
-            type: types.SET_CLUBID,
+            type: types.SET_CLUB_ID,
             id: data.id
         })
         yield put({
@@ -62,21 +62,21 @@ export function* init_club_state(clubid) {
             waitings: data.waitings
         })
         yield put({
-            type: types.SET_CLUBSCOPE,
+            type: types.SET_CLUB_SCOPE,
             scope: data.scope
         })
         yield put({
-            type: types.SET_CLUBCATEGORY,
+            type: types.SET_CLUB_CATEGORY,
             category: data.category
         })
         yield put({
-            type: types.SET_CLUBINTRODUCTION,
+            type: types.SET_CLUB_INTRODUCTION,
             introduction: data.introduction
         })
         // add boards
         for (var i=0; i<board_list.length; i++) {
             yield put({
-                type: types.ADD_CLUBBOARD,
+                type: types.ADD_CLUB_BOARD,
                 board: {id: board_list[i].id, name: board_list[i].name}
             })
             console.log(board_list[i].name)
@@ -141,7 +141,7 @@ export function* watchPostClubRequest() {
 export function* watchInitClubStateRequest() {
     while (true) {
         const { clubid } = yield take(types.INIT_CLUB_STATE)
-        yield call(init_club_state, clubid)
+        yield call(initClubState, clubid)
     }
 }
 
