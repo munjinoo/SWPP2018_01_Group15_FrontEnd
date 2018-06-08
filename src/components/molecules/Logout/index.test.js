@@ -4,12 +4,14 @@ import Logout from '.'
 
 const wrap = (props = {}) => shallow(<Logout {...props} />)
 
-it('renders children when passed in', () => {
-  const wrapper = wrap({ children: 'test' })
-  expect(wrapper.contains('test')).toBe(true)
-})
-
-it('renders props when passed in', () => {
-  const wrapper = wrap({ id: 'foo' })
-  expect(wrapper.find({ id: 'foo' })).toHaveLength(1)
+it('handle onLogout when click button', () => {
+  const props = {
+    userState: {
+      username: 'testuser'
+    },
+    onLogout: jest.fn()
+  }
+  const wrapper = wrap(props)
+  wrapper.find('button').simulate('click')
+  expect(props.onLogout).toHaveBeenCalled()
 })

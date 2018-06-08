@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import TestPage from '.'
+import SearchPage from '.'
 
 it('renders', () => {
-  shallow(<TestPage />)
+  shallow(<SearchPage location={{query: 'test'}} />)
 })

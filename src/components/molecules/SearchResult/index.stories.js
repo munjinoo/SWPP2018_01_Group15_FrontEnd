@@ -1,11 +1,11 @@
 import React from 'react'
 import { storiesOf } from '@kadira/storybook'
-import { Load } from 'components'
+import { SearchResult } from 'components'
 
-storiesOf('Load', module)
+storiesOf('SearchResult', module)
   .add('default', () => (
-    <Load>Hello</Load>
+    <SearchResult />
   ))
   .add('reverse', () => (
-    <Load reverse>Hello</Load>
+    <SearchResult reverse />
   ))
