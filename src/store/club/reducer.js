@@ -78,7 +78,7 @@ const delete_board = (board_list, board_id) => {
 
 const club_reducer = (state=clubState, action) => {
     switch (action.type) {
-        case types.RESET_CLUBINFO:
+        case types.RESET_CLUB_INFO:
             return {
                 ...clubState,
                 needLoading: true
@@ -88,55 +88,62 @@ const club_reducer = (state=clubState, action) => {
                 ...state,
                 needLoading: false
             }
-        case types.SET_CLUBNAME:
+        case types.SET_CLUB_NAME:
             return {
                 ...state,
                 name: action.name
             }
-        case types.SET_CLUBID:
+        case types.SET_CLUB_ID:
             return {
                 ...state,
                 id: action.id
             }
-        case types.SET_CLUBADMIN:
+        case types.SET_CLUB_ADMIN:
             return {
                 ...state,
                 admin: action.admin
             }
-        case types.SET_CLUBSCOPE:
+        case types.SET_CLUB_SCOPE:
             return {
                 ...state,
                 scope: action.scope
             }
-        case types.SET_CLUBCATEGORY:
+        case types.SET_CLUB_CATEGORY:
             return {
                 ...state,
                 category: action.category
             }
-        case types.SET_CLUBINTRODUCTION:
+        case types.SET_CLUB_INTRODUCTION:
             return {
                 ...state,
                 introduction: action.introduction
             }
-        case types.ADD_CLUBBOARD:
+        case types.ADD_CLUB_BOARD:
             return {
                 ...state,
                 boards: add_board(state.boards, action.board)
             }
-        case types.ADD_CLUBMEMBER:
+        case types.ADD_CLUB_MEMBER:
             return {
                 ...state,
                 members: add_member(state.members, action.member)
             }
-        case types.ADD_CLUBWAITING:
+        case types.ADD_CLUB_WAITING:
             return {
                 ...state,
                 waitings: add_waiting(state.waitings, action.waiting)
             }
-        case types.DELETE_CLUBBOARD:
+        case types.DELETE_CLUB_BOARD:
             return {
                 ...state,
                 boards: delete_board(state.boards, action.board_id)
+            }
+        case types.SET_CLUB_USER_LIST:
+            return {
+                ...state,
+                admin: action.admin,
+                members: action.members,
+                waitings: action.waitings
             }
         default:
             return state

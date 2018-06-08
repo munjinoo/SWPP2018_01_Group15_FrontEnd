@@ -41,6 +41,6 @@ export const initArticleState = (articleid) => {
 
 export const setArticleIsEdit = () =>{
     return {
-        type: types.SET_ARTICLE_ISEDIT
+        type: types.SET_ARTICLE_IS_EDIT
     }
 }

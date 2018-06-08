@@ -8,7 +8,7 @@ export function* postArticle(board, title, content) {
         const article = yield call(api.post, `/article/`, {title: title, content: content, board_id: board}, {credentials: 'include'});
         const data = yield call(api.get, `/article/${article.id}/`, {credentials: 'include'});
         yield put({
-            type: types.ADD_BOARDARTICLE,
+            type: types.ADD_BOARD_ARTICLE,
             article: data
         })
     } catch (e) {
@@ -19,7 +19,7 @@ export function* postArticle(board, title, content) {
 export function* putArticle(articleid, title, content) {
     try {
         yield call(api.put, `/article/${articleid}/`, {title: title, content: content}, {credentials: 'include'});        
-        yield call(init_article_state, articleid)
+        yield call(initArticleState, articleid)
     } catch (e) {
         console.log(e)
 }
@@ -30,7 +30,7 @@ export function* deleteArticle(articleid) {
         const article = yield call(api.get, `/article/${articleid}/`, {credentials: 'include'});
         yield call(api.delete, `/article/${articleid}/`, {credentials: 'include'});
         yield put({
-            type: types.DELETE_BOARDARTICLE,
+            type: types.DELETE_BOARD_ARTICLE,
             article_id: articleid
         })
         yield put(push(`/board/${article.board}`))
@@ -39,47 +39,46 @@ export function* deleteArticle(articleid) {
     }
 }
 
-export function* init_article_state(articleid) {
+export function* initArticleState(articleid) {
     try {
         const data = yield call(api.get, `/article/${articleid}/`, {credentials: 'include'})
         yield put({
-            type: types.RESET_ARTICLE_ISEDIT
+            type: types.RESET_ARTICLE_IS_EDIT
         })
 
         // set ARTICLE info
         yield put({
-            type: types.SET_ARTICLETITLE,
+            type: types.SET_ARTICLE_TITLE,
             title: data.title
         })
         yield put({
-            type: types.SET_ARTICLEID,
+            type: types.SET_ARTICLE_ID,
             id: data.id
         })
         yield put({
-            type: types.SET_ARTICLECONTENT,
+            type: types.SET_ARTICLE_CONTENT,
             content: data.content
         })
         yield put({
-            type: types.SET_ARTICLECREATEDAT,
+            type: types.SET_ARTICLE_CREATED_AT,
             created_at: data.created_at
         })
         yield put({
-            type: types.SET_ARTICLEUPDATEDAT,
+            type: types.SET_ARTICLE_UPDATED_AT,
             updated_at: data.updated_at
         })
         yield put({
-            type: types.SET_ARTICLEWRITER,
+            type: types.SET_ARTICLE_WRITER,
             writer: data.writer.username
         })
         yield put({
-            type: types.SET_ARTICLEBOARD,
+            type: types.SET_ARTICLE_BOARD,
             board: data.board
         })
     } catch (e) {
         console.log(e)
     }
 }
-
 
 export function* watchPostArticleRequest() {
     while (true) {
@@ -105,7 +104,7 @@ export function* watchDeleteArticleRequest() {
 export function* watchInitArticleStateRequest() {
     while (true) {
         const { articleid } = yield take(types.INIT_ARTICLE_STATE)
-        yield call(init_article_state, articleid)
+        yield call(initArticleState, articleid)
     }
 }
 

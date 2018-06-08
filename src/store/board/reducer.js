@@ -29,7 +29,7 @@ const delete_article = (article_list, article_id) => {
 }
 const board_reducer = (state=boardState, action) => { 
     switch (action.type) {
-        case types.RESET_BOARDINFO:
+        case types.RESET_BOARD_INFO:
             return {
                 ...clubState,
                 needLoading: true
@@ -39,22 +39,22 @@ const board_reducer = (state=boardState, action) => {
                 ...state,
                 needLoading: false
             }
-        case types.SET_BOARDNAME:
+        case types.SET_BOARD_NAME:
             return {
                 ...state,
                 name: action.name
             }
-        case types.SET_BOARDID:
+        case types.SET_BOARD_ID:
             return {
                 ...state,
                 id: action.id
             }
-        case types.ADD_BOARDARTICLE:
+        case types.ADD_BOARD_ARTICLE:
             return {
                 ...state,
                 articles: add_article(state.articles, action.article)
             }
-        case types.DELETE_BOARDARTICLE:
+        case types.DELETE_BOARD_ARTICLE:
             return {
                 ...state,
                 articles: delete_article(state.articles, action.article_id)

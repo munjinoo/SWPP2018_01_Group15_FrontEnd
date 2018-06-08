@@ -23,3 +23,20 @@ export const initClubState = (clubid) => {
         clubid
     }
 }
+
+export const changeUserStatus = (clubid, userid) => {
+    return {
+        type: types.CHANGE_USER_STATUS,
+        clubid,
+        userid
+    }
+}
+
+export const kickUser = (clubid, userid) => {
+    return {
+        type: types.KICK_USER,
+        clubid,
+        userid
+    }
+}
+
