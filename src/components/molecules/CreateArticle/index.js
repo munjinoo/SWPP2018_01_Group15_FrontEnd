@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 
@@ -26,11 +26,6 @@ const CreateArticle = ({ boardState, onPostArticle }) => {
       <button onClick={onClick}>게시</button>
     </Wrapper>
   )
-}
-
-CreateArticle.propTypes = {
-  reverse: PropTypes.bool,
-  children: PropTypes.node,
 }
 
 export default CreateArticle

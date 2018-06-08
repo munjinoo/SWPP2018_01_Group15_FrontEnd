@@ -1,4 +1,3 @@
-import { PropTypes } from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 
@@ -27,11 +26,6 @@ const spinner = (delay) => styled.span`
   -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
   animation: sk-bouncedelay 1.4s infinite ease-in-out both;
 `
-
-Loading.propTypes = {
-  palette: PropTypes.string,
-  reverse: PropTypes.bool,
-}
 
 Loading.defaultProps = {
   palette: 'grayscale',

@@ -8,11 +8,12 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const BoardPage = ({ routeParams } ) => {  
-  const board_id=routeParams.boardid;
+const BoardPage = ({ params } ) => {  
+  const boardid = params.boardid
+  const clubid = params.clubid
   return (
     <Wrapper>
-      <ArticleList boardid={board_id} /> <br/>
+      <ArticleList boardid={boardid} clubid={clubid} /> <br/>
       <CreateArticle />
     </Wrapper>
   )

@@ -1,4 +1,6 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import { Link } from 'react-router'
+import { Form, FormGroup, Input, Label, Button, Row, Col, Modal, ModalBody } from 'reactstrap'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 
@@ -7,28 +9,32 @@ const Wrapper = styled.div`
     color: ${palette('grayscale', 0)};
 `
 
-const Login = ({ userState={isLogin: false}, onLogin }) => {
+const Login = ({ onLogin }) => {
     let username = '';
     let password = '';
     const onClick = () => {
         if (username != undefined && password != undefined) {
             onLogin(username.value, password.value);
-            username.value = '';
-            password.value = '';
         }
     }
     return (
-        <Wrapper>
-            Username: <input type="text" ref={node => {username = node;}} /><br/>
-            Password: <input type="password" ref={node => {password = node;}} /><br/>
-            <button onClick={onClick}>Login</button>
-        </Wrapper>
+        <Modal isOpen centered backdrop={false} fade={false}>
+          <ModalBody>
+          <Form inline>
+            <FormGroup>
+              <Input type="text" placeholder="username" innerRef={node => {username = node;}} />
+            </FormGroup>
+            <FormGroup>
+              <Input type="password" placeholder="password" innerRef={node => {password = node;}} />
+            </FormGroup>
+            <Row>
+            <Col><Button id="login-submit" onClick={onClick} color="primary">로그인</Button></Col>
+            <Col><Button tag={Link} to="/signup/" color="secondary">회원가입</Button></Col>
+            </Row>
+          </Form>
+          </ModalBody>
+        </Modal>
     )
-}
-
-Login.propTypes = {
-    reverse: PropTypes.bool,
-    children: PropTypes.node,
 }
 
 export default Login

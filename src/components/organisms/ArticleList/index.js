@@ -18,14 +18,14 @@ const methods = {
   componentDidMount
 }
 
-const ArticleList = ({ boardState={name: "", articles: [], needLoading: true}, boardid }) => {
+const ArticleList = ({ boardState={name: "", articles: [], needLoading: true}, boardid, clubid }) => {
   return (    
     <Wrapper>
       {boardState.name}  <br />
       <ul>
         {boardState.articles.map((article) =>
           <li key={article.id}>
-              <Link to={`/article/${article.id}`}>{article.title}</Link>
+              <Link to={`/club/${clubid}/board/${boardid}/${article.id}`}>{article.title}</Link>
           </li>
         )}
       </ul>

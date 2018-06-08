@@ -4,12 +4,11 @@ import Login from '.'
 
 const wrap = (props = {}) => shallow(<Login {...props} />)
 
-it('renders children when passed in', () => {
-  const wrapper = wrap({ children: 'test' })
-  expect(wrapper.contains('test')).toBe(true)
-})
-
-it('renders props when passed in', () => {
-  const wrapper = wrap({ id: 'foo' })
-  expect(wrapper.find({ id: 'foo' })).toHaveLength(1)
+it('handle onLogin when click button', () => {
+  const props = {
+      onLogin: jest.fn()
+  }
+  const wrapper = wrap(props)
+  wrapper.find('#login-submit').simulate('click')
+  expect(props.onLogin).toHaveBeenCalled()
 })

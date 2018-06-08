@@ -12,8 +12,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onSignup: (username, password, email, name, college, major, admission_year) => {
-            dispatch(signup(username, password, email, name, college, major, admission_year))
+        onSignup: (username, password, email, name, college, major, admission_year, onErr) => {
+            dispatch(signup(username, password, email, name, college, major, admission_year, onErr))
         }
     }
 }
