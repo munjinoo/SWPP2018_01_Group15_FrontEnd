@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import { Link } from 'react-router'
@@ -22,10 +22,6 @@ const SearchResult = ({ search_result }) => {
       </ul>
     </Wrapper>
   )
-}
-
-SearchResult.propTypes = {
-  reverse: PropTypes.bool,
 }
 
 export default SearchResult

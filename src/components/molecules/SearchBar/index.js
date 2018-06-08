@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import { Link, withRouter } from 'react-router'
@@ -21,11 +21,6 @@ const SearchBar = () => {
       <Link to={{ pathname: "/search/", query: query }} onClick={onClick} >검색</Link>
     </Wrapper>
   )
-}
-
-SearchBar.propTypes = {
-  reverse: PropTypes.bool,
-  children: PropTypes.node,
 }
 
 export default SearchBar
