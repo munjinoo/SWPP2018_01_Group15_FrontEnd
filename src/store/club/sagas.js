@@ -79,7 +79,6 @@ export function* initClubState(clubid) {
                 type: types.ADD_CLUB_BOARD,
                 board: {id: board_list[i].id, name: board_list[i].name}
             })
-            console.log(board_list[i].name)
         }
     } catch (e) {
         console.log(e)

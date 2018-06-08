@@ -32,7 +32,6 @@ export function* initBoardState(boardid) {
     try {
         const data = yield call(api.get, `/board/${boardid}/`, {credentials: 'include'})
         const article_list = data.articles
-        console.log(data.articles)
         yield put({
             type: types.SET_BOARD_NEED_LOAD
         })

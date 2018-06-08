@@ -33,7 +33,6 @@ export const deleteArticle = (articleid) => {
 }
 
 export const initArticleState = (articleid) => {
-    console.log(articleid)
     return {
         type: types.INIT_ARTICLE_STATE,
         articleid
