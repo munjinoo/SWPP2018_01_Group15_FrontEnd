@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { Link } from 'react-router'
+import { Row, Col, Card, CardBody, Container } from 'reactstrap'
 import styled from 'styled-components'
 import lifecycle from 'react-pure-lifecycle'
 import { font, palette } from 'styled-theme'
@@ -21,22 +22,13 @@ const methods = {
 const UserStatus = ({ userState={isLogin: false}, onLoad, onLogout, onLogin }) => {
   if (userState.isLogin) {
     return (
-      <Wrapper>
-        <Logout username={userState.username} onLogout={onLogout} />
-      </Wrapper>
+      <Logout username={userState.username} onLogout={onLogout} />
     )
   } else {
     return (
-      <Wrapper>
-        <Login onLogin={onLogin} />
-        <Link to='/signup'>회원가입</Link>
-      </Wrapper>
+      <Login onLogin={onLogin} />
     )
   }
-}
-
-UserStatus.propTypes = {
-  reverse: PropTypes.bool,
 }
 
 export default lifecycle(methods)(UserStatus)
