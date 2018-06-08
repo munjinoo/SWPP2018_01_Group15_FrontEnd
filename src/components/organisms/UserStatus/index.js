@@ -3,11 +3,19 @@ import { Link } from 'react-router'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import { Login, Logout } from 'containers'
+import lifecycle from 'react-pure-lifecycle'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
   color: ${palette('grayscale', 0)};
 `
+const componentDidMount = (props) => {
+  props.onLoad()
+}
+
+const methods = {
+  componentDidMount
+}
 
 const UserStatus = ({ userState={isLogin: false, needLoading: {user: true}}, onLoad }) => {
   if (userState.isLogin) {
@@ -27,4 +35,4 @@ const UserStatus = ({ userState={isLogin: false, needLoading: {user: true}}, onL
 }
 
 
-export default UserStatus
+export default lifecycle(methods)(UserStatus)
