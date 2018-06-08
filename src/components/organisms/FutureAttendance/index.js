@@ -16,8 +16,10 @@ const methods = {
   componentDidMount
 }
 
-const FutureAttendance = ({ eventState = { future_attendees: [], future_absentees: [] }, onPutFutureAttendee, onPutFutureAbsentee, eventid }) => {
-  console.log("eventState in component",eventState)
+const FutureAttendance = ({ eventState = { future_attendees: [], future_absentees: [], date:null }, onPutFutureAttendee, onPutFutureAbsentee, eventid }) => {
+  var now = new Date()
+  var eventDate = new Date(eventState.date)
+  var isFuture = now < eventDate
   const onClickYes = () => {
     if (eventid != undefined) {
       onPutFutureAttendee(eventid);
@@ -32,9 +34,13 @@ const FutureAttendance = ({ eventState = { future_attendees: [], future_absentee
   }
   return (
     <Wrapper>
-      <strong>참가 여부 투표하기</strong><br/>
-      <button onClick={onClickYes}>참가</button>
-      <button onClick={onClickNo}>불참</button><br/>
+      { isFuture &&
+        <div>
+          <strong>참가 여부 투표하기</strong><br/>
+          <button onClick={onClickYes}>참가</button>
+          <button onClick={onClickNo}>불참</button><br/> 
+        </div>
+      }
       <strong>참가하는 사람들</strong>({eventState.future_attendees.length}명) <br/>
       <ul>
         {eventState.future_attendees.map(attendee =>
@@ -52,7 +58,6 @@ const FutureAttendance = ({ eventState = { future_attendees: [], future_absentee
         )}
       </ul>
     </Wrapper>
-    //check buttons need to be added
   )
 }
 
