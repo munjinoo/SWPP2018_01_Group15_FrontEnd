@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 `
 
 const componentDidMount = (props) => {
-  props.onLoad(props.eventid)
+  props.onLoad(props.eventid, props.clubid)
 }
 
 const methods = {
@@ -20,7 +20,6 @@ const methods = {
 const PastAttendance = ({ eventState = { past_attendees: [], club: null }, clubState = { admin: [] }, userState = { id: null }, eventid, clubid }) => {
   console.log("eventState in pastAttendance",eventState)
   
-  //admin만 출첵할수 있게
   var isAdmin = false
   for (var i=0; i<clubState.admin.length; i++) {
     if (clubState.admin[i].id == userState.id) {
