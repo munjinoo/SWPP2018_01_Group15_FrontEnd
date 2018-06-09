@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, IndexRoute } from 'react-router'
 
 import App from 'components/App'
-import { HomePage, MyPage, ClubMain, CreateClubPage, SignupPage, VerifyPage, ClubEventPage, ClubAccountingPage, ClubManagePage, BoardPage, ArticlePage, SearchPage } from 'components'
+import { HomePage, MyPage, ClubMain, CreateClubPage, SignupPage, VerifyPage, ClubEventPage, EventDetailPage, ClubAccountingPage, ClubManagePage, BoardPage, ArticlePage, SearchPage } from 'components'
 
 
 const routes = (
@@ -15,7 +15,8 @@ const routes = (
       <Route path='create' component={CreateClubPage} />
       <Route path=':clubid'>
         <IndexRoute component={ClubMain} />
-        <Route path='event' component={ClubEventPage}/>
+        <Route path='event' component = {props => <ClubEventPage key={props.routeParams.clubid}{...props}/>} />
+        <Route path='event/:eventid' component = {EventDetailPage} />
         <Route path='manage' component={ClubManagePage} /> 
         <Route path='account' component={ClubAccountingPage} />
         <Route path='board/:boardid'>
@@ -25,7 +26,6 @@ const routes = (
       </Route>
     </Route>
     <Route path=':token' component={VerifyPage} />
-    <Route path='mypage' component={MyPage} />
     <Route path = "signup" component={SignupPage} />
   </Route>
 
