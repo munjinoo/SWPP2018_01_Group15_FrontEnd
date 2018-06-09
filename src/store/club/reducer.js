@@ -35,58 +35,82 @@ const add_club = (clubs, num) => {
     return new_clubs;
 }
 
+const delete_board = (board_list, board_id) => {
+   let new_list = [...board_list]
+   for (var i=0; i < new_list.length; i++) {
+       if (new_list[i].id=board_id){
+           new_list.splice(i,1)
+           return new_list
+       }
+   }
+   return new_list
+}
+
 const club_reducer = (state=clubState, action) => {
     switch (action.type) {
-        case types.SET_CLUBINFO:
+        
+        case types.SET_CLUB_NAME:
             return {
                 ...state,
-                name: action.name,
-                id: action.id, 
-                scope: action.scope,
-                category: action.category,
-                introduction: action.introduction,
+                name: action.name
             }
-        
-        case types.ADD_CLUBBOARD:
+        case types.SET_CLUB_ID:
+            return {
+                ...state,
+                id: action.id
+            }
+        case types.SET_CLUB_ADMIN:
+            return {
+                ...state,
+                admin: action.admin
+            }
+        case types.SET_CLUB_SCOPE:
+            return {
+                ...state,
+                scope: action.scope
+            }
+        case types.SET_CLUB_CATEGORY:
+            return {
+                ...state,
+                category: action.category
+            }
+        case types.SET_CLUB_INTRODUCTION:
+            return {
+                ...state,
+                introduction: action.introduction
+            }
+        case types.ADD_CLUB_BOARD:
             return {
                 ...state,
                 boards: add(state.boards, action.board)
             }
-        case types.ADD_CLUBADMIN:
-            return {
-                ...state,
-                admin: add(state.admin, action.admin)
-            }
-        case types.ADD_CLUBMEMBER:
+        case types.ADD_CLUB_MEMBER:
             return {
                 ...state,
                 members: add(state.members, action.member)
             }
-        case types.ADD_CLUBWAITING:
+        case types.ADD_CLUB_ADMIN:
+            return {
+                ...state,
+                admin: add(state.admin, action.admin)
+            }
+        case types.ADD_CLUB_WAITING:
             return {
                 ...state,
                 waitings: add(state.waitings, action.waiting)
             }
-        case types.ADD_CLUBBOARD:
+        case types.DELETE_CLUB_BOARD:
             return {
                 ...state,
-                boards: add_board(state.boards, action.board)
+                boards: delete_board(state.boards, action.board_id)
             }
-        case types.ADD_FUTURE_EVENT:
+        case types.SET_CLUB_USER_LIST:
             return {
                 ...state,
-                future_events: add(state.future_events, action.event)
+                admin: action.admin,
+                members: action.members,
+                waitings: action.waitings
             }
-        case types.ADD_PAST_EVENT:
-            return {
-                ...state,
-                past_events: add(state.past_events, action.event)
-            }
-        // case types.ADD_EVENT:
-        //     return {
-        //         ...state,
-        //         events: add_event(state.events, action.event)
-        //     }
         default:
             return state
     }

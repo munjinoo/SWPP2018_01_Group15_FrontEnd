@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button, Modal, ModalBody } from 'reactstrap'
 import { Link } from 'react-router'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
@@ -8,14 +9,15 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const Logout = ({ userState, onLogout }) => {
+const Logout = ({ username, onLogout }) => {
   return (
-    <Wrapper>
-      Hello, <Link to="/mypage">{userState.username}</Link><br/>
-      <button onClick={onLogout}>Logout</button>
-    </Wrapper>
+    <Modal isOpen backdrop={false} centered fade={false}>
+      <ModalBody className="text-center">
+        <Button tag={Link} to="/mypage">{username}</Button><br/>
+        <Button onClick={onLogout}>Logout</Button>
+      </ModalBody>
+    </Modal>
   )
 }
-
 
 export default Logout

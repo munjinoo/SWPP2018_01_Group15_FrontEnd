@@ -1,14 +1,16 @@
 import React from 'react'
-import { ClubList } from 'containers'
+import { Button } from 'reactstrap'
+import { ClubList, MenuBar } from 'containers'
 import { Link } from 'react-router'
 
 const MyPage = () => {
   return (
     <div>
+      <MenuBar />
       <ClubList />
-      <Link to="/club/create">
+      <Button tag={Link} to="/club/create">
         새 동아리방 만들기
-      </Link>
+      </Button>
     </div>
   )
 }

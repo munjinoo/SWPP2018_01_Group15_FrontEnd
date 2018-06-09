@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { injectGlobal, ThemeProvider } from 'styled-components'
 
 import theme from './themes/default'
@@ -15,10 +15,6 @@ const App = ({ children }) => {
       {children}
     </ThemeProvider>
   )
-}
-
-App.propTypes = {
-  children: PropTypes.any,
 }
 
 export default App
