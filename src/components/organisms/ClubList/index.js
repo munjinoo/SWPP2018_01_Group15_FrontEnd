@@ -18,7 +18,7 @@ const methods = {
   componentDidMount
 }
 
-const ClubList = ({ userState = { clubs_as_admin: [], clubs_as_member: [], onLoad }) => {
+const ClubList = ({ userState = { clubs_as_admin: [], clubs_as_member: [], onLoad }}) => {
   const as_member = userState.clubs_as_member
   const as_admin = userState.clubs_as_admin
   let only_as_member = []
