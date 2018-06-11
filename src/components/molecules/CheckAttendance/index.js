@@ -62,7 +62,7 @@ const CheckAttendance = ({ clubState = { members: [] }, onPostPastAttendees, eve
             {member.username} 
           </div>
         )}
-    <button onClick={onClickSubmit}>출석체크 완료</button>
+    <button id="check-attendance" onClick={onClickSubmit}>출석체크 완료</button>
     
     </Wrapper>
   )

@@ -12,14 +12,11 @@ const CreateEvent = ({ eventState = { future_attendees: [], future_absentees: []
 
   let name = '';
   let content = '';
-  let date = '';     //???
+  let date = '';
   
   const onClick = () => {
     if (name != undefined && content != undefined && date != undefined) {
       onPostEvent(name.value, content.value, date.value, clubid);
-      name.value = '';
-      content.value = '';
-      date.value = '';     //?????
     }
   }
   return (
@@ -27,7 +24,7 @@ const CreateEvent = ({ eventState = { future_attendees: [], future_absentees: []
       행사 이름: <input type="text" ref={node => {name = node;}} /> <br/>
       날짜: <input type="datetime-local" ref={node => {date = node}} /> <br/>
       설명: <input type="text" ref={node => {content = node;}} /> <br/>
-      <button onClick={onClick}>등록하기</button>
+      <button id="post-event" onClick={onClick}>등록하기</button>
     </Wrapper>
   )
 }

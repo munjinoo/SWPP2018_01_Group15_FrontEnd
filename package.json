@@ -18,6 +18,7 @@
     "build": "npm run env:prod -- webpack --progress"
   },
   "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js",
     "modulePathIgnorePatterns": [
       "<rootDir>/src-clean"
     ],
@@ -47,7 +48,8 @@
     "babel-preset-stage-1": "^6.16.0",
     "copyfiles": "^1.0.0",
     "cross-env": "^4.0.0",
-    "enzyme": "^2.7.0",
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^3.14.0",
     "eslint-config-airbnb": "^14.0.0",
     "eslint-import-resolver-webpack": "^0.8.1",
@@ -58,7 +60,7 @@
     "file-loader": "^0.11.0",
     "happypack": "^3.0.3",
     "html-webpack-plugin": "^2.26.0",
-    "jest-cli": "^19.0.0",
+    "jest-cli": "^22.1.4",
     "opn-cli": "^3.1.0",
     "raw-loader": "^0.5.1",
     "react-addons-test-utils": "^15.4.1",

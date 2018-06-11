@@ -3,5 +3,5 @@ import { shallow } from 'enzyme'
 import ClubMain from '.'
 
 it('renders', () => {
-  shallow(<ClubMain />)
+  shallow(<ClubMain params={{clubid: 1}} />)
 })

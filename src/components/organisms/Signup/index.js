@@ -79,7 +79,7 @@ class Signup extends React.Component {
 		</Input>
 입학년도: <Input type="number" innerRef={node => {admission_year = node}} max={max_year}/><br/>
 <Row>
-            <Col sm={{size:'auto', offset:0}}><Button onClick={onClick} color="primary">회원가입</Button></Col>
+            <Col sm={{size:'auto', offset:0}}><Button id="signup-button" onClick={onClick} color="primary">회원가입</Button></Col>
 			<Col sm={{size:'auto', offset:0}}><Fade in={this.state.hasError}><Button outline disabled color="danger">{this.state.errMsg}</Button></Fade></Col>
 			</Row>
 			</CardBody>

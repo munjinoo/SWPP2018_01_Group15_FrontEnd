@@ -1,10 +1,9 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 import ChangeUserStatus from '.'
 
 const wrap = (props = {}) => shallow(<ChangeUserStatus {...props} />)
 
-it('renders props when passed in', () => {
-  const wrapper = wrap({ id: 'foo' })
-  expect(wrapper.find({ id: 'foo' })).toHaveLength(1)
+it('renders', () => {
+  wrap({ onChangeUserStatus: jest.fn(), onKickUser: jest.fn(), clubid: 1 })
 })

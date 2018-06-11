@@ -10,7 +10,7 @@ describe('user actions', () => {
             username: username,
             password: password
         }
-        expect(actions.login(username, password)).toEqual(expectedAction)
+        expect(actions.login(username, password)).toEqual(expect.objectContaining(expectedAction))
     })
 
     it('should create an action to logout', () => {
@@ -50,7 +50,7 @@ describe('user actions', () => {
             type: types.SIGNUP,
             ...data
         }
-        expect(actions.signup(data.username, data.password, data.email, data.name, data.college, data.major, data.admission_year)).toEqual(expectedAction)
+        expect(actions.signup(data.username, data.password, data.email, data.name, data.college, data.major, data.admission_year)).toEqual(expect.objectContaining(expectedAction))
     })
 
 })

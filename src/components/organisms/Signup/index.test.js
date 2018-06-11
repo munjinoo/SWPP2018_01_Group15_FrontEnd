@@ -9,6 +9,6 @@ it('handle onSignup when click button', () => {
     onSignup: jest.fn()
   }
   const wrapper = wrap(props)
-  wrapper.find('button').simulate('click')
+  wrapper.find('#signup-button').simulate('click')
   expect(props.onSignup).toHaveBeenCalled()
 })

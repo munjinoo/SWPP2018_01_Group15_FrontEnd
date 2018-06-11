@@ -18,7 +18,7 @@ const ArticleEdit = ({ articleid, title, content, onPutArticle }) => {
     <Wrapper>
       제목: <input type="text" defaultValue={title} ref={node => {new_title=node;}} /> <br/>
       <input type="text" defaultValue={content} ref={node => {new_content=node;}} /> <br/>
-      <button onClick={onClick}>수정</button>      
+      <button id="edit-article" onClick={onClick}>수정</button>      
     </Wrapper>
   )
 }

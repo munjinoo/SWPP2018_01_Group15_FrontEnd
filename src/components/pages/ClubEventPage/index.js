@@ -1,12 +1,12 @@
 import { CreateEvent, FutureEvents, PastEvents } from 'containers'
 import React from 'react'
 
-const ClubEventPage = ({ routeParams }) => {
+const ClubEventPage = ({ params }) => {
   return (
     <div>
-      <CreateEvent clubid={routeParams.clubid}/>
-      <FutureEvents clubid={routeParams.clubid}/>
-      <PastEvents clubid={routeParams.clubid}/>
+      <CreateEvent clubid={params.clubid}/>
+      <FutureEvents clubid={params.clubid}/>
+      <PastEvents clubid={params.clubid}/>
     </div>
   )
 }

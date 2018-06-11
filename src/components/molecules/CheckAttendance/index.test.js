@@ -1,15 +1,18 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
 import CheckAttendance from '.'
 
-const wrap = (props = {}) => shallow(<CheckAttendance {...props} />)
+const wrap = (props = {}) => mount(<CheckAttendance {...props} />)
 
-it('renders children when passed in', () => {
-  const wrapper = wrap({ children: 'test' })
-  expect(wrapper.contains('test')).toBe(true)
-})
-
-it('renders props when passed in', () => {
-  const wrapper = wrap({ id: 'foo' })
-  expect(wrapper.find({ id: 'foo' })).toHaveLength(1)
+it('handle onPostPastAttendees when submit', () => {
+  const props = {
+    onPostPastAttendees: jest.fn(),
+    onLoad: jest.fn(),
+    eventid: 1,
+    clubid: 1
+  }
+  const wrapper = wrap(props)
+  expect(props.onLoad).toHaveBeenCalled()
+  wrapper.find('#check-attendance').simulate('click')
+  expect(props.onPostPastAttendees).toHaveBeenCalled()
 })

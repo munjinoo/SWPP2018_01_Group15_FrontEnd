@@ -1,11 +1,11 @@
 import { EventInfo, Attendance } from 'containers'
 import React from 'react'
 
-const EventDetailPage = ({ routeParams }) => {
+const EventDetailPage = ({ params }) => {
   return (
     <div>
-      <EventInfo eventid = {routeParams.eventid}/>
-      <Attendance eventid = {routeParams.eventid} clubid = {routeParams.clubid} />
+      <EventInfo eventid={params.eventid}/>
+      <Attendance eventid={params.eventid} clubid={params.clubid} />
     </div>
   )
 }

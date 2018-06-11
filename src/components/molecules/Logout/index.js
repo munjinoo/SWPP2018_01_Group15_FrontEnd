@@ -14,7 +14,7 @@ const Logout = ({ username, onLogout }) => {
     <Modal isOpen backdrop={false} centered fade={false}>
       <ModalBody className="text-center">
         <Button tag={Link} to="/mypage">{username}</Button><br/>
-        <Button onClick={onLogout}>Logout</Button>
+        <Button id="logout" onClick={onLogout}>Logout</Button>
       </ModalBody>
     </Modal>
   )

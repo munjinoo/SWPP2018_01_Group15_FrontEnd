@@ -12,6 +12,6 @@ it('handle onLogout when click button', () => {
     onLogout: jest.fn()
   }
   const wrapper = wrap(props)
-  wrapper.find('button').simulate('click')
+  wrapper.find('#logout').simulate('click')
   expect(props.onLogout).toHaveBeenCalled()
 })
