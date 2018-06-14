@@ -43,13 +43,8 @@ export function* initClubState(clubid) {
     try {
         const data = yield call(api.get, `/club/${clubid}/`, {credentials: 'include'})
         const board_list = data.boards
-        const future_event_data = yield call(api.get, `/event/?need=future&clubid=${clubid}`)
-        let future_event_list = future_event_data
-        const past_event_data = yield call(api.get, `/event/?need=past&clubid=${clubid}`)
-        let past_event_list = past_event_data
-        yield put({
-            type: types.SET_CLUB_NEED_LOAD
-        })
+        const future_event_list = yield call(api.get, `/event/?need=future&clubid=${clubid}`)
+        const past_event_list = yield call(api.get, `/event/?need=past&clubid=${clubid}`)
         // set user info
         yield put({
             type: types.SET_CLUB_NAME,
@@ -85,18 +80,14 @@ export function* initClubState(clubid) {
             })
         }
         // add events
-        for (var i=0; i<future_event_list.length; i++) {
-                type: types.ADD_FUTURE_EVENT,
-            yield put({
-                event: future_event_list[i]
-            })
-        }
-        for (var i=0; i<past_event_list.length; i++) {
-            yield put({
-                type: types.ADD_PAST_EVENT,
-                event: past_event_list[i]
-            })
-        }
+        yield put({
+            type: types.SET_FUTURE_EVENT,
+            event: future_event_list
+        })
+        yield put({
+            type: types.SET_PAST_EVENT,
+            event: past_event_list
+        })
     } catch (e) {
         console.log(e)
     }

@@ -8,15 +8,13 @@ const CheckAttendanceContainer = props => <CheckAttendance {...props} />
 const mapStateToProps = (state) => {
     return {
         clubState: state.club,
-        eventState: state.event
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLoad: (clubid, eventid) => {
+        onLoad: (clubid) => {
             dispatch(initClubState(clubid))
-            dispatch(initEventState(eventid))
         },
         onPostPastAttendees: (eventid, past_attendees) => {
             dispatch(postPastAttendees(eventid, past_attendees))

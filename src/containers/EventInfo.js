@@ -7,7 +7,7 @@ const EventInfoContainer = props => <EventInfo {...props} />
 
 const mapStateToProps = (state) => {
     return {
-        eventState: state.event   //??
+        eventState: state.event
     }
 }
 

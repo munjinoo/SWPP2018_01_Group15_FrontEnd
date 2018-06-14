@@ -16,10 +16,18 @@ const add_person = (old_list, addme) => {
     return new_list
 }
 
+const remove_person = (list, id) => {
+    const id_filter = (obj) => {
+        if (obj.id === id)
+            return false
+        else
+            return true
+    }
+    return list.filter(id_filter)
+}
 
 const event_reducer = (state=eventState, action) => {
     switch (action.type) {
-        
         case types.SET_EVENT:
           return {
               ...state,
@@ -35,12 +43,14 @@ const event_reducer = (state=eventState, action) => {
         case types.ADD_FUTURE_ATTENDEE:
           return {
             ...state,
-            future_attendees: add_person(state.future_attendees, action.future_attendee)
+            future_attendees: add_person(state.future_attendees, action.future_attendee),
+            future_absentees: remove_person(state.future_absentees, action.future_attendee.id)
           }
         case types.ADD_FUTURE_ABSENTEE:
           return {
             ...state,
-            future_absentees: add_person(state.future_absentees, action.future_absentee)
+            future_absentees: add_person(state.future_absentees, action.future_absentee),
+            future_attendees: remove_person(state.future_attendees, action.future_absentee.id)
           }
         case types.SET_PAST_ATTENDEES:
           return {

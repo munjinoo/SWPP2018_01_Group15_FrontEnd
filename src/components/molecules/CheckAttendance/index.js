@@ -1,4 +1,5 @@
 import React from 'react'
+import { Input, Button, Form, FormGroup } from 'reactstrap'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import { Link } from 'react-router'
@@ -10,7 +11,7 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 const componentDidMount = (props) => {
-  props.onLoad(props.clubid, props.eventid)
+  props.onLoad(props.clubid)
 }
 
 const methods = {
@@ -18,14 +19,11 @@ const methods = {
 }
 
 const CheckAttendance = ({ clubState = { members: [] }, onPostPastAttendees, eventid, clubid }) => {
-  console.log("clubState in component", clubState)
-  console.log("clubid in component", clubid)
-  let selected = [];
+  let selected = []
 
   const onClickMember = (e) => {
     const id = e.target.id;
     const username = e.target.name;
-    const member = {id: id, username: username}
     var exists = false
     for (var i=0; i<selected.length; i++) {
       if (selected[i].id == id) {
@@ -37,34 +35,36 @@ const CheckAttendance = ({ clubState = { members: [] }, onPostPastAttendees, eve
         selected.findIndex(function(obj) {
           return obj.id === id
       }))
-      console.log("deleted selected", selected)
     }
     else {
-      selected.push(member)
-      console.log("added selected", selected)
+      selected.push(e.target)
     }
   }
 
   const onClickSubmit = () => {
     if (eventid != undefined && selected != undefined) {
-      onPostPastAttendees(eventid, selected);
+      const members = selected.map(target => ({id: target.id, username: target.name}))
+      onPostPastAttendees(eventid, members);
+      for (var i=0; i<selected.length; i++) {
+        selected[i].checked = false
+      }
       selected = []
     }
-    window.location.reload()
   }
 
   return (
-    <Wrapper>
+    <Form>
       <strong>출석 체크하기</strong><br/>
+      <FormGroup check>
         {clubState.members.map(member =>
           <div key={member.id}>
-          <input type="checkbox" id={member.id} name={member.username} onChange={ onClickMember }/>
+          <Input type="checkbox" id={member.id} name={member.username} onChange={ onClickMember }/>
             {member.username} 
           </div>
         )}
-    <button id="check-attendance" onClick={onClickSubmit}>출석체크 완료</button>
-    
-    </Wrapper>
+      </FormGroup>
+      <Button id="check-attendance" onClick={onClickSubmit}>출석체크 완료</Button>
+    </Form>
   )
 }
 

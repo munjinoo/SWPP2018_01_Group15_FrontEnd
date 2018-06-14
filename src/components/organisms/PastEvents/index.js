@@ -1,41 +1,25 @@
 import React from 'react'
-import styled from 'styled-components'
-import { font, palette } from 'styled-theme'
+import { Card, CardText, CardBody, CardTitle, CardSubtitle, Row, Col } from 'reactstrap'
 import { Link } from 'react-router'
-import lifecycle from 'react-pure-lifecycle'
+import { dateTimeConvert } from 'services/convert'
 
-const Wrapper = styled.div`
-  font-family: ${font('primary')};
-  color: ${palette('grayscale', 0)};
-`
-const componentDidMount = (props) => {
-  props.onLoad(props.clubid)
-}
-
-const methods = {
-  componentDidMount
-}
-
-const PastEvents = ({ clubState = { past_events: [] }, clubid }) => {
-  
+const PastEvents = ({ past_events = [], clubid }) => {
   return (
-    <Wrapper>
-      지난 행사
-      <ul>
-        {clubState.past_events.map(event =>   //how to get only past events?
-          <li key={event.id}>
-            <strong>{event.name}</strong><br/>
-            날짜: {event.date}<br/>
-            내용: {event.content}<br/>
+    <div>
+      <br/>
+      {past_events.map(event =>
+        <Col sm={{ size:6, offset: 3 }}>
+          <Card key={event.id} body>
+            <CardTitle>{event.name}</CardTitle>
+            <CardSubtitle>{dateTimeConvert(event.date)}</CardSubtitle>
             <Link to={`/club/${clubid}/event/${event.id}/`}>
               자세히 보기
             </Link>
-          </li>
-        )}
-      </ul>
-    </Wrapper>
+          </Card><br/>
+        </Col>
+      )}
+    </div>
   )
 }
 
-
-export default lifecycle(methods)(PastEvents)
+export default PastEvents

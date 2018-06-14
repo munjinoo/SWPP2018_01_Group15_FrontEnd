@@ -33,7 +33,7 @@ export function* logout() {
     }
 }
 
-export function* init_user_state() {
+export function* initUserState() {
     try {
         const data = yield call(api.get, `/me/`, {credentials: 'include'})
         const as_admin = data.clubs_as_admin
@@ -106,7 +106,7 @@ export function* watchLogoutRequest() {
 export function* watchInitUserStateRequest() {
     while (true) {
         yield take(types.INIT_USER_STATE)
-        yield call(init_user_state)
+        yield call(initUserState)
       
     }
 }

@@ -47,7 +47,7 @@ export function* postEvent(name, content, date, club) {
             })
         }
 
-        yield put(push(`/club/${data.event.club}/event/${data.event.id}/`))   //이 url로 이동하자
+        yield put(push(`/club/${data.event.club}/event/${data.event.id}/`)) 
     }
     catch (e) {
         console.log(e)
@@ -62,7 +62,6 @@ export function* putFutureAttendee(eventid) {
             type: types.ADD_FUTURE_ATTENDEE,
             future_attendee: {username: data.username, id: data.id}
         })
-        yield put(push(`/event/${eventid}/`))
     }
     catch (e) {
         console.log(e)
@@ -77,7 +76,6 @@ export function* putFutureAbsentee(eventid) {
             type: types.ADD_FUTURE_ABSENTEE,
             future_absentee: {username: data.username, id: data.id}
         })
-        yield put(push(`/event/${eventid}/`))
     }
     catch (e) {
         console.log(e)
@@ -86,14 +84,12 @@ export function* putFutureAbsentee(eventid) {
 
 export function* postPastAttendees(eventid, past_attendees) {
     try {
-        console.log("past_attendees in sagas", past_attendees)
         const data = yield call(api.post, `/event/${eventid}/past_attendee/`, {past_attendees: past_attendees}, {credentials: 'include'})
         
         yield put({
             type: types.SET_PAST_ATTENDEES,
             past_attendees: past_attendees
         })
-        yield put(push(`/club/${data.clubid}/event/${eventid}/`))
     }
     catch (e) {
         console.log(e)
@@ -115,7 +111,6 @@ export function* init_event_state(eventid) {
             future_absentees: data.future_absentees,
             past_attendees: data.past_attendees
         })
-        console.log("initEventState 해씀")
     }
     catch (e) {
         console.log(e)

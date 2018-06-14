@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
-import lifecycle from 'react-pure-lifecycle'
 import { CheckAttendance } from 'containers'
 
 const Wrapper = styled.div`
@@ -9,26 +8,15 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const componentDidMount = (props) => {
-  props.onLoad(props.eventid, props.clubid)
-}
 
-const methods = {
-  componentDidMount
-}
-
-const PastAttendance = ({ eventState = { past_attendees: [], club: null }, clubState = { admin: [] }, userState = { id: null }, eventid, clubid }) => {
-  console.log("eventState in pastAttendance",eventState)
-  
+const PastAttendance = ({ eventState = { past_attendees: [], club: null }, clubState = { admin: [] }, userState = { clubs_as_admin: [] }, eventid, clubid }) => {
   var isAdmin = false
-  for (var i=0; i<clubState.admin.length; i++) {
-    if (clubState.admin[i].id == userState.id) {
+  for (var i=0; i<userState.clubs_as_admin.length; i++) {
+    if (userState.clubs_as_admin[i].id == clubid) {
       isAdmin = true
+      break
     }
   }
-  console.log("clubState", clubState)
-  console.log("userState", userState)
-  console.log("isAdmin", isAdmin)
   return (
     <Wrapper>
       
@@ -40,12 +28,12 @@ const PastAttendance = ({ eventState = { past_attendees: [], club: null }, clubS
           </li>
         )}
       </ul>
-      {isAdmin && 
-        <CheckAttendance eventid = {eventid} clubid = {clubid}/>
+      {isAdmin 
+        && <CheckAttendance eventid = {eventid} clubid = {clubid}/>
       }
       
     </Wrapper>
   )
 }
 
-export default lifecycle(methods)(PastAttendance)
+export default PastAttendance

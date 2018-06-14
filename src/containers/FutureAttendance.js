@@ -13,9 +13,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLoad: (eventid) => {
-            dispatch(initEventState(eventid))
-        },
         onPutFutureAttendee: (eventid) => {
             dispatch(putFutureAttendee(eventid))
         },

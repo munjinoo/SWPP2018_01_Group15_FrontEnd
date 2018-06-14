@@ -79,6 +79,16 @@ const club_reducer = (state=clubState, action) => {
                 ...state,
                 introduction: action.introduction
             }
+        case types.SET_FUTURE_EVENT:
+            return {
+                ...state,
+                future_events: action.event
+            }
+        case types.SET_PAST_EVENT:
+            return {
+                ...state,
+                past_events: action.event
+            }
         case types.ADD_CLUB_BOARD:
             return {
                 ...state,

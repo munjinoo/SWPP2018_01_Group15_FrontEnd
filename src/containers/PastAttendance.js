@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { PastAttendance } from 'components'
-import { initEventState, initUserState, initClubState } from 'store/actions'
 
 const PastAttendanceContainer = props => <PastAttendance {...props} />
 
@@ -15,11 +14,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onLoad: (eventid, clubid) => {
-            dispatch(initEventState(eventid))
-            dispatch(initUserState())
-            dispatch(initClubState(clubid))
-        }
     }
 }
 
