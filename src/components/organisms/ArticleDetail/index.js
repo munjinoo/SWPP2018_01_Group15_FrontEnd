@@ -1,46 +1,67 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import { Card, CardTitle, CardSubTitle, CardText, Button, ButtonGroup } from 'reactstrap'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
-import lifecycle from 'react-pure-lifecycle'
-import { ArticleEdit, ArticleShow } from 'containers'
+import { ArticleShow, ArticleEdit } from 'components'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
   color: ${palette('grayscale', 0)};
 `
 
-const componentDidMount = (props) => {
-  props.onLoad(props.articleid)
-}
-
-const methods = {
-  componentDidMount
-}
-
-const ArticleDetail = ({ articleState={title: "", board: "", content: "", created_at: "", updated_at:"", writer:"", comments: [], isEdit}, articleid, onSetArticleIsEdit }) => {
-  console.log(articleState.isEdit)
-  const onClick = () => {
-    onSetArticleIsEdit();
-    console.log(articleState.isEdit)
+class ArticleDetail extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isEdit: false
+    }
+    this.onEdit = this.onEdit.bind(this)
+    this.onEditEnd = this.onEditEnd.bind(this)
+    this.onDelete = this.onDelete.bind(this)
   }
 
-  if(articleState.isEdit){
-    return (
-      <Wrapper>
-        <ArticleEdit articleid={articleid} title={articleState.title} content={articleState.content} /> <br/>
-      </Wrapper>
-    )
+  onEdit() {
+    this.setState({ isEdit: true })
   }
-  else {
-  return (
-    <Wrapper>
-        <ArticleShow articleid={articleid} board={articleState.board} title={articleState.title} content={articleState.content} created_at={articleState.created_at} updated_at={articleState.updated_at} writer={articleState.writer} comments={articleState.comments} /> <br/>
-        <button onClick={onClick}> 수정 </button>
-    </Wrapper>
-  )
+
+  onEditEnd() {
+    this.setState({ isEdit: false })
   }
+
+  onDelete() {
+    this.props.onDelete(this.props.articleid)
+  }
+
+  componentDidMount() {
+    this.props.onLoad(this.props.articleid)
+  }
+
+  render() {
+    const articleState = this.props.articleState
+    const articleid = this.props.articleid
+
+    if(this.state.isEdit)
+      return (
+        <ArticleEdit
+          articleid={articleid}
+          title={articleState.title} 
+          content={articleState.content}
+          onPut={this.props.onPut}
+          onEditEnd={this.onEditEnd}
+        />
+      )
   
+    else
+      return (
+        <ArticleShow {...this.props}>
+          <ButtonGroup>
+            <Button onClick={this.onEdit}>수정</Button>
+            <Button onClick={this.onDelete} color="danger">삭제</Button>
+          </ButtonGroup>
+        </ArticleShow>
+      )
+  }
 }
 
 
-export default lifecycle(methods)(ArticleDetail)
+export default ArticleDetail

@@ -14,8 +14,12 @@ export const SET_USERID = 'SET_USERID'
 
 export const ADD_ADMIN_CLUB = 'ADD_ADMIN_CLUB'
 export const ADD_MEMBER_CLUB = 'ADD_MEMBER_CLUB'
+export const SET_WAITING_CLUB = 'SET_WAITING_CLUB'
 
 export const VERIFY_TOKEN = 'VERIFY_TOKEN'
+
+export const JOIN_CLUB = 'JOIN_CLUB'
+export const CANCEL_JOIN_CLUB = 'CANCEL_JOIN_CLUB'
 
 /* Club */
 export const POST_CLUB = 'POST_CLUB'
@@ -53,6 +57,7 @@ export const SET_BOARD_NEED_LOAD = 'SET_BOARD_NEED_LOAD'
 
 export const SET_BOARD_NAME = 'SET_BOARD_NAME'
 export const SET_BOARD_ID = 'SET_BOARD_ID'
+export const SET_BOARD_ARTICLES = 'SET_BOARD_ARTICLES'
 export const ADD_BOARD_ARTICLE = 'ADD_BOARD_ARTICLE'
 export const DELETE_BOARD_ARTICLE = 'DELETE_BOARD_ARTICLE'
 

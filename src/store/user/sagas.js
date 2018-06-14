@@ -62,6 +62,10 @@ export function* initUserState() {
                 club: {id: as_member[i].id, name: as_member[i].name}
             })
         }
+        yield put({
+            type: types.SET_WAITING_CLUB,
+            club: data.clubs_as_waitings
+        })
     } catch (e) {
         yield put({type: types.RESET_USERINFO})
     }
@@ -86,6 +90,24 @@ export function* signup(username, password, email, name, college, major, admissi
         console.log(e)
         const response = yield e.response.json()
         yield call(onErr, response)
+    }
+}
+
+export function* joinClub(clubid) {
+    try {
+        yield call(api.post, `/club/${clubid}/join/`, {}, {credentials: 'include'})
+        yield call(initUserState)
+    } catch (e) {
+        console.log(e)
+    }
+}
+
+export function* cancelJoinClub(clubid) {
+    try {
+        yield call(api.delete, `/club/${clubid}/join/`, {credentials: 'include'})
+        yield call(initUserState)
+    } catch (e) {
+        console.log(e)
     }
 }
 
@@ -125,10 +147,26 @@ export function* watchVerifyTokenRequest() {
     }
 }
 
+export function* watchJoinClubRequest() {
+    while (true) {
+        const { clubid } = yield take(types.JOIN_CLUB)
+        yield call(joinClub, clubid)
+    }
+}
+
+export function* watchCancelJoinClubRequest() {
+    while (true) {
+        const { clubid } = yield take(types.CANCEL_JOIN_CLUB)
+        yield call(cancelJoinClub, clubid)
+    }
+}
+
 export default function* () {
     yield fork(watchLoginRequest)
     yield fork(watchLogoutRequest)
     yield fork(watchInitUserStateRequest)
     yield fork(watchSignupRequest)
     yield fork(watchVerifyTokenRequest)
+    yield fork(watchJoinClubRequest)
+    yield fork(watchCancelJoinClubRequest)
 }

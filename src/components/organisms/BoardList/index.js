@@ -1,4 +1,5 @@
 import React from 'react'
+import { ListGroup, ListGroupItem, Button } from 'reactstrap'
 import styled from 'styled-components'
 import lifecycle from 'react-pure-lifecycle'
 import { font, palette } from 'styled-theme'
@@ -23,14 +24,14 @@ const BoardList = ({ clubState={id, boards: [] }, clubid, onDeleteBoard}) => {
   }
   return (    
     <Wrapper>
-      전체 게시판  <br />
-      <ul>
+      <h3>전체 게시판</h3>
+      <ListGroup>
         {clubState.boards.map((board) =>
-          <li key={board.id}>
-            {board.name} <button onClick={onClick} id={board.id}> 삭제 </button>
-          </li>
+          <ListGroupItem key={board.id}>
+            {board.name} <Button onClick={onClick} id={board.id} size="sm" color="danger">삭제</Button>
+          </ListGroupItem>
         )}
-      </ul>
+      </ListGroup>
     </Wrapper>
 
   )

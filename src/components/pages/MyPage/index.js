@@ -11,9 +11,6 @@ const MyPage = () => {
         <BreadcrumbItem active>내 페이지</BreadcrumbItem>
       </Breadcrumb>
       <ClubList />
-      <Button tag={Link} to="/club/create">
-        새 동아리방 만들기
-      </Button>
     </div>
   )
 }

@@ -47,6 +47,11 @@ const user_reducer = (state = initialState, action) => {
                 ...state,
                 clubs_as_member: add_club(state.clubs_as_member, action.club)
             }
+        case types.SET_WAITING_CLUB:
+            return {
+                ...state,
+                clubs_as_waiting: action.club
+            }
         default:
             return state
     }

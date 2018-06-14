@@ -3,7 +3,7 @@ import { Breadcrumb, BreadcrumbItem } from 'reactstrap'
 import { Link } from 'react-router'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
-import { MenuBar, ArticleList, CreateArticle } from 'containers'
+import { MenuBar, ArticleList } from 'containers'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
@@ -21,7 +21,6 @@ const BoardPage = ({ params } ) => {
         <BreadcrumbItem>게시판</BreadcrumbItem>
       </Breadcrumb>
       <ArticleList boardid={boardid} clubid={clubid} /> <br/>
-      <CreateArticle />
     </Wrapper>
   )
 }

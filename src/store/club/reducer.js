@@ -38,8 +38,8 @@ const add_club = (clubs, num) => {
 const delete_board = (board_list, board_id) => {
    let new_list = [...board_list]
    for (var i=0; i < new_list.length; i++) {
-       if (new_list[i].id=board_id){
-           new_list.splice(i,1)
+       if (new_list[i].id == board_id){
+           new_list.splice(i, 1)
            return new_list
        }
    }

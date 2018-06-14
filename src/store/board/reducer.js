@@ -49,6 +49,11 @@ const board_reducer = (state=boardState, action) => {
                 ...state,
                 id: action.id
             }
+        case types.SET_BOARD_ARTICLES:
+            return {
+                ...state,
+                articles: action.articles
+            }
         case types.ADD_BOARD_ARTICLE:
             return {
                 ...state,

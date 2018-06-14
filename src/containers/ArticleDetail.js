@@ -1,13 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { ArticleDetail } from 'components'
-import { initArticleState, setArticleIsEdit } from 'store/actions'
+import { initArticleState, deleteArticle, putArticle } from 'store/actions'
 
 const ArticleDetailContainer = props => <ArticleDetail {...props} />
 
 const mapStateToProps = (state) => {
     return {
-        articleState: state.article
+        articleState: state.article,
+        uid: state.user.id
     }
 }
 
@@ -16,8 +17,11 @@ const mapDispatchToProps = (dispatch) => {
         onLoad: (articleid) => {
             dispatch(initArticleState(articleid))
         },
-        onSetArticleIsEdit: () => {
-            dispatch(setArticleIsEdit())
+        onDelete: (articleid) => {
+            dispatch(deleteArticle(articleid))
+        },
+        onPut: (articleid, title, content, onSuccess, onErr) => {
+            dispatch(putArticle(articleid, title, content, onSuccess, onErr))
         }
     }
 }

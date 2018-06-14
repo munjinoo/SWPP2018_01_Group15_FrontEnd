@@ -1,5 +1,5 @@
 import React from 'react'
-import { Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap'
+import { Nav, NavItem, NavLink, TabContent, TabPane, Card } from 'reactstrap'
 import classnames from 'classnames'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
@@ -35,7 +35,11 @@ class Events extends React.Component {
   render() {
     const clubid = this.props.clubid
     return [
-      <CreateEvent onPostEvent={this.props.onPostEvent} clubid={clubid} />,
+      <Card body>
+        <CreateEvent onPostEvent={this.props.onPostEvent} clubid={clubid} />
+      </Card>,
+      <br/>,
+      <Card body>
       <Nav tabs>
         <NavItem>
           <NavLink
@@ -53,7 +57,7 @@ class Events extends React.Component {
             지난 행사
           </NavLink>
         </NavItem>
-      </Nav>,
+      </Nav>
       <TabContent activeTab={this.state.activeTab}>
         <TabPane tabId="1">
           <FutureEvents future_events={this.props.future_events} clubid={clubid} />
@@ -62,6 +66,7 @@ class Events extends React.Component {
           <PastEvents past_events={this.props.past_events} clubid={clubid} />
         </TabPane>
       </TabContent>
+      </Card>
     ]
   }
 }

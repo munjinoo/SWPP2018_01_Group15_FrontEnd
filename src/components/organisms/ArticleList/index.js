@@ -1,9 +1,11 @@
 import React from 'react'
+import { Card, CardTitle, CardSubtitle, Table } from 'reactstrap'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import lifecycle from 'react-pure-lifecycle'
-import { Load } from 'components'
 import { Link } from 'react-router'
+import { CreateArticle } from 'containers'
+import { dateTimeConvert } from 'services/convert'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
@@ -19,19 +21,34 @@ const methods = {
 }
 
 const ArticleList = ({ boardState={name: "", articles: [], needLoading: true}, boardid, clubid }) => {
-  return (    
-    <Wrapper>
-      {boardState.name}  <br />
-      <ul>
+  return [   
+    <Card body>
+      <CardTitle>{boardState.name}</CardTitle>
+      <CardSubtitle>글쓰기</CardSubtitle>
+      <CreateArticle />
+    </Card>,
+    <br/>,
+    <Card body>
+      <Table>
+        <thead>
+          <tr>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>날짜</th>
+          </tr>
+        </thead>
+        <tbody>
         {boardState.articles.map((article) =>
-          <li key={article.id}>
-              <Link to={`/club/${clubid}/board/${boardid}/${article.id}`}>{article.title}</Link>
-          </li>
+          <tr key={article.id}>
+            <td><Link to={`/club/${clubid}/board/${boardid}/${article.id}`}>{article.title}</Link></td>
+            <td>{article.writer.username}</td>
+            <td>{dateTimeConvert(article.created_at)}</td>
+          </tr>
         )}
-      </ul>
-    </Wrapper>
-
-  )
+        </tbody>
+      </Table>
+    </Card>
+  ]
 }
 
 export default lifecycle(methods)(ArticleList)

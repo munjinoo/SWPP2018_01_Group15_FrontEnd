@@ -1,47 +1,43 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import { Card, CardHeader, CardBody, CardTitle, CardSubtitle, CardText, CardFooter, Col } from 'reactstrap'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
-import lifecycle from 'react-pure-lifecycle'
+import { dateTimeConvert } from 'services/convert'
+import { CommentList } from 'containers'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
   color: ${palette('grayscale', 0)};
 `
 
+const ArticleShow = ({ uid, articleid, articleState, children }) => {
+  const updated_at = articleState.updated_at === null
+      ? '' 
+      : '최종 수정: ' + dateTimeConvert(articleState.updated_at)
+  const isWriter = uid === articleState.writer.id
 
-
-const ArticleShow = ({ articleid, board, title, content, created_at, updated_at, writer, comments, onDeleteArticle }) => {
-
-const onClick = () => {
-  onDeleteArticle(articleid)
-
+  return [
+    <Card>
+      <CardHeader>
+        <h3>글</h3>
+      </CardHeader>
+      <CardBody>
+        <CardTitle>{articleState.title}</CardTitle>
+        <CardText>
+          {articleState.content.split('\n').map(line =>
+            <div>{line}<br/></div>
+          )}
+        </CardText>
+      </CardBody>
+      <CardFooter>
+        <small>{articleState.writer.username}</small><br/>
+        <small className="text-muted">{dateTimeConvert(articleState.created_at)} {updated_at}</small><br/>
+        {isWriter ? children : ''}
+      </CardFooter>
+    </Card>,
+    <br/>,
+    <CommentList uid={uid} articleid={articleState.id} comment_list={articleState.comments} />
+  ]
 }
-
-if(updated_at==null) {
-  return (
-    <Wrapper>
-      제목: {title} <br/>
-      글쓴이: {writer} <br/>
-      작성시간: {created_at} <br/>
-      {content} <br/>
-      <button onClick={onClick}> 삭제 </button>
-    </Wrapper>
-  )
-}
-else {
-  return (
-    <Wrapper>
-      제목: {title} <br/>
-      글쓴이: {writer} <br/>
-      작성시간: {created_at} (updated at {updated_at})<br/>
-      {content} <br/>
-      <button onClick={onClick}> 삭제 </button>
-    </Wrapper>
-  )
-  }
-}
-  
-
-
 
 export default ArticleShow
