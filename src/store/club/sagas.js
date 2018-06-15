@@ -39,12 +39,14 @@ export function* postClub(name, scope, category, introduction) {
     }
 }
 
+<<<<<<< HEAD
 export function* initClubState(clubid) {
     try {
         const data = yield call(api.get, `/club/${clubid}/`, {credentials: 'include'})
         const board_list = data.boards
         const future_event_list = yield call(api.get, `/event/?need=future&clubid=${clubid}`)
         const past_event_list = yield call(api.get, `/event/?need=past&clubid=${clubid}`)
+        const accounting_list = data.accounts
         // set user info
         yield put({
             type: types.SET_CLUB_NAME,
@@ -88,6 +90,12 @@ export function* initClubState(clubid) {
             type: types.SET_PAST_EVENT,
             event: past_event_list
         })
+        for (var i = 0; i<accounting_list.length; i++){
+            yield put({
+                type: types.ADD_ACCOUNT,
+                account: accounting_list[i]
+            })
+        }    
     } catch (e) {
         console.log(e)
     }
@@ -131,8 +139,6 @@ export function* getClubUserList(clubid) {
     }
 }
 
-        
-        
 export function* watchGetClubsRequest() {
     while (true) {
         const userid = yield take(types.GET_CLUBS);

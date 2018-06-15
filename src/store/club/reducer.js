@@ -46,9 +46,19 @@ const delete_board = (board_list, board_id) => {
    return new_list
 }
 
+const delete_account = (account_list, account_id) =>{
+    let new_list = [...account_list]
+    for (var i = 0; i < new_list.length; i++){
+        if(new_list[i].id==account_id){
+            new_list.splice(i,1)
+            return new_list
+        }
+    }
+    return new_list 
+}
+
 const club_reducer = (state=clubState, action) => {
     switch (action.type) {
-        
         case types.SET_CLUB_NAME:
             return {
                 ...state,
@@ -120,10 +130,21 @@ const club_reducer = (state=clubState, action) => {
                 admin: action.admin,
                 members: action.members,
                 waitings: action.waitings
+        case types.ADD_ACCOUNT:
+            return {
+                ...state,
+                accounts: add(state.accounts, action.account)
+            }
+        case types.DELETE_ACCOUNT: 
+            return {
+                ...state,
+                accounts: delete_account(state.accounts, action.account_id)
             }
         default:
             return state
     }
 }
 
+
 export default club_reducer;
+

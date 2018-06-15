@@ -2,8 +2,7 @@ import React from 'react'
 import { Route, IndexRoute } from 'react-router'
 
 import App from 'components/App'
-import { HomePage, MyPage, ClubMainPage, CreateClubPage, SignupPage, VerifyPage, ClubEventPage, EventDetailPage, ClubAccountingPage, ClubManagePage, BoardPage, ArticlePage, SearchPage } from 'components'
-
+import { HomePage, MyPage, ClubMainPage, CreateClubPage, SignupPage, VerifyPage, ClubEventPage, EventDetailPage, ClubAccountingPage, ClubManagePage, BoardPage, ArticlePage, SearchPage, AccountDetailPage } from 'components'
 
 const routes = (
   <Route path="/" component={App}>
@@ -19,6 +18,7 @@ const routes = (
         <Route path='event/:eventid' component={EventDetailPage} />
         <Route path='manage' component={ClubManagePage} /> 
         <Route path='account' component={ClubAccountingPage} />
+        <Route path='account/:accountid' component={AccountDetailPage} />
         <Route path='board/:boardid'>
           <IndexRoute component={props => <BoardPage key={props.params.boardid} {...props} />} />
           <Route path=':articleid' component={ArticlePage} />
