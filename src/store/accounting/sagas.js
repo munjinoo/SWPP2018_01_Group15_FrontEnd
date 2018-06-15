@@ -6,11 +6,11 @@ import * as types from '../types'
 
 export function* postAccount(is_income, money, date, content, club) {
     try { 
-        const data = yield call(api.post, `/account/`, {is_income : is_income, money: money, date: date, content: content, club:club}, {credentials: 'include'});
+        const data = yield call(api.post, `/account/`, {is_income : is_income, money: money, date: date, content: content, club_id: club}, {credentials: 'include'})
 
         yield put({
-            type : types.ADD_ACCOUNT,
-            account: data.account
+            type : types.INIT_CLUB_STATE,
+            clubid: club
         })
         
     } catch (e) {

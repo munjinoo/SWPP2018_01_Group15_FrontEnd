@@ -1,15 +1,23 @@
 import React from 'react'
-import { AccountForm, AccountList } from 'containers'
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap'
+import { Link } from 'react-router'
+import { MenuBar, AccountForm, AccountList } from 'containers'
 
 const ClubAccountingPage = (props) => {
+  const clubid = props.params.clubid
   return(
     <div>
-      <p> 동아리 회계 관리 </p>
+      <MenuBar />
+      <Breadcrumb>
+        <BreadcrumbItem><Link to={`/club/${clubid}`}>동아리</Link></BreadcrumbItem>
+        <BreadcrumbItem active>회계</BreadcrumbItem>
+      </Breadcrumb>
       <AccountForm 
-        clubid = {props.routeParams.clubid}
-      /> 
+        clubid = {clubid}
+      />
+      <br/>
       <AccountList 
-        clubid = {props.routeParams.clubid}
+        clubid = {clubid}
       /> 
     </div>
   )

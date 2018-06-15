@@ -130,6 +130,7 @@ const club_reducer = (state=clubState, action) => {
                 admin: action.admin,
                 members: action.members,
                 waitings: action.waitings
+            }
         case types.ADD_ACCOUNT:
             return {
                 ...state,

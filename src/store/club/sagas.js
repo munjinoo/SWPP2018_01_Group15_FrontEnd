@@ -39,7 +39,6 @@ export function* postClub(name, scope, category, introduction) {
     }
 }
 
-<<<<<<< HEAD
 export function* initClubState(clubid) {
     try {
         const data = yield call(api.get, `/club/${clubid}/`, {credentials: 'include'})

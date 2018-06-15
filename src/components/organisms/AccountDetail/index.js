@@ -1,4 +1,5 @@
 import React from 'react'
+import { Card, CardHeader, CardBody } from 'reactstrap'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import lifecycle from 'react-pure-lifecycle'
@@ -16,20 +17,19 @@ const methods = {
 }
 
 
-const AccountDetail = ({ accountState = { created_at: null, updated_at: null, is_income: null, money: null, date: null, writer: null, content: null }, accountid }) => {
+const AccountDetail = ({ accountState = { created_at: '', updated_at: '', is_income: null, money: 0, date: '', writer: '', content: '' }, accountid }) => {
   return (
-    <Wrapper>
-      
-      <strong>{accountState.is_income ===  "income" ? `수입` : `지출` } </strong> <br/> 
-            금액: {accountState.money} <br/>
-            작성자: {accountState.writer} <br/>
-            내용: {accountState.content} <br/>
-            날짜: {accountState.date} <br/>
-            작성일: {accountState.created_at} <br/>
-            수정일: {accountState.updated_at} <br/>
-      
-    </Wrapper>
-    // edit, delete to be added
+    <Card>
+      <CardHeader>{accountState.is_income === true ? "수입" : "지출" }</CardHeader>
+      <CardBody>
+        금액: {accountState.money} <br/>
+        작성자: {accountState.writer.username} <br/>
+        작성일: {accountState.created_at} <br/>
+        {accountState.updated_at && <div>수정일: {accountState.updated_at}<br/></div>}
+        내용: {accountState.content} <br/>
+        날짜: {accountState.date} <br/>
+      </CardBody>
+    </Card>
   )
 }
 
