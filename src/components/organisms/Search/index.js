@@ -1,4 +1,5 @@
 import React from 'react'
+import { Col, Card, CardHeader, CardTitle, CardBody } from 'reactstrap'
 import styled from 'styled-components'
 import lifecycle from 'react-pure-lifecycle'
 import { font, palette } from 'styled-theme'
@@ -17,12 +18,16 @@ const methods = {
   componentDidMount
 }
 
-const Search = ({ search_result }) => {
+const Search = ({ search_result, query }) => {
   return (
-    <Wrapper>
-      <SearchBar />
-      <SearchResult search_result={search_result} />
-    </Wrapper>
+    <Card>
+      <CardHeader>
+        <SearchBar search={query.name} />
+      </CardHeader>
+      <CardBody>
+        <SearchResult search_result={search_result} />
+      </CardBody>
+    </Card>
   )
 }
 
