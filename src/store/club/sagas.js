@@ -84,6 +84,9 @@ export function* initClubState(clubid) {
             type: types.SET_CLUB_INTRODUCTION,
             introduction: data.introduction
         })
+        yield put({
+            type: types.INIT_CLUB_BOARD
+        })
         // add boards
         for (var i=0; i<board_list.length; i++) {
             yield put({
@@ -99,6 +102,9 @@ export function* initClubState(clubid) {
         yield put({
             type: types.SET_PAST_EVENT,
             event: past_event_list
+        })
+        yield put({
+             type: types.INIT_CLUB_ACCOUNT
         })
         for (var i = 0; i<accounting_list.length; i++){
             yield put({

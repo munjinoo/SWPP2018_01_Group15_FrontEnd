@@ -99,6 +99,16 @@ const club_reducer = (state=clubState, action) => {
                 ...state,
                 past_events: action.event
             }
+        case types.INIT_CLUB_BOARD:
+            return {
+                ...state,
+                boards: []
+            }
+        case types.INIT_CLUB_ACCOUNT:
+             return {
+                ...state,
+                accounts: []
+             }
         case types.ADD_CLUB_BOARD:
             return {
                 ...state,
