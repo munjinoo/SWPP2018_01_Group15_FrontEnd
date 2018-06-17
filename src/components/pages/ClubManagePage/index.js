@@ -60,8 +60,6 @@ class ClubManagePage extends React.Component {
             <TabPane tabId="1">
               <br/>
               <ChangeClubInfo clubid={clubid} />
-              <br/>
-              <BoardList clubid={clubid} />
             </TabPane>
             <TabPane tabId="2">
               <br/>
