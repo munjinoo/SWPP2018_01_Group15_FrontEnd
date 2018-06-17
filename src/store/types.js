@@ -24,6 +24,7 @@ export const CANCEL_JOIN_CLUB = 'CANCEL_JOIN_CLUB'
 export const POST_CLUB = 'POST_CLUB'
 export const GET_CLUBS = 'GET_CLUBS'
 export const SET_CLUBS = 'SET_CLUBS'
+export const PUT_CLUB = 'PUT_CLUB'
 
 export const INIT_CLUB_STATE = 'INIT_CLUB_STATE'
 

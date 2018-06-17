@@ -17,6 +17,17 @@ export const postClub = (name, scope, category, introduction) => {
     }
 }
 
+export const putClub = (clubid, name, scope, category, introduction) => {
+    return {
+        type: types.PUT_CLUB,
+        clubid,
+        name,	
+        scope,
+        category,
+        introduction
+    }
+}
+
 export const initClubState = (clubid) => {
     return {
         type: types.INIT_CLUB_STATE,

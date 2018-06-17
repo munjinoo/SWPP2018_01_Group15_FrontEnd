@@ -1,7 +1,7 @@
 import React from 'react'
 import { Breadcrumb, BreadcrumbItem, TabContent, TabPane, Nav, NavItem, NavLink, Card, Row, Col } from 'reactstrap'
 import { Link } from 'react-router'
-import { MenuBar, BoardList, CreateBoard, ChangeUserStatus } from 'containers'
+import { MenuBar, BoardList, CreateBoard, ChangeUserStatus, ChangeClubInfo } from 'containers'
 import classnames from 'classnames'
 
 class ClubManagePage extends React.Component {
@@ -32,16 +32,25 @@ class ClubManagePage extends React.Component {
           <Nav tabs>
             <NavItem>
               <NavLink
-                className={classnames({ active: this.state.activeTab === '1' })}
+                className={classnames({ active: this.state.activeTab === '1'
+})}
                 onClick={() => {this.toggle('1')}}
               >
-                게시판 관리
+                기본정보 관리
               </NavLink>
             </NavItem>
             <NavItem>
               <NavLink
                 className={classnames({ active: this.state.activeTab === '2' })}
                 onClick={() => {this.toggle('2')}}
+              >
+                게시판 관리
+              </NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink
+                className={classnames({ active: this.state.activeTab === '3' })}
+                onClick={() => {this.toggle('3')}}
               >
                 회원 관리
               </NavLink>
@@ -50,11 +59,17 @@ class ClubManagePage extends React.Component {
           <TabContent activeTab={this.state.activeTab}>
             <TabPane tabId="1">
               <br/>
-              <CreateBoard />
+              <ChangeClubInfo clubid={clubid} />
               <br/>
               <BoardList clubid={clubid} />
             </TabPane>
             <TabPane tabId="2">
+              <br/>
+              <CreateBoard />
+              <br/>
+              <BoardList clubid={clubid} />
+            </TabPane>
+            <TabPane tabId="3">
               <br/>
               <ChangeUserStatus clubid={clubid} />
             </TabPane>

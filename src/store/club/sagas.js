@@ -39,6 +39,17 @@ export function* postClub(name, scope, category, introduction) {
     }
 }
 
+export function* putClub(clubid, name, scope, category, introduction) {
+    try {
+        console.log(clubid)
+        yield call(api.put, `/club/${clubid}/`, {name: name, scope: scope
+, category: category, introduction: introduction}, {credentials: 'include'});
+        yield call(initClubState, clubid)
+    } catch (e) {
+        console.log(e)
+    }
+}
+
 export function* initClubState(clubid) {
     try {
         const data = yield call(api.get, `/club/${clubid}/`, {credentials: 'include'})
@@ -152,6 +163,13 @@ export function* watchPostClubRequest() {
     }
 }
 
+export function* watchPutClubRequest() {
+    while (true) {
+        const { clubid, name, scope, category, introduction } = yield take(types.PUT_CLUB)
+        yield call(putClub, clubid, name, scope, category, introduction)
+    }
+}
+
 export function* watchInitClubStateRequest() {
     while (true) {
         const { clubid } = yield take(types.INIT_CLUB_STATE)
@@ -183,6 +201,7 @@ export function* watchGetClubUserList() {
 export default function* () {
     yield fork(watchGetClubsRequest);
     yield fork(watchPostClubRequest);
+    yield fork(watchPutClubRequest);
     yield fork(watchInitClubStateRequest);
     yield fork(watchChangeUserStatus);
     yield fork(watchKickUser);
