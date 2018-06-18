@@ -4,6 +4,7 @@ import classnames from 'classnames'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import { FutureEvents, PastEvents, CreateEvent } from 'components'
+import { AttendanceStatistic } from 'containers'
 
 const Wrapper = styled.div`
   font-family: ${font('primary')};
@@ -57,6 +58,14 @@ class Events extends React.Component {
             지난 행사
           </NavLink>
         </NavItem>
+        <NavItem>
+          <NavLink
+            className={classnames({ active: this.state.activeTab === '3' })}
+            onClick={() => { this.toggle('3') }}
+          >
+            출석 통계
+          </NavLink>
+        </NavItem>
       </Nav>
       <TabContent activeTab={this.state.activeTab}>
         <TabPane tabId="1">
@@ -64,6 +73,10 @@ class Events extends React.Component {
         </TabPane>
         <TabPane tabId="2">
           <PastEvents past_events={this.props.past_events} clubid={clubid} />
+        </TabPane>
+        <TabPane tabId="3">
+          <br/>
+          <AttendanceStatistic clubid={clubid} />
         </TabPane>
       </TabContent>
       </Card>

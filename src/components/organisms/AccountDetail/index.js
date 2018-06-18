@@ -19,7 +19,7 @@ const methods = {
 
 const AccountDetail = ({ accountState = { created_at: '', updated_at: '', is_income: null, money: 0, date: '', writer: '', content: '' }, accountid }) => {
   return (
-    <Card>
+    <Card color={accountState.is_income ? "primary" : "danger"} outline>
       <CardHeader>{accountState.is_income === true ? "수입" : "지출" }</CardHeader>
       <CardBody>
         금액: {accountState.money} <br/>

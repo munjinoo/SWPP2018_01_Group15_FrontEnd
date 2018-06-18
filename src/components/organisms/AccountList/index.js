@@ -69,7 +69,7 @@ const AccountList = ({ clubState={id, accounts: [], money: 0},  clubid, onDelete
         {clubState.accounts.map(account =>
           <div>
           <br/>
-          <Card key={account.id}>
+          <Card key={account.id} outline color={account.is_income ? "primary" : "danger"}>
             <CardHeader>{account.is_income ===  true ? "수입" : "지출" }</CardHeader>
             <CardBody>
               <CardText>

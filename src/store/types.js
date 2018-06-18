@@ -124,3 +124,7 @@ export const INIT_ACCOUNT_STATE = 'INIT_ACCOUNT_STATE'
 export const SET_ACCOUNT = 'SET_ACCOUNT'
 export const ADD_ACCOUNT = 'ADD_ACCOUNT'
 export const DELETE_ACCOUNT = 'DELETE_ACCOUNT'
+
+/* Attendance */
+export const CHECK_ATTENDANCE = 'CHECK_ATTENDANCE'
+export const SET_ATTENDANCE = 'SET_ATTENDANCE'
