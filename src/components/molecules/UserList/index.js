@@ -13,7 +13,7 @@ const UserList = ({ Child=undefined, user_list=[], title }) => {
       {title}
       <ul>
         {user_list.map(user =>
-          <li key={user.id}>{user.username} <Child user={user} /></li>
+          <li key={user.id}>{user.name} <Child user={user} /></li>
         )}
       </ul>
     </Wrapper>

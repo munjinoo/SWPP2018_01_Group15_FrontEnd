@@ -41,7 +41,7 @@ const ArticleList = ({ boardState={name: "", articles: [], needLoading: true}, b
         {boardState.articles.map((article) =>
           <tr key={article.id}>
             <td><Link to={`/club/${clubid}/board/${boardid}/${article.id}`}>{article.title}</Link></td>
-            <td>{article.writer.username}</td>
+            <td>{article.writer.name}</td>
             <td>{dateTimeConvert(article.created_at)}</td>
           </tr>
         )}

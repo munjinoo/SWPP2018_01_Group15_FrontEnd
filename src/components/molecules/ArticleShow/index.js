@@ -30,7 +30,7 @@ const ArticleShow = ({ uid, articleid, articleState, children }) => {
         </CardText>
       </CardBody>
       <CardFooter>
-        <small>{articleState.writer.username}</small><br/>
+        <small>{articleState.writer.name}</small><br/>
         <small className="text-muted">{dateTimeConvert(articleState.created_at)} {updated_at}</small><br/>
         {isWriter ? children : ''}
       </CardFooter>

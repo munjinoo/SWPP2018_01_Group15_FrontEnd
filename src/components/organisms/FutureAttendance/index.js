@@ -36,7 +36,7 @@ const FutureAttendance = ({ eventState = { future_attendees: [], future_absentee
       <ListGroup>
         {eventState.future_attendees.map(attendee =>
           <ListGroupItem key={attendee.id}>
-            {attendee.username}
+            {attendee.name}
           </ListGroupItem>
         )}
       </ListGroup>
@@ -44,7 +44,7 @@ const FutureAttendance = ({ eventState = { future_attendees: [], future_absentee
       <ListGroup>
         {eventState.future_absentees.map(absentee =>
           <ListGroupItem key={absentee.id}>
-            {absentee.username}
+            {absentee.name}
           </ListGroupItem>
         )}
       </ListGroup>
