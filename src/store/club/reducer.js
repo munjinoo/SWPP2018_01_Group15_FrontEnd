@@ -146,6 +146,12 @@ const club_reducer = (state=clubState, action) => {
                 ...state,
                 accounts: add(state.accounts, action.account)
             }
+        case types.SET_ACCOUNT_INFO:
+            return {
+                ...state,
+                accounts: action.accountings,
+                money: action.money
+            }
         case types.DELETE_ACCOUNT: 
             return {
                 ...state,

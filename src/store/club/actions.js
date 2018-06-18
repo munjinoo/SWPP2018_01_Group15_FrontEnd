@@ -58,3 +58,12 @@ export const kickUser = (clubid, userid) => {
     }
 }
 
+export const getAccountInfo = (clubid, only, start_from, end_until) => {
+    return {
+        type: types.GET_ACCOUNT_INFO,
+        clubid,
+        only,
+        start_from,
+        end_until
+    }
+}

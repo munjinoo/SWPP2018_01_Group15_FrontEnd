@@ -8,12 +8,21 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const AccountForm = ({ accountState = { created_at: null, updated_at: null, is_income: null,  money: null, date: null, writer: null, content: null }, onPostAccount, clubid} ) => {
+const getFlag = (list, id) => {
+  for (var i=0; i<list.length; i++) {
+    if (list[i].id == id)
+      return true
+  }
+  return false
+}
+
+const AccountForm = ({ accountState = { created_at: null, updated_at: null, is_income: null,  money: null, date: null, writer: null, content: null }, onPostAccount, clubid, uid, admin_list }) => {
   let is_income = ''
   let money = ''
   let date = ''
   let content = ''
 
+  const isAdmin = getFlag(admin_list, uid)
   const onClick = () => {
     if(is_income != undefined && money != undefined && date != undefined && content != undefined){
       onPostAccount(is_income, money.value, date.value, content.value, clubid)
@@ -28,6 +37,8 @@ const AccountForm = ({ accountState = { created_at: null, updated_at: null, is_i
     is_income = e.target.value;
   }
 
+  if (!isAdmin)
+    return (<div></div>)
   return (
     <Card body>
       <CardTitle>회계 기록 추가</CardTitle>

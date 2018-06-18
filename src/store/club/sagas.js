@@ -62,13 +62,31 @@ export function* putClub(clubid, name, scope, category, introduction) {
     }
 }
 
+export function* getAccountInfo(clubid, only, start_from, end_until) {
+    try {
+        const query = {
+            only: only,
+            start_from: start_from,
+            end_until: end_until
+        }
+        const data = yield call(api.get, `/account/statistic/${clubid}/`, {params: query, credentials: 'include'})
+        yield put({
+            type: types.SET_ACCOUNT_INFO,
+            money: data.total,
+            accountings: data.accountings
+        })
+    } catch (e) {
+        console.log(e)
+    }
+}
+
 export function* initClubState(clubid) {
     try {
         const data = yield call(api.get, `/club/${clubid}/`, {credentials: 'include'})
         const board_list = data.boards
-        const future_event_list = yield call(api.get, `/event/?need=future&clubid=${clubid}`)
-        const past_event_list = yield call(api.get, `/event/?need=past&clubid=${clubid}`)
-        const accounting_list = data.accounts
+        const future_event_list = yield call(api.get, `/event/?need=future&clubid=${clubid}`, {credentials: 'include'})
+        const past_event_list = yield call(api.get, `/event/?need=past&clubid=${clubid}`, {credentials: 'include'})
+        const accounts = yield call(api.get, `/account/statistic/${clubid}/`, {credentials: 'include'})
         // set user info
         yield put({
             type: types.SET_CLUB_NAME,
@@ -118,12 +136,18 @@ export function* initClubState(clubid) {
         yield put({
              type: types.INIT_CLUB_ACCOUNT
         })
+        /*
         for (var i = 0; i<accounting_list.length; i++){
             yield put({
                 type: types.ADD_ACCOUNT,
                 account: accounting_list[i]
             })
-        }    
+        }*/
+        yield put({
+            type: types.SET_ACCOUNT_INFO,
+            money: accounts.total,
+            accountings: accounts.accountings
+        })
     } catch (e) {
         console.log(e)
     }
@@ -223,6 +247,13 @@ export function* watchDeleteClubRequest() {
     }
 }
 
+export function* watchGetAccountInfoRequest() {
+    while (true) {
+        const { clubid, only, start_from, end_until } = yield take(types.GET_ACCOUNT_INFO)
+        yield call(getAccountInfo, clubid, only, start_from, end_until)
+    }
+}
+
 export default function* () {
     yield fork(watchGetClubsRequest);
     yield fork(watchDeleteClubRequest)
@@ -232,4 +263,5 @@ export default function* () {
     yield fork(watchChangeUserStatus);
     yield fork(watchKickUser);
     yield fork(watchGetClubUserList);
+    yield fork(watchGetAccountInfoRequest)
 }

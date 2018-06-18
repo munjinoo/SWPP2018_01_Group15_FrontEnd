@@ -83,7 +83,7 @@ class ClubMain extends React.Component {
           }
           <Button onClick={this.toggle} color="info" block>게시판</Button>
           {status.isMember && <Button tag={Link} to={`/club/${clubid}/event`} color="success" block>동아리 행사</Button>}
-          {status.isAdmin && <Button tag={Link} to={`/club/${clubid}/account`} color="warning" block>동아리 회계</Button>}
+          {status.isMember && <Button tag={Link} to={`/club/${clubid}/account`} color="warning" block>동아리 회계</Button>}
           {status.isAdmin && <Button tag={Link} to={`/club/${clubid}/manage`} color="primary" block>동아리 관리</Button>}
           <Collapse isOpen={this.state.collapse}>
             <br/>

@@ -1,7 +1,7 @@
 export const clubState = { admin: [], members: [], waitings: [],
     id: null, name: '', scope: '',
     category: '', introduction: '',
-    boards: [], future_events: [], past_events: [], accounts: []
+    boards: [], future_events: [], past_events: [], accounts: [], money: 0
 }
 
     // admin, members, waitings: {id: ~, name: ~}
