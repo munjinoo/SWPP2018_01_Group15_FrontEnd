@@ -1,4 +1,5 @@
 import { take, put, call, fork, select } from 'redux-saga/effects'
+import { push } from 'react-router-redux'
 import api from 'services/api'
 import * as types from '../types'
 
@@ -15,23 +16,27 @@ export function* postArticle(board, title, content) {
     }
 }
 
-export function* putArticle(articleid, title, content) {
+export function* putArticle(articleid, title, content, onSuccess, onErr) {
     try {
         yield call(api.put, `/article/${articleid}/`, {title: title, content: content}, {credentials: 'include'});        
         yield call(initArticleState, articleid)
+        yield call(onSuccess)
     } catch (e) {
         console.log(e)
+        yield call(onErr)
     }
 }
 
 export function* deleteArticle(articleid) {
     try {
-        const article = yield call(api.get, `/article/${articleid}/`, {credentials: 'include'});
-        yield call(api.delete, `/article/${articleid}/`, {credentials: 'include'});
-        yield put({
-            type: types.DELETE_BOARD_ARTICLE,
-            article_id: articleid
-        })
+        yield call(api.delete, `/article/${articleid}/`, {credentials: 'include'})
+        const getLocation = state => state.routing.locationBeforeTransitions.pathname
+        const location = yield select(getLocation)
+        const loc = location.split('/')
+        let new_loc = ''
+        for (var i=0; i<loc.length-1; i++)
+            new_loc += '/' + loc[i]
+        yield put(push(new_loc))
     } catch (e) {
         console.log(e)
     }
@@ -51,7 +56,7 @@ export function* postComment(articleid, title, content) {
     }
 }
 
-export function* putComment(commentid, title, content) {
+export function* putComment(commentid, title, content, onSuccess, onErr) {
     try {
         const data = {
             title: title,
@@ -61,8 +66,10 @@ export function* putComment(commentid, title, content) {
         const getArticle = state => state.article
         const articleState = yield select(getArticle)
         yield call(initArticleState, articleState.id)
+        yield call(onSuccess)
     } catch (e) {
         console.log(e)
+        yield call(onErr)
     }
 }
 
@@ -107,7 +114,7 @@ export function* initArticleState(articleid) {
         })
         yield put({
             type: types.SET_ARTICLE_WRITER,
-            writer: data.writer.username
+            writer: data.writer
         })
         yield put({
             type: types.SET_ARTICLE_BOARD,
@@ -124,22 +131,22 @@ export function* initArticleState(articleid) {
 
 export function* watchPostArticleRequest() {
     while (true) {
-        const { board, title, content } = yield take(types.POST_ARTICLE);
-        yield call(postArticle, board, title, content);
+        const { board, title, content } = yield take(types.POST_ARTICLE)
+        yield call(postArticle, board, title, content)
     }
 }
 
 export function* watchPutArticleRequest() {
     while (true) {
-        const { articleid, title, content } = yield take(types.PUT_ARTICLE);
-        yield call(putArticle, articleid, title, content);
+        const { articleid, title, content, onSuccess, onErr } = yield take(types.PUT_ARTICLE)
+        yield call(putArticle, articleid, title, content, onSuccess, onErr)
     }
 }
 
 export function* watchDeleteArticleRequest() {
     while (true) {
-        const { articleid } = yield take(types.DELETE_ARTICLE);
-        yield call(deleteArticle, articleid);
+        const { articleid } = yield take(types.DELETE_ARTICLE)
+        yield call(deleteArticle, articleid)
     }
 }
 
@@ -152,22 +159,22 @@ export function* watchInitArticleStateRequest() {
 
 export function* watchPostCommentRequest() {
     while (true) {
-        const { articleid, title, content } = yield take(types.POST_COMMENT);
-        yield call(postComment, articleid, title, content);
+        const { articleid, title, content } = yield take(types.POST_COMMENT)
+        yield call(postComment, articleid, title, content)
     }
 }
 
 export function* watchPutCommentRequest() {
     while (true) {
-        const { commentid, title, content } = yield take(types.PUT_COMMENT);
-        yield call(putComment, commentid, title, content);
+        const { commentid, title, content, onSuccess, onErr } = yield take(types.PUT_COMMENT)
+        yield call(putComment, commentid, title, content, onSuccess, onErr)
     }
 }
 
 export function* watchDeleteCommentRequest() {
     while (true) {
-        const { commentid } = yield take(types.DELETE_COMMENT);
-        yield call(deleteComment, commentid);
+        const { commentid } = yield take(types.DELETE_COMMENT)
+        yield call(deleteComment, commentid)
     }
 }
 

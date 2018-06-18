@@ -3,5 +3,5 @@ import { shallow } from 'enzyme'
 import ClubEventPage from '.'
 
 it('renders', () => {
-  shallow(<ClubEventPage />)
+  shallow(<ClubEventPage params={{clubid: 1}} />)
 })

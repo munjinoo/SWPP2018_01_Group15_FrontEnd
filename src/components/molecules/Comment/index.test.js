@@ -4,12 +4,14 @@ import Comment from '.'
 
 const wrap = (props = {}) => shallow(<Comment {...props} />)
 
-it('renders children when passed in', () => {
-  const wrapper = wrap({ children: 'test' })
-  expect(wrapper.contains('test')).toBe(true)
-})
-
-it('renders props when passed in', () => {
-  const wrapper = wrap({ id: 'foo' })
-  expect(wrapper.find({ id: 'foo' })).toHaveLength(1)
+it('renders title and content', () => {
+  const props = {
+      comment: {
+        title: 'test title',
+        content: 'test content'
+      }
+  }
+  const wrapper = wrap(props)
+  expect(wrapper.find(props.comment.title)).toEqual(expect.anything())
+  expect(wrapper.find(props.comment.content)).toEqual(expect.anything())
 })

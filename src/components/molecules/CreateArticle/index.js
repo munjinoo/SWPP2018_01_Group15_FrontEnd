@@ -1,4 +1,5 @@
 import React from 'react'
+import { FormGroup, Form, Input, Label, Button } from 'reactstrap'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 
@@ -20,11 +21,17 @@ const CreateArticle = ({ boardState, onPostArticle }) => {
   }
 
   return (
-    <Wrapper>
-      제목: <input type="text" ref={node => {title = node;}} /> <br/>
-      <input type="text" ref={node => {content = node;}} /> <br/>
-      <button onClick={onClick}>게시</button>
-    </Wrapper>
+    <Form>
+      <FormGroup>
+        <Label>제목</Label>
+        <Input type="text" innerRef={node => {title = node;}} />
+      </FormGroup>
+      <FormGroup>
+        <Label>내용</Label>
+        <Input type="textarea" innerRef={node => {content = node;}} />
+      </FormGroup>
+      <Button onClick={onClick}>게시</Button>
+    </Form>
   )
 }
 

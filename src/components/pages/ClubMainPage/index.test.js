@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import ClubMain from '.'
+import ClubMainPage from '.'
 
 it('renders', () => {
-  shallow(<ClubMain />)
+  shallow(<ClubMainPage params={{clubid: 1}} />)
 })

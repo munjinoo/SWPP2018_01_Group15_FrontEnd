@@ -1,11 +1,21 @@
 import React from 'react'
-import { ArticleDetail } from 'containers'
+import { MenuBar, ArticleDetail } from 'containers'
+import { Link } from 'react-router'
+import { Breadcrumb, BreadcrumbItem } from 'reactstrap'
 
-const ArticlePage = ({routeParams}) => {
-  const article_id=routeParams.articleid;
+const ArticlePage = ({ params }) => {
+  const clubid = params.clubid
+  const boardid = params.boardid
+  const articleid = params.articleid
   return (
     <div>
-      <ArticleDetail articleid={article_id}/>
+      <MenuBar />
+      <Breadcrumb>
+        <BreadcrumbItem><Link to={`/club/${clubid}`}>동아리</Link></BreadcrumbItem>
+        <BreadcrumbItem><Link to={`/club/${clubid}/board/${boardid}`}>게시판</Link></BreadcrumbItem>
+        <BreadcrumbItem active>글</BreadcrumbItem>
+      </Breadcrumb>
+      <ArticleDetail articleid={articleid}/>
     </div>
   )
 }

@@ -1,11 +1,11 @@
 import React from 'react'
 import { storiesOf } from '@kadira/storybook'
-import { BoardList } from 'components'
+import { ChangeClubInfo } from 'components'
 
-storiesOf('BoardList', module)
+storiesOf('ChangeClubInfo', module)
   .add('default', () => (
-    <BoardList />
+    <ChangeClubInfo />
   ))
   .add('reverse', () => (
-    <BoardList reverse />
+    <ChangeClubInfo reverse />
   ))

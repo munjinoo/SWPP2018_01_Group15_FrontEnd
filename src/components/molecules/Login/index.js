@@ -1,40 +1,52 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { Form, FormGroup, Input, Label, Button, Row, Col, Modal, ModalBody } from 'reactstrap'
+import { Form, FormGroup, Input, Label, Button, Row, Col, ButtonGroup } from 'reactstrap'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
+import { LoginModal } from 'components'
 
 const Wrapper = styled.div`
-    font-family: ${font('primary')};
-    color: ${palette('grayscale', 0)};
+  font-family: ${font('primary')};
+  color: ${palette('grayscale', 0)};
 `
 
-const Login = ({ onLogin }) => {
-    let username = '';
-    let password = '';
-    const onClick = () => {
-        if (username != undefined && password != undefined) {
-            onLogin(username.value, password.value);
-        }
+class Login extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      hasError: false,
+      modal: false
     }
-    return (
-        <Modal isOpen centered backdrop={false} fade={false}>
-          <ModalBody>
-          <Form inline>
-            <FormGroup>
-              <Input type="text" placeholder="username" innerRef={node => {username = node;}} />
-            </FormGroup>
-            <FormGroup>
-              <Input type="password" placeholder="password" innerRef={node => {password = node;}} />
-            </FormGroup>
-            <Row>
-            <Col><Button id="login-submit" onClick={onClick} color="primary">로그인</Button></Col>
-            <Col><Button tag={Link} to="/signup/" color="secondary">회원가입</Button></Col>
-            </Row>
-          </Form>
-          </ModalBody>
-        </Modal>
-    )
+    this.toggle = this.toggle.bind(this)
+    this.onLogin = this.onLogin.bind(this)
+    this.onErr = this.onErr.bind(this)
+  }
+
+  onErr() {
+    this.setState({ hasError: true })
+  }
+
+  onLogin(username, password) {
+    this.props.onLogin(username, password, this.onErr)
+    this.setState({ hasError: false })
+  }
+
+  toggle() {
+    this.setState({
+      modal: !this.state.modal,
+      hasError: false
+    })
+  }
+
+  render() {
+    return [
+        <div>
+          <Button id="login-submit" onClick={this.toggle} color="primary">로그인</Button>{' '}
+          <Button tag={Link} to="/signup/" color="secondary">회원가입</Button>
+        </div>,
+        <LoginModal onLogin={this.onLogin} isOpen={this.state.modal} toggle={this.toggle} hasError={this.state.hasError}/>
+    ]
+  }
 }
 
 export default Login

@@ -41,3 +41,17 @@ export const signup = (username, password, email, name, college, major, admissio
         onErr
     }
 }
+
+export const joinClub = (clubid) => {
+    return {
+        type: types.JOIN_CLUB,
+        clubid
+    }
+}
+
+export const cancelJoinClub = (clubid) => {
+    return {
+        type: types.CANCEL_JOIN_CLUB,
+        clubid
+    }
+}

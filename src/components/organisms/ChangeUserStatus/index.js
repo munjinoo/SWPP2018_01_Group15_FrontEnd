@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button, ButtonGroup } from 'reactstrap'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import { UserList } from 'components'
@@ -18,10 +19,10 @@ const ChangeUserStatus = ({ clubid, admin=[], members=[], waitings=[], onChangeU
       onKickUser(clubid, user.id)
     }
     return (
-      <div>
-        <button onClick={onChange}>등급 수정</button>
-        <button onClick={onDelete}>제명</button>
-      </div>
+      <ButtonGroup>
+        <Button onClick={onChange} color="info" size="sm">등급 수정</Button>
+        <Button onClick={onDelete} color="danger" size="sm">제명</Button>
+      </ButtonGroup>
     )
   }
   const admin_length = admin.length

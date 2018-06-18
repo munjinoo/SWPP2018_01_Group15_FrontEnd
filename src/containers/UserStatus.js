@@ -16,8 +16,8 @@ const mapDispatchToProps = (dispatch) => {
         onLoad: () => {
             dispatch(initUserState())
         },
-        onLogin: (username, password) => {
-            dispatch(login(username, password))
+        onLogin: (username, password, onErr) => {
+            dispatch(login(username, password, onErr))
         },
         onLogout: () => {
             dispatch(logout())

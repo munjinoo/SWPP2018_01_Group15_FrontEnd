@@ -4,12 +4,13 @@ import CreateEvent from '.'
 
 const wrap = (props = {}) => shallow(<CreateEvent {...props} />)
 
-it('renders children when passed in', () => {
-  const wrapper = wrap({ children: 'test' })
-  expect(wrapper.contains('test')).toBe(true)
-})
-
-it('renders props when passed in', () => {
-  const wrapper = wrap({ id: 'foo' })
-  expect(wrapper.find({ id: 'foo' })).toHaveLength(1)
+it('handle onPostEvent when submit', () => {
+  const props = {
+    eventState: {},
+    clubid: 1,
+    onPostEvent: jest.fn()
+  }
+  const wrapper = wrap(props)
+  wrapper.find('#post-event').simulate('click')
+  expect(props.onPostEvent).toHaveBeenCalled()
 })

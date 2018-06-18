@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button, ButtonGroup, ListGroup, ListGroupItem } from 'reactstrap'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import lifecycle from 'react-pure-lifecycle'
@@ -8,57 +9,47 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const componentDidMount = (props) => {
-  props.onLoad(props.eventid)
-}
-
-const methods = {
-  componentDidMount
-}
-
 const FutureAttendance = ({ eventState = { future_attendees: [], future_absentees: [], date:null }, onPutFutureAttendee, onPutFutureAbsentee, eventid }) => {
   var now = new Date()
   var eventDate = new Date(eventState.date)
   var isFuture = now < eventDate
   const onClickYes = () => {
-    if (eventid != undefined) {
-      onPutFutureAttendee(eventid);
-      window.location.reload()
-    }
+    if (eventid != undefined)
+      onPutFutureAttendee(eventid)
   }
   const onClickNo = () => {
-    if (eventid != undefined) {
-      onPutFutureAbsentee(eventid);
-      window.location.reload()
-    }
+    if (eventid != undefined)
+      onPutFutureAbsentee(eventid)
   }
   return (
     <Wrapper>
       { isFuture &&
         <div>
           <strong>참가 여부 투표하기</strong><br/>
-          <button onClick={onClickYes}>참가</button>
-          <button onClick={onClickNo}>불참</button><br/> 
+          <ButtonGroup>
+            <Button onClick={onClickYes} color="primary">참가</Button>
+            <Button onClick={onClickNo} color="secondary">불참</Button>
+          </ButtonGroup>
         </div>
       }
-      <strong>참가하는 사람들</strong>({eventState.future_attendees.length}명) <br/>
-      <ul>
+      <strong>참가자</strong>({eventState.future_attendees.length}명) <br/>
+      <ListGroup>
         {eventState.future_attendees.map(attendee =>
-          <li key={attendee.id}>
-            {attendee.username}
-          </li>
+          <ListGroupItem key={attendee.id}>
+            {attendee.name}
+          </ListGroupItem>
         )}
-      </ul>
-      <strong>불참하는 사람들</strong>({eventState.future_absentees.length}명) <br/>
-      <ul>
+      </ListGroup>
+      <strong>불참자</strong>({eventState.future_absentees.length}명) <br/>
+      <ListGroup>
         {eventState.future_absentees.map(absentee =>
-          <li key={absentee.id}>
-            {absentee.username}
-          </li>
+          <ListGroupItem key={absentee.id}>
+            {absentee.name}
+          </ListGroupItem>
         )}
-      </ul>
+      </ListGroup>
     </Wrapper>
   )
 }
 
-export default lifecycle(methods)(FutureAttendance)
+export default FutureAttendance

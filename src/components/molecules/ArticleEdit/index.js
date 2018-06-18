@@ -1,4 +1,5 @@
 import React from 'react'
+import { Card, Input, Label, Form, FormGroup, Button, ButtonGroup } from 'reactstrap'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 
@@ -7,19 +8,30 @@ const Wrapper = styled.div`
   color: ${palette('grayscale', 0)};
 `
 
-const ArticleEdit = ({ articleid, title, content, onPutArticle }) => {
+const ArticleEdit = ({ articleid, title, content, onPut, onEditEnd }) => {
   let new_title='';
   let new_content='';
   const onClick = () => {
-    onPutArticle(articleid, new_title.value, new_content.value);
-    window.location.reload();
+    onPut(articleid, new_title.value, new_content.value, onEditEnd, onEditEnd)
   }
+
   return (
-    <Wrapper>
-      제목: <input type="text" defaultValue={title} ref={node => {new_title=node;}} /> <br/>
-      <input type="text" defaultValue={content} ref={node => {new_content=node;}} /> <br/>
-      <button onClick={onClick}>수정</button>      
-    </Wrapper>
+    <Card body>
+      <Form>
+        <FormGroup>
+          <Label>제목</Label>
+          <Input type="text" defaultValue={title} innerRef={node => {new_title=node;}} />
+        </FormGroup>
+        <FormGroup>
+          <Label>내용</Label>
+          <Input type="textarea" defaultValue={content} innerRef={node => {new_content=node;}} />
+        </FormGroup>
+        <ButtonGroup>
+          <Button id="edit-article" onClick={onClick} color="primary">수정</Button>
+          <Button onClick={onEditEnd}>취소</Button>
+        </ButtonGroup>
+      </Form>
+    </Card>
   )
 }
 

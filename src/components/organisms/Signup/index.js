@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, Button, Fade, Card, Row, Col, CardTitle, CardBody } from 'reactstrap'
+import { Input, Button, Fade, Card, Row, Col, CardTitle, CardBody, InputGroup, InputGroupAddon } from 'reactstrap'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
 import { major_list } from './major'
@@ -59,11 +59,14 @@ class Signup extends React.Component {
 
     return (
       <Card body>
-	  <CardBody>
-	  <CardTitle>회원가입</CardTitle>
+				<CardTitle>회원가입</CardTitle>
         아이디: <Input type="text" innerRef={node => {username = node}} />
         비밀번호: <Input type="password" innerRef={node => {password = node}} />
-        이메일: <Input type="email" innerRef={node => {email = node}} />
+        이메일:
+				<InputGroup>
+					<Input type="email" innerRef={node => {email = node}} />
+					<InputGroupAddon addonType="append">@snu.ac.kr</InputGroupAddon>
+				</InputGroup>
         이름: <Input type="test" innerRef={node => {name = node}} />
         단과대학: <Input type="select" onChange={this.setMajor}>
             <option value="">--선택--</option>
@@ -79,10 +82,9 @@ class Signup extends React.Component {
 		</Input>
 입학년도: <Input type="number" innerRef={node => {admission_year = node}} max={max_year}/><br/>
 <Row>
-            <Col sm={{size:'auto', offset:0}}><Button onClick={onClick} color="primary">회원가입</Button></Col>
+            <Col sm={{size:'auto', offset:0}}><Button id="signup-button" onClick={onClick} color="primary">회원가입</Button></Col>
 			<Col sm={{size:'auto', offset:0}}><Fade in={this.state.hasError}><Button outline disabled color="danger">{this.state.errMsg}</Button></Fade></Col>
 			</Row>
-			</CardBody>
         </Card>
     )
   }

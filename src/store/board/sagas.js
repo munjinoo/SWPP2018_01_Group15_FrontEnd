@@ -31,12 +31,7 @@ export function* deleteBoard(boardid) {
 export function* initBoardState(boardid) {
     try {
         const data = yield call(api.get, `/board/${boardid}/`, {credentials: 'include'})
-        const article_list = data.articles
-        yield put({
-            type: types.SET_BOARD_NEED_LOAD
-        })
-
-        // set user info
+        const article_list = data.articles.reverse()
         yield put({
             type: types.SET_BOARD_NAME,
             name: data.name
@@ -45,13 +40,10 @@ export function* initBoardState(boardid) {
             type: types.SET_BOARD_ID,
             id: data.id
         })
-        // add boards
-        for (var i=0; i<article_list.length; i++) {
-            yield put({
-                type: types.ADD_BOARD_ARTICLE,
-                article: {id: article_list[i].id, title: article_list[i].title, created_at: article_list[i].created_at}
-            })
-        }
+        yield put({
+            type: types.SET_BOARD_ARTICLES,
+            articles: article_list
+        })
     } catch (e) {
         console.log(e)
     }
@@ -59,14 +51,14 @@ export function* initBoardState(boardid) {
 
 export function* watchPostBoardRequest() {
     while (true) {
-        const {club, name} = yield take(types.POST_BOARD);
+        const { club, name } = yield take(types.POST_BOARD);
         yield call(postBoard, club, name);
     }
 }
 
 export function* watchDeleteBoardRequest() {
     while (true) {
-        const {boardid} = yield take(types.DELETE_BOARD);
+        const { boardid } = yield take(types.DELETE_BOARD);
         yield call(deleteBoard, boardid);
     }
 }

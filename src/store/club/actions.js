@@ -7,10 +7,28 @@ export const getClubs = (userid) => {
     }
 }
 
+export const deleteClub = (clubid) => {
+    return {
+        type: types.DELETE_CLUB,
+        clubid
+    }
+}
+
 export const postClub = (name, scope, category, introduction) => {
     return {
         type: types.POST_CLUB,
         name,
+        scope,
+        category,
+        introduction
+    }
+}
+
+export const putClub = (clubid, name, scope, category, introduction) => {
+    return {
+        type: types.PUT_CLUB,
+        clubid,
+        name,	
         scope,
         category,
         introduction
@@ -40,3 +58,12 @@ export const kickUser = (clubid, userid) => {
     }
 }
 
+export const getAccountInfo = (clubid, only, start_from, end_until) => {
+    return {
+        type: types.GET_ACCOUNT_INFO,
+        clubid,
+        only,
+        start_from,
+        end_until
+    }
+}

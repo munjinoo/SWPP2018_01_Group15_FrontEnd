@@ -38,17 +38,27 @@ const add_club = (clubs, num) => {
 const delete_board = (board_list, board_id) => {
    let new_list = [...board_list]
    for (var i=0; i < new_list.length; i++) {
-       if (new_list[i].id=board_id){
-           new_list.splice(i,1)
+       if (new_list[i].id == board_id){
+           new_list.splice(i, 1)
            return new_list
        }
    }
    return new_list
 }
 
+const delete_account = (account_list, account_id) =>{
+    let new_list = [...account_list]
+    for (var i = 0; i < new_list.length; i++){
+        if(new_list[i].id==account_id){
+            new_list.splice(i,1)
+            return new_list
+        }
+    }
+    return new_list 
+}
+
 const club_reducer = (state=clubState, action) => {
     switch (action.type) {
-        
         case types.SET_CLUB_NAME:
             return {
                 ...state,
@@ -79,6 +89,26 @@ const club_reducer = (state=clubState, action) => {
                 ...state,
                 introduction: action.introduction
             }
+        case types.SET_FUTURE_EVENT:
+            return {
+                ...state,
+                future_events: action.event
+            }
+        case types.SET_PAST_EVENT:
+            return {
+                ...state,
+                past_events: action.event
+            }
+        case types.INIT_CLUB_BOARD:
+            return {
+                ...state,
+                boards: []
+            }
+        case types.INIT_CLUB_ACCOUNT:
+             return {
+                ...state,
+                accounts: []
+             }
         case types.ADD_CLUB_BOARD:
             return {
                 ...state,
@@ -111,9 +141,27 @@ const club_reducer = (state=clubState, action) => {
                 members: action.members,
                 waitings: action.waitings
             }
+        case types.ADD_ACCOUNT:
+            return {
+                ...state,
+                accounts: add(state.accounts, action.account)
+            }
+        case types.SET_ACCOUNT_INFO:
+            return {
+                ...state,
+                accounts: action.accountings,
+                money: action.money
+            }
+        case types.DELETE_ACCOUNT: 
+            return {
+                ...state,
+                accounts: delete_account(state.accounts, action.account_id)
+            }
         default:
             return state
     }
 }
 
+
 export default club_reducer;
+

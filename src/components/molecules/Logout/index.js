@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Modal, ModalBody } from 'reactstrap'
+import { Button, ButtonGroup } from 'reactstrap'
 import { Link } from 'react-router'
 import styled from 'styled-components'
 import { font, palette } from 'styled-theme'
@@ -11,12 +11,10 @@ const Wrapper = styled.div`
 
 const Logout = ({ username, onLogout }) => {
   return (
-    <Modal isOpen backdrop={false} centered fade={false}>
-      <ModalBody className="text-center">
-        <Button tag={Link} to="/mypage">{username}</Button><br/>
-        <Button onClick={onLogout}>Logout</Button>
-      </ModalBody>
-    </Modal>
+    <div>
+        <Button tag={Link} to="/mypage" color="primary">마이페이지</Button>{' '}
+        <Button id="logout" onClick={onLogout}>로그아웃</Button>
+    </div>
   )
 }
 

@@ -1,8 +1,8 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { shallow } from 'enzyme'
 import UserStatus from '.'
 
-const wrap = (props = {}) => mount(<UserStatus {...props} />)
+const wrap = (props = {}) => shallow(<UserStatus {...props} />)
 
 it('render Login when not logined', () => {
   const props = {
@@ -17,7 +17,6 @@ it('render Login when not logined', () => {
     onLogout: jest.fn()
   }
   const wrapper = wrap(props)
-  expect(wrapper.find('Login').exists()).toBe(true)
 })
 
 it('render Logout when logined', () => {
@@ -34,5 +33,4 @@ it('render Logout when logined', () => {
     onLogout: jest.fn()
   }
   const wrapper = wrap(props)
-  expect(wrapper.find('Logout').exists()).toBe(true)
 })
