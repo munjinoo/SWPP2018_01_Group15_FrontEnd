@@ -28,8 +28,6 @@ const ChangeClubInfo = ({ clubState={name, scope, category, introduction}, clubi
   const onClick = () => {
     onPutClub(clubid, new_name.value, new_scope.value, new_category.value, new_introduction.value)
   }
-  console.log(clubState.scope)
-  console.log(clubid)
   return (
     <Card body>
       <Form>

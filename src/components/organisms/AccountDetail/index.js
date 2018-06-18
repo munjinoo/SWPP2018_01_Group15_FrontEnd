@@ -18,12 +18,13 @@ const methods = {
 
 
 const AccountDetail = ({ accountState = { created_at: '', updated_at: '', is_income: null, money: 0, date: '', writer: '', content: '' }, accountid }) => {
+  console.log(accountState.writer)
   return (
     <Card color={accountState.is_income ? "primary" : "danger"} outline>
       <CardHeader>{accountState.is_income === true ? "수입" : "지출" }</CardHeader>
       <CardBody>
         금액: {accountState.money} <br/>
-        작성자: {accountState.writer.username} <br/>
+        작성자: {accountState.writer.name} <br/>
         작성일: {accountState.created_at} <br/>
         {accountState.updated_at && <div>수정일: {accountState.updated_at}<br/></div>}
         내용: {accountState.content} <br/>

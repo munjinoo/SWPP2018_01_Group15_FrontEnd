@@ -24,7 +24,7 @@ const PastAttendance = ({ eventState = { past_attendees: [], club: null }, clubS
       <ul>
         {eventState.past_attendees.map(attendee =>
           <li key={attendee.id}>
-            {attendee.username}
+            {attendee.name}
           </li>
         )}
       </ul>
