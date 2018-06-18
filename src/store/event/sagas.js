@@ -57,10 +57,9 @@ export function* postEvent(name, content, date, club) {
 export function* putFutureAttendee(eventid) {
     try {
         const data = yield call(api.post, `/event/${eventid}/future_attendee/`, {}, {credentials: 'include'})
-        
         yield put({
             type: types.ADD_FUTURE_ATTENDEE,
-            future_attendee: {username: data.username, id: data.id}
+            future_attendee: {username: data.username, id: data.id, name: data.name}
         })
     }
     catch (e) {
@@ -74,7 +73,7 @@ export function* putFutureAbsentee(eventid) {
         
         yield put({
             type: types.ADD_FUTURE_ABSENTEE,
-            future_absentee: {username: data.username, id: data.id}
+            future_absentee: {username: data.username, id: data.id, name: data.name}
         })
     }
     catch (e) {
