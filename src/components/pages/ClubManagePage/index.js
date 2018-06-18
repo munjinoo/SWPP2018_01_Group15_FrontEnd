@@ -1,7 +1,7 @@
 import React from 'react'
 import { Breadcrumb, BreadcrumbItem, TabContent, TabPane, Nav, NavItem, NavLink, Card, Row, Col } from 'reactstrap'
 import { Link } from 'react-router'
-import { MenuBar, BoardList, CreateBoard, ChangeUserStatus, ChangeClubInfo } from 'containers'
+import { MenuBar, DeleteClub, BoardList, CreateBoard, ChangeUserStatus, ChangeClubInfo } from 'containers'
 import classnames from 'classnames'
 
 class ClubManagePage extends React.Component {
@@ -55,6 +55,14 @@ class ClubManagePage extends React.Component {
                 회원 관리
               </NavLink>
             </NavItem>
+            <NavItem>
+              <NavLink
+                className={classnames({ active: this.state.activeTab === '4' })}
+                onClick={() => {this.toggle('4')}}
+              >
+                동아리 삭제
+              </NavLink>
+            </NavItem>
           </Nav>
           <TabContent activeTab={this.state.activeTab}>
             <TabPane tabId="1">
@@ -70,6 +78,10 @@ class ClubManagePage extends React.Component {
             <TabPane tabId="3">
               <br/>
               <ChangeUserStatus clubid={clubid} />
+            </TabPane>
+            <TabPane tabId="4">
+              <br/>
+              <DeleteClub clubid={clubid} />
             </TabPane>
           </TabContent>
         </Card>

@@ -50,18 +50,14 @@ export function* initUserState() {
             id: data.id
         })
         // add clubs
-        for (var i=0; i<as_admin.length; i++) {
-            yield put({
-                type: types.ADD_ADMIN_CLUB,
-                club: {id: as_admin[i].id, name: as_admin[i].name}
-            })
-        }
-        for (var i=0; i<as_member.length; i++) {
-            yield put({
-                type: types.ADD_MEMBER_CLUB,
-                club: {id: as_member[i].id, name: as_member[i].name}
-            })
-        }
+        yield put({
+            type: types.SET_ADMIN_CLUB,
+            club: as_admin
+        })
+        yield put({
+            type: types.SET_MEMBER_CLUB,
+            club: as_member
+        })
         yield put({
             type: types.SET_WAITING_CLUB,
             club: data.clubs_as_waitings

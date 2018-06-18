@@ -7,6 +7,13 @@ export const getClubs = (userid) => {
     }
 }
 
+export const deleteClub = (clubid) => {
+    return {
+        type: types.DELETE_CLUB,
+        clubid
+    }
+}
+
 export const postClub = (name, scope, category, introduction) => {
     return {
         type: types.POST_CLUB,

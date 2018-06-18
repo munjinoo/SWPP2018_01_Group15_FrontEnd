@@ -13,6 +13,8 @@ export const SET_USERID = 'SET_USERID'
 
 export const ADD_ADMIN_CLUB = 'ADD_ADMIN_CLUB'
 export const ADD_MEMBER_CLUB = 'ADD_MEMBER_CLUB'
+export const SET_ADMIN_CLUB = 'SET_ADMIN_CLUB'
+export const SET_MEMBER_CLUB = 'SET_MEMBER_CLUB'
 export const SET_WAITING_CLUB = 'SET_WAITING_CLUB'
 
 export const VERIFY_TOKEN = 'VERIFY_TOKEN'
@@ -22,6 +24,7 @@ export const CANCEL_JOIN_CLUB = 'CANCEL_JOIN_CLUB'
 
 /* Club */
 export const POST_CLUB = 'POST_CLUB'
+export const DELETE_CLUB = 'DELETE_CLUB'
 export const GET_CLUBS = 'GET_CLUBS'
 export const SET_CLUBS = 'SET_CLUBS'
 export const PUT_CLUB = 'PUT_CLUB'

@@ -26,6 +26,18 @@ export function* getClubs(userid) {
     }
 }
 
+export function* deleteClub(clubid) {
+    try {
+        yield call(api.delete, `/club/${clubid}/`, {credentials: 'include'})
+        yield put({
+            type: types.INIT_USER_STATE
+        })
+        yield put(push(`/`))
+    } catch (e) {
+        console.log(e)
+    }
+}
+
 export function* postClub(name, scope, category, introduction) {
     try {
         const data = yield call(api.post, `/club/`, {name: name, scope: scope, category: category, introduction: introduction}, {credentials: 'include'});
@@ -204,8 +216,16 @@ export function* watchGetClubUserList() {
     }
 }
 
+export function* watchDeleteClubRequest() {
+    while (true) {
+        const { clubid } = yield take(types.DELETE_CLUB)
+        yield call(deleteClub, clubid)
+    }
+}
+
 export default function* () {
     yield fork(watchGetClubsRequest);
+    yield fork(watchDeleteClubRequest)
     yield fork(watchPostClubRequest);
     yield fork(watchPutClubRequest);
     yield fork(watchInitClubStateRequest);
