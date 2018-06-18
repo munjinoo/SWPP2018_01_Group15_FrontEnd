@@ -22,7 +22,7 @@ const Search = ({ search_result, query }) => {
   return (
     <Card>
       <CardHeader>
-        <SearchBar search={query.name} />
+        <SearchBar search={query.q} />
       </CardHeader>
       <CardBody>
         <SearchResult search_result={search_result} />
