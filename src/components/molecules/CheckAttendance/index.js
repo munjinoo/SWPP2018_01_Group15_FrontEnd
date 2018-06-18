@@ -23,7 +23,7 @@ const CheckAttendance = ({ clubState = { members: [] }, onPostPastAttendees, eve
 
   const onClickMember = (e) => {
     const id = e.target.id;
-    const username = e.target.name;
+    const name = e.target.name;
     var exists = false
     for (var i=0; i<selected.length; i++) {
       if (selected[i].id == id) {
@@ -43,7 +43,7 @@ const CheckAttendance = ({ clubState = { members: [] }, onPostPastAttendees, eve
 
   const onClickSubmit = () => {
     if (eventid != undefined && selected != undefined) {
-      const members = selected.map(target => ({id: target.id, username: target.name}))
+      const members = selected.map(target => ({id: target.id, name: target.name}))
       onPostPastAttendees(eventid, members);
       for (var i=0; i<selected.length; i++) {
         selected[i].checked = false
@@ -58,8 +58,8 @@ const CheckAttendance = ({ clubState = { members: [] }, onPostPastAttendees, eve
       <FormGroup check>
         {clubState.members.map(member =>
           <div key={member.id}>
-          <Input type="checkbox" id={member.id} name={member.username} onChange={ onClickMember }/>
-            {member.username} 
+          <Input type="checkbox" id={member.id} name={member.name} onChange={ onClickMember }/>
+            {member.name} 
           </div>
         )}
       </FormGroup>
