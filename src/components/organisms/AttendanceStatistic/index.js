@@ -44,7 +44,7 @@ class AttendanceStatistic extends React.Component {
         <Modal isOpen={this.state.isOpen} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>{this.state.name}</ModalHeader>
           <ModalBody>
-            출석률: {attendance.rate} %<br/>
+            출석률: {attendance.rate * 100} %<br/>
             결석: {attendance.absent} 회
           </ModalBody>
         </Modal>
